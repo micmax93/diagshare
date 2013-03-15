@@ -1,22 +1,26 @@
 <?php
-/**
- * Created by Yongo Group
- * User: phisikus
- * Date: 12.03.13
- * Time: 13:21
- */
+
 echo '
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet" type="text/css" href="' . url::base() . 'application/views/css/style.css">
 </head>
 <body>
-<h1>'.$tytul.'</h1>
-<p>
-'.$tresc.'
-</p>
-</body>
-</html>
+<div id="sideBar">
+    <div id="roomList">
 
-';
+    </div>
+    <div id="messageBox">
+
+    </div>
+
+</div>
+<div id="main">
+
+</div>
+</body>
+
+</html> ';
+
+?>
