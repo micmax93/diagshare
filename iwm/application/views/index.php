@@ -4,20 +4,28 @@ echo '
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="' . url::base() . 'application/views/css/style.css">
+ <title>' . $title . '</title>
+ <link rel="stylesheet" type="text/css" href="' . URL::base() . 'application/views/css/style.css">
+ <script src="' . URL::base() . 'application/views/js/jquery-1.9.1.js"></script>
+ <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
+ <script src="' . URL::base() . 'application/views/js/jquery.mousewheel.min.js"></script>
+  <script src="' . URL::base() . 'application/views/js/mapbox.js"></script>
+  <script src="' . URL::base() . 'application/views/js/functions.js"></script>
+  <script src="' . URL::base() . 'application/views/js/setup.js"></script>
 </head>
-<body>
-<div id="sideBar">
-    <div id="roomList">
+<body onload="setup()">
+<div id="container">
+    <div id="sideBar">
+        <div id="roomList">
+        ' . $room . '
+        </div>
+        <div id="messageBox">
+        ' . $chat . '
+        </div>
 
     </div>
-    <div id="messageBox">
-
+    <div id="main">' . $canvas . '
     </div>
-
-</div>
-<div id="main">
-
 </div>
 </body>
 

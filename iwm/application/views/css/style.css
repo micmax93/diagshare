@@ -1,0 +1,68 @@
+html,body {
+    height:100%;
+    margin: 0 auto;
+}
+
+#container {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+    overflow:hidden;
+}
+
+#main {
+    float: left;
+    width: 80%;
+    height: 100%;
+    border-bottom: 2px solid;
+    margin: 0;
+    padding: 0;
+    background: #086CA2;
+}
+
+#sideBar {
+    float: left;
+    border-right: 2px solid;
+    border-bottom: 2px solid;
+    height: 100%;
+    width: 19%;
+}
+
+#roomList {
+    height: 30%;
+    border-bottom: 2px dashed;
+    background: #3C9DD0;
+}
+
+#messageBox {
+    height: 70%;
+    background: #64AAD0;
+}
+
+.image {
+    border: 2px solid red;
+    left: 0;
+    top: 0;
+}
+
+.titleBar {
+    background: #FF8B00;
+    font-size: 15px;
+    color: white;
+    height: 20px;
+}
+.titleBar p {
+    display: inline;
+    letter-spacing: 4px;
+}
+
+.titleBar a {
+    float: right;
+    display: inline;
+    letter-spacing: 4px;
+    font-size: 14px;
+    color: #034569;
+    text-decoration: none;
+}
+
