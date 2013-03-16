@@ -28,4 +28,11 @@ class Controller_Test extends IwMController
     }
 
 
+    public function action_testElfa()
+    {
+        $tekst = "Lol";
+        $this->response->body($tekst);
+    }
+
+
 } // End Welcome
