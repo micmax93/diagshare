@@ -25,7 +25,7 @@ foreach ($images as $k => $v) {
     printf("\n");
     echo "  document.getElementById('" . $k . "').style.width = parseInt(document.getElementById('" . $k . "_img').width)+'px';";
     printf("\n");
-    echo "  document.getElementById('" . $k . "').style.height = (parseInt(document.getElementById('" . $k . "_img').height+20))+'px';";
+    echo "  document.getElementById('" . $k . "').style.height = (parseInt(document.getElementById('" . $k . "_img').height + 30))+'px';";
     printf("\n");
 }
 echo '

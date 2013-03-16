@@ -3,17 +3,17 @@
 // -- Environment setup --------------------------------------------------------
 
 // Load the core Kohana class
-require SYSPATH.'classes/Kohana/Core'.EXT;
+require SYSPATH.'classes/kohana/core'.EXT;
 
-if (is_file(APPPATH.'classes/Kohana'.EXT))
+if (is_file(APPPATH.'classes/kohana'.EXT))
 {
 	// Application extends the core
-	require APPPATH.'classes/Kohana'.EXT;
+	require APPPATH.'classes/kohana'.EXT;
 }
 else
 {
 	// Load empty core extension
-	require SYSPATH.'classes/Kohana'.EXT;
+	require SYSPATH.'classes/kohana'.EXT;
 }
 
 /**
@@ -41,14 +41,6 @@ setlocale(LC_ALL, 'pl_PL.utf-8');
 spl_autoload_register(array('Kohana', 'auto_load'));
 
 /**
- * Optionally, you can enable a compatibility auto-loader for use with
- * older modules that have not been updated for PSR-0.
- *
- * It is recommended to not enable this unless absolutely necessary.
- */
-//spl_autoload_register(array('Kohana', 'auto_load_lowercase'));
-
-/**
  * Enable the Kohana auto-loader for unserialization.
  *
  * @link http://www.php.net/manual/function.spl-autoload-call
@@ -61,7 +53,7 @@ ini_set('unserialize_callback_func', 'spl_autoload_call');
 /**
  * Set the default language
  */
-I18n::lang('pl');
+I18n::lang('en-us');
 
 /**
  * Set Kohana::$environment if a 'KOHANA_ENV' environment variable has been supplied.
@@ -107,12 +99,11 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	 'auth'       => MODPATH.'auth',       // Basic authentication
+	// 'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	 'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'minion'     => MODPATH.'minion',     // CLI Tasks
 	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
@@ -122,8 +113,6 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-
-
 Route::set('czat', '(<controller>(/<action>(/<id>)))')
   ->defaults(array(
   'controller' => 'test',
