@@ -7,11 +7,6 @@
 
 class Model_User extends ORM
 {
-    protected $_table_columns = array(
-        'id' => array('type' => 'int', 'is_nullable' => false),
-        'name' => array('type' => 'string', 'is_nullable' => false),
-        'password' => array('type' => 'string', 'is_nullable' => false),
-    );
     public $_table_name = "user";
 
     public function getUser($id)
