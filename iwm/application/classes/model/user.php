@@ -18,3 +18,4 @@ class Model_User extends ORM
         return ORM::factory('user')->find_all();
     }
 }
+
