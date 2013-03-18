@@ -8,6 +8,10 @@ class Controller_Test extends IwMController
     public function action_index()
     {
         $x = new Model_User();
+        $users= $x->getAllItems();
+        echo $users[0]->name;
+        return;
+
         $image["qwd"] = URL::base().'application/views/img/xray.jpg';
       //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
       //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
@@ -24,14 +28,12 @@ class Controller_Test extends IwMController
         $widok->set('chat',$chat->render());
 
         $this->response->body($widok->render());
-
     }
 
 
-    public function action_testElfa()
+    public function action_testing()
     {
-        $tekst = "Lol";
-        $this->response->body($tekst);
+
     }
 
 
