@@ -9,3 +9,4 @@ class Model_User extends Model_Base
 {
     public $_table_name = "user";
 }
+
