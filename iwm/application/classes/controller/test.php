@@ -7,12 +7,8 @@ class Controller_Test extends IwMController
 
     public function action_index()
     {
-        $x = new Model_User();
-        $users= $x->getAllItems();
-        echo $users[0]->name;
-        return;
-
-        $image["qwd"] = URL::base().'application/views/img/xray.jpg';
+        $image["qwd"] = url::base(TRUE, 'http').'application/views/img/xray.jpg';
+        $image["qwd2"] = url::base(TRUE, 'http').'application/views/img/xray.jpg';
       //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
       //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
 

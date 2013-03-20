@@ -8,7 +8,7 @@
 function showHideImage(thing) {
     var el = document.getElementById(thing);
     if (el.style.display == "none") {
-        el.style.display = "block";
+        el.style.display = "inline";
         el.parentNode.style.height = parseInt(el.height) + "px";
 
     }

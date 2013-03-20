@@ -11,22 +11,37 @@
 
 foreach ($images as $k => $v) {
     echo '
-    <div class="image" id="' . $k . '">
-        <div class="titleBar"><p>'.$k.'</p><a href="javascript:showHideImage(\''.$k.'_img\');">S/H</a></div>
-        <img src="' . $v . '" id="' . $k . '_img">
+    <div class="imageWindow" id="' . $k . '_window">
+        <div class="titleBar"><p>'.$k.'</p><a href="javascript:showHideImage(\''.$k.'\');">S/H</a></div>
+        <div class="image" id="'.$k.'"></div>
     </div>';
 }
 echo '
 <script type="text/javascript">
+var graphic = new Array();
+var map = new Array();
 ';
+$i = 0;
 foreach ($images as $k => $v) {
-    echo '  $( "#' . $k . '" ).draggable();';
-    //echo '  $( "#' . $k . '" ).draggable({ containment: "parent" });';
-    printf("\n");
-    echo "  document.getElementById('" . $k . "').style.width = parseInt(document.getElementById('" . $k . "_img').width)+'px';";
-    printf("\n");
-    echo "  document.getElementById('" . $k . "').style.height = (parseInt(document.getElementById('" . $k . "_img').height + 30))+'px';";
-    printf("\n");
+
+    echo "
+        map[".$i."] = new OpenLayers.Map('".$k."');
+            graphic[".$i."] = new OpenLayers.Layer.Image(
+                '".$k."',
+                '".$v."',
+                new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
+                new OpenLayers.Size(1024, 768),
+                {numZoomLevels: 10}
+            );
+            map[".$i."].addLayers([graphic[".$i."]]);
+            map[".$i."].addControl(new OpenLayers.Control.LayerSwitcher());
+            map[".$i."].zoomToMaxExtent();
+            document.getElementById('".$k."').style.width = 1024;
+            document.getElementById('".$k."').style.height = 768;
+    ";
+    echo '$( "#' . $k . '_window" ).draggable();';
+    $i++;
+
 }
 echo '
 </script>
