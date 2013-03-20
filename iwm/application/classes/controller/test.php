@@ -8,9 +8,9 @@ class Controller_Test extends IwMController
     public function action_index()
     {
         $x = new Model_User();
-        $image["qwd"] = URL::base().'application/views/img/xray.jpg';
-      //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
-      //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
+      //  $image["qwd"] = URL::base().'application/views/img/xray.jpg';
+     //   $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
+        $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
 
         $kanwa = View::factory('canvas');
         $kanwa->set('images',$image);
@@ -36,3 +36,4 @@ class Controller_Test extends IwMController
 
 
 } // End Welcome
+
