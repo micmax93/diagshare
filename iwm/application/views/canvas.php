@@ -10,8 +10,8 @@ echo '
 foreach ($images as $k => $v) {
     $size = getimagesize($v);
   echo '
-    <div class="imageWindow" id="' . $k . '_window">
-        <div class="titleBar" onclick="firstPlan()"><p>' . $k . ' ['.$size[0].'x'.$size[1].']</p><a href="javascript:showHide(\'' . $k . '_window\');">X</a></div>
+    <div class="imageWindow" id="' . $k . '_window"  onmousedown="firstPlan(event)">
+        <div class="titleBar"><p>' . $k . ' ['.$size[0].'x'.$size[1].']</p><a href="javascript:showHide(\'' . $k . '_window\');">X</a></div>
         <div class="image" id="' . $k . '"></div>
     </div>';
 }
@@ -29,6 +29,8 @@ foreach ($images as $k => $v) {
 
   echo "
         $('#" . $k . "_window').draggable();
+        $('#" . $k . "_window').css('top'," . ($i*20) . ");
+
         $('#" . $k . "_window').width(" . $size[0] . ");
         $('#" . $k . "_window').height(" . ($size[1]+20) . " );
         $('#" . $k . "').width(" . $size[0] . ");

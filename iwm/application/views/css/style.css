@@ -1,6 +1,7 @@
-html,body {
-    height:100%;
+html, body {
+    height: 100%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 #container {
@@ -8,7 +9,7 @@ html,body {
     height: 100%;
     margin: 0 auto;
     padding: 0;
-    overflow:hidden;
+
 }
 
 #main {
@@ -19,6 +20,7 @@ html,body {
     margin: 0;
     padding: 0;
     background: #086CA2;
+    overflow: hidden;
 }
 
 #sideBar {
@@ -62,6 +64,7 @@ html,body {
     color: black;
     height: 20px;
 }
+
 .titleBar p {
     display: inline;
     letter-spacing: 4px;

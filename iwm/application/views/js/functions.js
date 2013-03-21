@@ -20,11 +20,8 @@ function showHide(thing) {
 }
 
 function firstPlan(e) {
-
-    for(var i in listaOkien)
-    {
-
-        //document.getElementById(listaOkien[i]).style.display = "none";
+    for (var i in listaOkien) {
+        document.getElementById(listaOkien[i]).style.zIndex = 0;
     }
-
+    e.target.parentNode.style.zIndex = 1;
 }
