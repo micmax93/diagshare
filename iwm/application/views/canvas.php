@@ -34,7 +34,6 @@ foreach ($images as $k => $v) {
                 {numZoomLevels: 10}
             );
             map[".$i."].addLayers([graphic[".$i."]]);
-            map[".$i."].addControl(new OpenLayers.Control.LayerSwitcher());
             map[".$i."].zoomToMaxExtent();
             document.getElementById('".$k."').style.width = 1024;
             document.getElementById('".$k."').style.height = 768;
