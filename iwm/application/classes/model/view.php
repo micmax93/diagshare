@@ -20,8 +20,33 @@ class Model_View extends Model_Base
         return $u->getItem($this->ownerId);
     }
 
+    public function endY()
+    {
+        $photo=this.getPhoto();
+        $myEnd=($this->y)+(($photo->height)/($this->scale));
+
+        if($myEnd>($photo->height)) {return $photo->height;}
+        else {return $myEnd;}
+    }
+
+    public function endX()
+    {
+        $photo=this.getPhoto();
+        $myEnd=($this->x)+(($photo->width)/($this->scale));
+
+        if($myEnd>($photo->width)) {return $photo->width;}
+        else {return $myEnd;}
+    }
+
     public function getVisibleTags()
     {
-        //TODO
+        $photo=this.getPhoto();
+        $tags=$photo->myTags();
+        $tags=$tags->where('x','>=',$this->x);
+        $tags=$tags->where('x','<=',$this->endX());
+        $tags=$tags->where('y','>=',$this->y);
+        $tags=$tags->where('y','<=',$this->endY());
+
+        return $tags->findAll();
     }
 }

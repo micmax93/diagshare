@@ -7,6 +7,8 @@
 class Model_Photo extends Model_Base
 {
     public $_table_name = "photo";
+    public $height;
+    public $width;
 
     public function getPatient()
     {
