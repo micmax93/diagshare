@@ -25,11 +25,11 @@ foreach ($images as $k => $v) {
     echo "
         $('#" . $k . "_window').draggable();
         $('#" . $k . "_window').css('top'," . ($i * 20) . ");
-
         $('#" . $k . "_window').width(" . $size[0] . ");
         $('#" . $k . "_window').height(" . ($size[1] + 20) . " );
         $('#" . $k . "').width(" . $size[0] . ");
         $('#" . $k . "').height(" . $size[1] . ");
+
         map[" . $i . "] = new OpenLayers.Map('" . $k . "');
             graphic[" . $i . "] = new OpenLayers.Layer.Image(
                 '" . $k . "',
@@ -40,15 +40,13 @@ foreach ($images as $k => $v) {
             );
         map[" . $i . "].addLayers([graphic[" . $i . "]]);
         map[" . $i . "].zoomToMaxExtent();
-        listaOkien.push('" . $k . "_window');
+
         $('#" . $k . "').css('z-index',0);
-
-        zdjecia[" . $i . "] = $('#" . $k . "').find('img').map(function(){ return this.parentNode.id;}).get();
-
-
-
-
-
+        $('#" . $k . "').find('img').map(function(){
+            this.id='" . $k . "_img';
+            return this;
+        }).get();
+        listaOkien.push('" . $k . "_window');
 
     ";
     $i++;

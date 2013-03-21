@@ -11,7 +11,6 @@ echo '
  <script src="' . URL::base() . 'application/views/js/jquery-1.9.1.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
   <script src="' . URL::base() . 'application/views/js/OpenLayers.js"></script>
-  <script src="' . URL::base() . 'application/views/js/caman.full.min.js"></script>
   <script src="' . URL::base() . 'application/views/js/functions.js"></script>
   <script src="' . URL::base() . 'application/views/js/setup.js"></script>
 </head>
