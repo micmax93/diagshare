@@ -42,17 +42,18 @@ html,body {
 
 .imageWindow {
     border: 4px solid black;
-    left: 0;
+    left: 20%;
     top: 0;
-    position: relative;
+    position: absolute;
     height: 800px;
     width: 800px;
-
+    z-index: 0;
 }
 
 .imageWindow .image {
     width: 100%;
     height: 100%;
+    background: grey;
 }
 
 .titleBar {
