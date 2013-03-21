@@ -8,7 +8,7 @@ class Controller_Test extends IwMController
     public function action_index()
     {
         $image["qwd"] = url::base(TRUE, 'http').'application/views/img/xray.jpg';
-        $image["qwd2"] = url::base(TRUE, 'http').'application/views/img/xray.jpg';
+        $image["qwd2"] = url::base(TRUE, 'http').'application/views/img/xray2.jpg';
       //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
       //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
 
