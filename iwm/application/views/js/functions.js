@@ -5,17 +5,26 @@
  * Time: 00:05
  * To change this template use File | Settings | File Templates.
  */
-function showHideImage(thing) {
+function showHide(thing) {
     var el = document.getElementById(thing);
     if (el.style.display == "none") {
-        el.style.display = "inline";
-        el.parentNode.style.height = parseInt(el.height) + "px";
-
+        el.style.display = "block";
+        //el.parentNode.style.height = parseInt(el.height) + "px";
     }
     else {
         el.style.display = "none";
-        el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
+        //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
 
+    }
+
+}
+
+function firstPlan(e) {
+
+    for(var i in listaOkien)
+    {
+
+        //document.getElementById(listaOkien[i]).style.display = "none";
     }
 
 }

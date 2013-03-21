@@ -7,6 +7,7 @@ echo '
  <title>' . $title . '</title>
  <link rel="stylesheet" type="text/css" href="' . URL::base() . 'application/views/css/style.css">
  <link rel="stylesheet" href="' . URL::base() . 'application/views/css/OpenLayers.css" type="text/css">
+ <link rel="stylesheet" href="' . URL::base() . 'application/views/css/jquery.window.css" type="text/css">
  <script src="' . URL::base() . 'application/views/js/jquery-1.9.1.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
   <script src="' . URL::base() . 'application/views/js/OpenLayers.js"></script>
