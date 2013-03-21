@@ -9,6 +9,7 @@ class Controller_Test extends IwMController
     {
         $image["qwd"] = url::base(TRUE, 'http') . 'application/views/img/xray.jpg';
         $image["qwd2"] = url::base(TRUE, 'http') . 'application/views/img/xray2.jpg';
+
         $imageSettings["ratio"] = 0.50;
         //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
         //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';

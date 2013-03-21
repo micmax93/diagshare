@@ -1,17 +1,11 @@
 <?php
 
-echo '
-<div id="okienko" style="display: none;">
- elorap
-</div>
-
-';
 
 foreach ($images as $k => $v) {
     $size = getimagesize($v);
-  echo '
+    echo '
     <div class="imageWindow" id="' . $k . '_window"  onmousedown="firstPlan(event)">
-        <div class="titleBar"><p>' . $k . ' ['.$size[0].'x'.$size[1].']</p><a href="javascript:showHide(\'' . $k . '_window\');">X</a></div>
+        <div class="titleBar"><p>' . $k . ' [' . $size[0] . 'x' . $size[1] . ']</p><a href="javascript:showHide(\'' . $k . '_window\');">X</a></div>
         <div class="image" id="' . $k . '"></div>
     </div>';
 }
@@ -19,20 +13,21 @@ echo '
 <script type="text/javascript">
 var graphic = new Array();
 var map = new Array();
+var zdjecia = new Array();
 
 ';
 $i = 0;
 foreach ($images as $k => $v) {
-  $size = getimagesize($v);
-  $size[0] = $size[0] * $imageSettings["ratio"];
-  $size[1] = $size[1] * $imageSettings["ratio"];
+    $size = getimagesize($v);
+    $size[0] = $size[0] * $imageSettings["ratio"];
+    $size[1] = $size[1] * $imageSettings["ratio"];
 
-  echo "
+    echo "
         $('#" . $k . "_window').draggable();
-        $('#" . $k . "_window').css('top'," . ($i*20) . ");
+        $('#" . $k . "_window').css('top'," . ($i * 20) . ");
 
         $('#" . $k . "_window').width(" . $size[0] . ");
-        $('#" . $k . "_window').height(" . ($size[1]+20) . " );
+        $('#" . $k . "_window').height(" . ($size[1] + 20) . " );
         $('#" . $k . "').width(" . $size[0] . ");
         $('#" . $k . "').height(" . $size[1] . ");
         map[" . $i . "] = new OpenLayers.Map('" . $k . "');
@@ -48,10 +43,18 @@ foreach ($images as $k => $v) {
         listaOkien.push('" . $k . "_window');
         $('#" . $k . "').css('z-index',0);
 
+        zdjecia[" . $i . "] = $('#" . $k . "').find('img').map(function(){ return this.parentNode.id;}).get();
+
+
+
+
+
+
     ";
-  $i++;
+    $i++;
 
 }
 echo '
 </script>
+
 ';
