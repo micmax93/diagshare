@@ -48,3 +48,8 @@ function changeFilter(cName, br, con, blur) {
     $('.' + cName).css('-webkit-filter', 'brightness(' + oBr + ') contrast(' + oCo + ') blur(' + oBl + 'px)');
 
 }
+
+
+function resetFilter(cName) {
+    $('.' + cName).css('-webkit-filter', 'brightness(0) contrast(1) blur(0px)');
+}

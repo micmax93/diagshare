@@ -14,6 +14,7 @@ foreach ($images as $k => $v) {
         O:
         <a href="javascript:changeFilter(\'' . $k . '_img\',0,0,1);" class="smallButton">+</a>
         <a href="javascript:changeFilter(\'' . $k . '_img\',0,0,-1);" class="smallButton">-</a>
+        Reset: <a href="javascript:resetFilter(\'' . $k . '_img\');" class="smallButton">R</a>
         <a href="javascript:showHide(\'' . $k . '_window\');" class="close">X</a></div>
         <div class="image" id="' . $k . '"></div>
     </div>';
