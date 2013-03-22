@@ -14,8 +14,6 @@ foreach ($images as $k => $v) {
         O:
         <a href="javascript:changeFilter(\'' . $k . '_img\',0,0,1);" class="smallButton">+</a>
         <a href="javascript:changeFilter(\'' . $k . '_img\',0,0,-1);" class="smallButton">-</a>
-
-
         <a href="javascript:showHide(\'' . $k . '_window\');" class="close">X</a></div>
         <div class="image" id="' . $k . '"></div>
     </div>';
@@ -30,8 +28,8 @@ var zdjecia = new Array();
 $i = 0;
 foreach ($images as $k => $v) {
     $size = getimagesize($v);
-    $size[0] = $size[0] * $imageSettings["ratio"];
-    $size[1] = $size[1] * $imageSettings["ratio"];
+    $size[0] = $size[0] * $imageSettings["scale"];
+    $size[1] = $size[1] * $imageSettings["scale"];
 
     echo "
         $('#" . $k . "_window').draggable();
@@ -57,7 +55,6 @@ foreach ($images as $k => $v) {
             this.className='" . $k . "_img';
             return this;
         }).get();
-
 
         listaOkien.push('" . $k . "_window');
 
