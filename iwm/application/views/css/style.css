@@ -71,6 +71,14 @@ html, body {
 }
 
 .titleBar a {
+    display: inline;
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+
+.titleBar a.close {
     float: right;
     display: inline;
     letter-spacing: 4px;
@@ -79,3 +87,14 @@ html, body {
     text-decoration: none;
 }
 
+
+.smallButton {
+    display: block;
+    background: #086CA2;
+    font-size: 16px;
+    font-family: Courier, "Courier New";
+    font-weight: bold;
+    padding-left: 2px;
+    padding-right: 2px;
+    color: white;
+}

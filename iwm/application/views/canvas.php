@@ -5,7 +5,10 @@ foreach ($images as $k => $v) {
     $size = getimagesize($v);
     echo '
     <div class="imageWindow" id="' . $k . '_window"  onmousedown="firstPlan(event)">
-        <div class="titleBar"><p>' . $k . ' [' . $size[0] . 'x' . $size[1] . ']</p><a href="javascript:showHide(\'' . $k . '_window\');">X</a></div>
+        <div class="titleBar"><p>' . $k . ' [' . $size[0] . 'x' . $size[1] . ']</p>Kontrast:
+        <a href="javascript:changeContrast(\'' . $k . '_img\',1);" class="smallButton">+</a>
+        <a href="javascript:changeContrast(\'' . $k . '_img\',-1);" class="smallButton">-</a>
+        <a href="javascript:showHide(\'' . $k . '_window\');" class="close">X</a></div>
         <div class="image" id="' . $k . '"></div>
     </div>';
 }
@@ -43,9 +46,11 @@ foreach ($images as $k => $v) {
 
         $('#" . $k . "').css('z-index',0);
         $('#" . $k . "').find('img').map(function(){
-            this.id='" . $k . "_img';
+            this.className='" . $k . "_img';
             return this;
         }).get();
+
+
         listaOkien.push('" . $k . "_window');
 
     ";
