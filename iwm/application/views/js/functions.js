@@ -27,16 +27,24 @@ function firstPlan(e) {
 }
 
 
-function changeContrast(cName, val) {
-    if($('.' + cName).css('-webkit-filter') == "none")
-    {
-        $('.' + cName).css('-webkit-filter','brightness(0)');
+function changeFilter(cName, br, con, blur) {
+
+    if ($('.' + cName).css('-webkit-filter') == "none") {
+        $('.' + cName).css('-webkit-filter', 'brightness(0) contrast(1) blur(0px)');
     }
 
-    var brightness = $('.' + cName).css('-webkit-filter').toString();
-    brightness = brightness.replace("brightness(","","gi").replace(")","","gi");
-    var value = Math.floor(parseFloat(brightness)*16)/16 + val/16;
-    $('.' + cName).css('-webkit-filter','brightness('+value+')');
+    var dane = $('.' + cName).css('-webkit-filter').toString();
+    var oBr = dane.match(/[0-9\-]+.[0-9]+|[0-9]/);
+    dane = dane.replace("brightness(" + oBr + ")", "");
+    var oCo = dane.match(/[0-9\-]+.[0-9]+|[0-9]/);
+    dane = dane.replace("contrast(" + oCo + ")", "");
+    var oBl = dane.match(/[0-9\-]+.[0-9]+|[0-9]/);
+    dane = dane.replace("blur(" + oCo + "px)", "");
 
+    oBr = parseFloat(oBr) + parseFloat(br) / 16;
+    oCo = parseFloat(oCo) + parseFloat(con) / 8;
+    oBl = parseInt(oBl) + parseInt(blur);
+
+    $('.' + cName).css('-webkit-filter', 'brightness(' + oBr + ') contrast(' + oCo + ') blur(' + oBl + 'px)');
 
 }

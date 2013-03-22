@@ -5,9 +5,17 @@ foreach ($images as $k => $v) {
     $size = getimagesize($v);
     echo '
     <div class="imageWindow" id="' . $k . '_window"  onmousedown="firstPlan(event)">
-        <div class="titleBar"><p>' . $k . ' [' . $size[0] . 'x' . $size[1] . ']</p>Kontrast:
-        <a href="javascript:changeContrast(\'' . $k . '_img\',1);" class="smallButton">+</a>
-        <a href="javascript:changeContrast(\'' . $k . '_img\',-1);" class="smallButton">-</a>
+        <div class="titleBar"><p>' . $k . ' [' . $size[0] . 'x' . $size[1] . ']</p>B:
+        <a href="javascript:changeFilter(\'' . $k . '_img\',1,0,0);" class="smallButton">+</a>
+        <a href="javascript:changeFilter(\'' . $k . '_img\',-1,0,0);" class="smallButton">-</a>
+        C:
+        <a href="javascript:changeFilter(\'' . $k . '_img\',0,1,0);" class="smallButton">+</a>
+        <a href="javascript:changeFilter(\'' . $k . '_img\',0,-1,0);" class="smallButton">-</a>
+        O:
+        <a href="javascript:changeFilter(\'' . $k . '_img\',0,0,1);" class="smallButton">+</a>
+        <a href="javascript:changeFilter(\'' . $k . '_img\',0,0,-1);" class="smallButton">-</a>
+
+
         <a href="javascript:showHide(\'' . $k . '_window\');" class="close">X</a></div>
         <div class="image" id="' . $k . '"></div>
     </div>';
