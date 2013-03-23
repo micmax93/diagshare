@@ -1,5 +1,6 @@
 html, body {
     height: 100%;
+    width: 100%;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -92,7 +93,6 @@ html, body {
 }
 
 .viewport {
-
     overflow: hidden;
     background: grey;
     overflow: hidden;
@@ -100,7 +100,6 @@ html, body {
 }
 
 .imageGrid {
-    display:inline-block;
     padding: 0;
     line-height: 0;
 }
