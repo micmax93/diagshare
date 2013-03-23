@@ -38,16 +38,21 @@ function addNewLine(parentId) {
 }
 
 function zoom(id, scale) {
+
     var viewport =  $('#'+id);
+    var h;
+    var w;
+
+    h = viewport.height();
+    w = viewport.width();
+
     viewport.height(viewport.height()*scale);
     viewport.width(viewport.width()*scale);
 
+    h = h - viewport.height();
+    w = w - viewport.width();
+    //alert(viewport.css('top'));
+    viewport.css('top',parseInt(viewport.css('top')) + (h/2));
+    viewport.css('left',parseInt(viewport.css('left')) + (w/2));
+
 }
-/*
-function zoomGrid(parentId, level) {
-    var kanwy = document.getElementById(parentId).getElementsByClassName("imageCanvas");
-    for (var i = 0; i < kanwy.length; i++)
-        zoomCanvas(kanwy[i].id, parseInt(level));
-
-} */
-

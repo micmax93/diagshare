@@ -7,9 +7,17 @@ var listaOkien = Array();
 
 function createWindow(parentId, id, width, height, imgUrl) {
 
+    var window;
+    for (var i = 0; i < listaOkien.length; i++) {
+        window = document.getElementById(listaOkien[i]);
+        window.style.zIndex = 0;
+        window.getElementsByTagName("div")[0].className = "titleBar";
+    }
+
     $('#' + parentId).append('' +
         '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');">' +
-        '   <div class="titleBar" onmousedown="firstPlanWindow(\'' + id + '_window\');"><p>' + id + ' [' + width + 'x' + height + ']</p>' +
+        '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');"><p>' + id + ' [' + width + 'x' + height + ']</p>' +
+        'Zoom:' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',1.1);" class="smallButton">+</a>' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',0.9);" class="smallButton">-</a>' +
         '       <a href="javascript:closeWindow(\'' + id + '_window\');" class="close">X</a>' +
@@ -41,10 +49,16 @@ function closeWindow(id) {
 }
 
 function firstPlanWindow(name) {
+    var window;
     for (var i in listaOkien) {
-        document.getElementById(listaOkien[i]).style.zIndex = 0;
+        window = document.getElementById(listaOkien[i]);
+        window.style.zIndex = 0;
+        window.getElementsByTagName("div")[0].className = "titleBar";
+
     }
-    document.getElementById(name).style.zIndex = 1;
+    window = document.getElementById(name);
+    window.style.zIndex = 1;
+    window.getElementsByTagName("div")[0].className = "titleBarActive";
 
 }
 

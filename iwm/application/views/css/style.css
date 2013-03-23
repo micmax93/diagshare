@@ -71,6 +71,37 @@ html, body {
     text-decoration: none;
 }
 
+
+.titleBarActive {
+    background: #FDD017;
+    font-size: 15px;
+    color: black;
+    height: 20px;
+}
+
+.titleBarActive p {
+    display: inline;
+    letter-spacing: 4px;
+}
+
+.titleBarActive a {
+    display: inline;
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.titleBarActive a.close {
+    float: right;
+    display: inline;
+    letter-spacing: 4px;
+    font-size: 15px;
+    color: #034569;
+    text-decoration: none;
+}
+
+
+
 .smallButton {
     display: block;
     background: #086CA2;
