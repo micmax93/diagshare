@@ -5,7 +5,7 @@
  * Time: 22:03
  * To change this template use File | Settings | File Templates.
  */
-var listaOkien = Array();
+
 function setup() {
  //   $('#mainCanvas').draggable({ containment: "parent" });
 
