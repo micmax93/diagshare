@@ -112,6 +112,5 @@ html, body {
     height: 100%;
     background: grey;
     display: inline-block;
-    border: 1px solid;
-    border-color: red;
+
 }

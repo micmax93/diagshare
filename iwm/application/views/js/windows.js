@@ -10,8 +10,8 @@ function createWindow(parentId, id, width, height, imgUrl) {
     $('#' + parentId).append('' +
         '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');">' +
         '   <div class="titleBar" onmousedown="firstPlanWindow(\'' + id + '_window\');"><p>' + id + ' [' + width + 'x' + height + ']</p>' +
-        '       <a href="javascript:zoomGrid(\'' + id + '_grid\',1.1);" class="smallButton">+</a>' +
-        '       <a href="javascript:zoomGrid(\'' + id + '_grid\',0.9);" class="smallButton">-</a>' +
+        '       <a href="javascript:zoom(\'' + id + '_grid\',1.1);" class="smallButton">+</a>' +
+        '       <a href="javascript:zoom(\'' + id + '_grid\',0.9);" class="smallButton">-</a>' +
         '       <a href="javascript:closeWindow(\'' + id + '_window\');" class="close">X</a>' +
         '   </div>' +
         '   <div class="viewport" id="' + id + '_viewport">' +

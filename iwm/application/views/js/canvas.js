@@ -37,29 +37,17 @@ function addNewLine(parentId) {
     $('#' + parentId).append("<br>");
 }
 
-function zoomCanvas(x, scale) {
-
-    var canvas = document.getElementById(x);
-    var imageUrl = canvas.toDataURL("image/jpeg");
-
-    var context = canvas.getContext('2d');
-    var img = new Image();
-
-    img.onload = function () {
-
-        canvas.width = img.width*scale;
-        canvas.height = img.height*scale;
-        context.drawImage(img, 0, 0, img.width*scale, img.height*scale);
-    };
-    img.src = imageUrl;
-
+function zoom(id, scale) {
+    var viewport =  $('#'+id);
+    viewport.height(viewport.height()*scale);
+    viewport.width(viewport.width()*scale);
 
 }
-
+/*
 function zoomGrid(parentId, level) {
     var kanwy = document.getElementById(parentId).getElementsByClassName("imageCanvas");
     for (var i = 0; i < kanwy.length; i++)
         zoomCanvas(kanwy[i].id, parseInt(level));
 
-}
+} */
 
