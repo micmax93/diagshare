@@ -19,8 +19,8 @@ class Controller_Test extends IwMController
                 url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
                 url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
                 url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray3.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray.jpg',
             )
 
         );

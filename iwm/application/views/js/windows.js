@@ -59,6 +59,9 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
         firstPlanWindow(id + '_window');
     }, false);
 
+    // Początkowe wycofanie - żeby było widać wszystkie elementy
+    zoom(id+'_grid',1/(rows));
+
 
     // using the event helper
     $('#' + id + '_viewport').bind('mousewheel', function (event, delta, deltaX, deltaY) {

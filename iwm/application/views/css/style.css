@@ -71,7 +71,6 @@ html, body {
     text-decoration: none;
 }
 
-
 .titleBarActive {
     background: #FDD017;
     font-size: 15px;
@@ -100,8 +99,6 @@ html, body {
     text-decoration: none;
 }
 
-
-
 .smallButton {
     display: block;
     background: #086CA2;
@@ -125,7 +122,6 @@ html, body {
 }
 
 .viewport {
-
     background: grey;
     overflow: hidden;
     white-space: nowrap;
