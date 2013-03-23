@@ -5,7 +5,6 @@
  */
 var listaOkien = Array();
 
-
 function createWindow(parentId, id, width, height, imgUrl) {
 
     $('#' + parentId).append('' +
@@ -37,11 +36,9 @@ function createWindow(parentId, id, width, height, imgUrl) {
     listaOkien.push(id + '_window');
 }
 
-
 function closeWindow(id) {
     $('#' + id).css('display', 'none');
 }
-
 
 function firstPlanWindow(name) {
     for (var i in listaOkien) {
@@ -50,7 +47,6 @@ function firstPlanWindow(name) {
     document.getElementById(name).style.zIndex = 1;
 
 }
-
 
 function showHide(thing) {
     var el = document.getElementById(thing);

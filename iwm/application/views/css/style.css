@@ -90,13 +90,16 @@ html, body {
     height: 800px;
     width: 800px;
     z-index: 0;
+    overflow: hidden;
 }
 
 .viewport {
-    overflow: hidden;
+
     background: grey;
     overflow: hidden;
     white-space: nowrap;
+    width: 100%;
+    height: 100%;
 }
 
 .imageGrid {
@@ -109,4 +112,6 @@ html, body {
     height: 100%;
     background: grey;
     display: inline-block;
+    border: 1px solid;
+    border-color: red;
 }
