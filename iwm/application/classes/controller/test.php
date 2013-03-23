@@ -7,10 +7,32 @@ class Controller_Test extends IwMController
 
     public function action_index()
     {
-        $image["qwd"] = url::base(TRUE, 'http') . 'application/views/img/xray.jpg';
-        $image["qwd2"] = url::base(TRUE, 'http') . 'application/views/img/xray2.jpg';
+        $image["Zestaw1"] = array(
+            "rowSize" => "3",
+            "numberOfRows" => "3",
+            "images" =>
+            array(
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
+            )
 
-        $imageSettings["scale"] = 0.70;
+        );
+
+
+        $image["Obraz1"] = array(
+            "rowSize" => "1",
+            "numberOfRows" => "1",
+            "images" => array(url::base(TRUE, 'http') . 'application/views/img/xray.jpg')
+        );
+
+        $imageSettings["scale"] = 1;
         //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
         //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
 

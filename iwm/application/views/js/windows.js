@@ -5,7 +5,7 @@
  */
 var listaOkien = Array();
 
-function createWindow(parentId, id, width, height, imgUrl) {
+function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
     // Oznacz wszystkie pozostałe okna jako nieaktywne
     var window;
@@ -18,7 +18,7 @@ function createWindow(parentId, id, width, height, imgUrl) {
     // Dodaj diva ze strukturą okna
     $('#' + parentId).append('' +
         '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');">' +
-        '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');"><p>' + id + ' [' + width + 'x' + height + ']</p>' +
+        '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');"><p>' + id + ' [' + width*rowSize + 'x' + height*rows + ']</p>' +
         'Zoom:' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',1.1);" class="smallButton">+</a>' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',0.9);" class="smallButton">-</a>' +
@@ -33,21 +33,38 @@ function createWindow(parentId, id, width, height, imgUrl) {
 
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
-    $('#' + id + '_window').draggable().css('top', (listaOkien.length * 20)).width(width).height(height + 20);
-    $('#' + id).width(width).height(height);
+    $('#' + id + '_window').draggable().css('top', (listaOkien.length * 20)).width(width*rowSize).height(height*rows + 20);
 
     // Dodaj kanwę
-    tc = addCanvas(id + '_grid', id + '_img');
+
+    if (!Array.isArray(images)) {
+        tc = addCanvas(id + '_grid', id + '_img');
+        // Rysuj zdjęcie
+        drawOnCanvas(id + '_img', images, 1);
+
+
+    }
+    else
+    {
+        for(var i=0;i<images.length;i++)
+        {
+
+            tc = addCanvas(id + '_grid', id + '_img'+i);
+            if(((i+1)%rowSize) == 0)
+                addNewLine(id+'_grid');
+            // Rysuj zdjęcie
+            drawOnCanvas(id + '_img' +i, images[i], 1);
+        }
+
+    }
     tc.addEventListener('mousedown', function () {
         firstPlanWindow(id + '_window');
     }, false);
 
-    // Rysuj zdjęcie
-    drawOnCanvas(id + '_img', imgUrl, 1);
 
     // using the event helper
-    $('#'+ id + '_viewport').bind('mousewheel', function(event, delta, deltaX, deltaY) {
-        zoom(id+'_img',((delta > 0) ? 1.1 : 0.9));
+    $('#' + id + '_viewport').bind('mousewheel', function (event, delta, deltaX, deltaY) {
+        zoom(id + '_grid', ((delta > 0) ? 1.1 : 0.9));
     });
 
 
@@ -59,6 +76,11 @@ function createWindow(parentId, id, width, height, imgUrl) {
 
 function closeWindow(id) {
     $('#' + id).css('display', 'none');
+    for(var i=0;i<listaOkien.length; i++)
+    {
+        if(listaOkien[i] == id)
+            listaOkien.splice(i,1);
+    }
 }
 
 function firstPlanWindow(name) {

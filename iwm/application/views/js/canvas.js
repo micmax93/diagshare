@@ -23,7 +23,6 @@ function drawOnCanvas(id, imageUrl, scale) {
     var img = new Image();
 
     img.onload = function () {
-
         canvas.width = img.width*scale;
         canvas.height = img.height*scale;
         context.drawImage(img, 0, 0, img.width*scale, img.height*scale);
@@ -32,6 +31,7 @@ function drawOnCanvas(id, imageUrl, scale) {
 
 }
 
+
 function addNewLine(parentId) {
 
     $('#' + parentId).append("<br>");
@@ -39,20 +39,19 @@ function addNewLine(parentId) {
 
 function zoom(id, scale) {
 
-    var viewport =  $('#'+id);
+    var grid =  $('#'+id);
     var h;
     var w;
 
-    h = viewport.height();
-    w = viewport.width();
+    h = grid.height();
+    w = grid.width();
 
-    viewport.height(viewport.height()*scale);
-    viewport.width(viewport.width()*scale);
+    grid.height(grid.height()*scale);
+    grid.width(grid.width()*scale);
 
-    h = h - viewport.height();
-    w = w - viewport.width();
-    //alert(viewport.css('top'));
-    viewport.css('top',parseInt(viewport.css('top')) + (h/2));
-    viewport.css('left',parseInt(viewport.css('left')) + (w/2));
+    h = h - grid.height();
+    w = w - grid.width();
+    grid.css('top',parseInt(grid.css('top')) + (h/2));
+    grid.css('left',parseInt(grid.css('left')) + (w/2));
 
 }
