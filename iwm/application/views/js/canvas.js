@@ -61,7 +61,20 @@ function contrastGrid(id, value) {
     var grid = document.getElementById(id);
     var canvases = grid.getElementsByTagName("canvas");
     for (var i = 0; i < canvases.length; i++) {
-
+        Caman('#' + canvases[i].id, function () {
+            this.contrast(value);
+            this.render();
+        });
     }
+}
 
+function brightnessGrid(id, value) {
+    var grid = document.getElementById(id);
+    var canvases = grid.getElementsByTagName("canvas");
+    for (var i = 0; i < canvases.length; i++) {
+        Caman('#' + canvases[i].id, function () {
+            this.brightness(value);
+            this.render();
+        });
+    }
 }

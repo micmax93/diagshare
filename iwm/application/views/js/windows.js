@@ -22,6 +22,13 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
         'Zoom:' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',1.1);" class="smallButton">+</a>' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',0.9);" class="smallButton">-</a>' +
+        ' Contrast:' +
+        '       <a href="javascript:contrastGrid(\'' + id + '_grid\',-20);" class="smallButton">+</a>' +
+        '       <a href="javascript:contrastGrid(\'' + id + '_grid\',20);" class="smallButton">-</a>' +
+        ' Brightness:' +
+        '       <a href="javascript:brightnessGrid(\'' + id + '_grid\',20);" class="smallButton">+</a>' +
+        '       <a href="javascript:brightnessGrid(\'' + id + '_grid\',-20);" class="smallButton">-</a>' +
+
         '       <a href="javascript:closeWindow(\'' + id + '_window\');" class="close">X</a>' +
         '   </div>' +
         '   <div class="viewport" id="' + id + '_viewport">' +
@@ -37,7 +44,6 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     $('#' + id + '_grid').width(width * rowSize).height(height * rowSize);
 
     // Dodaj kanwę
-
     if (!Array.isArray(images)) {
         tc = addCanvas(id + '_grid', id + '_img');
         // Rysuj zdjęcie
@@ -60,7 +66,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     }, false);
 
     // Początkowe wycofanie - żeby było widać wszystkie elementy
-    zoom(id+'_grid',1/(rows));
+    zoom(id + '_grid', 1 / (Math.max(rows, rowSize)));
 
 
     // using the event helper
@@ -76,6 +82,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
 }
 
 function closeWindow(id) {
+
     $('#' + id).css('display', 'none');
     for (var i = 0; i < listaOkien.length; i++) {
         if (listaOkien[i] == id)
