@@ -9,11 +9,11 @@ echo '
  <link rel="stylesheet" href="' . URL::base() . 'application/views/css/jquery.window.css" type="text/css">
  <script src="' . URL::base() . 'application/views/js/jquery-1.9.1.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
-<!-- <script src="' . URL::base() . 'application/views/js/jcanvas.min.js"></script>-->
-  <script src="' . URL::base() . 'application/views/js/functions.js"></script>
-  <script src="' . URL::base() . 'application/views/js/windows.js"></script>
-  <script src="' . URL::base() . 'application/views/js/canvas.js"></script>
-  <script src="' . URL::base() . 'application/views/js/setup.js"></script>
+ <script src="' . URL::base() . 'application/views/js/jquery.mousewheel.js"></script>
+ <script src="' . URL::base() . 'application/views/js/functions.js"></script>
+ <script src="' . URL::base() . 'application/views/js/windows.js"></script>
+ <script src="' . URL::base() . 'application/views/js/canvas.js"></script>
+ <script src="' . URL::base() . 'application/views/js/setup.js"></script>
 </head>
 <body onload="setup()">
 <div id="container">

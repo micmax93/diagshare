@@ -7,6 +7,7 @@ var listaOkien = Array();
 
 function createWindow(parentId, id, width, height, imgUrl) {
 
+    // Oznacz wszystkie pozostałe okna jako nieaktywne
     var window;
     for (var i = 0; i < listaOkien.length; i++) {
         window = document.getElementById(listaOkien[i]);
@@ -14,6 +15,7 @@ function createWindow(parentId, id, width, height, imgUrl) {
         window.getElementsByTagName("div")[0].className = "titleBar";
     }
 
+    // Dodaj diva ze strukturą okna
     $('#' + parentId).append('' +
         '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');">' +
         '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');"><p>' + id + ' [' + width + 'x' + height + ']</p>' +
@@ -28,20 +30,31 @@ function createWindow(parentId, id, width, height, imgUrl) {
         '   </div>' +
         '</div>' +
         '');
+
+    // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
     $('#' + id + '_window').draggable().css('top', (listaOkien.length * 20)).width(width).height(height + 20);
     $('#' + id).width(width).height(height);
 
-
+    // Dodaj kanwę
     tc = addCanvas(id + '_grid', id + '_img');
     tc.addEventListener('mousedown', function () {
         firstPlanWindow(id + '_window');
     }, false);
+
+    // Rysuj zdjęcie
     drawOnCanvas(id + '_img', imgUrl, 1);
+
+    // using the event helper
+    $('#'+ id + '_viewport').bind('mousewheel', function(event, delta, deltaX, deltaY) {
+        zoom(id+'_img',((delta > 0) ? 1.1 : 0.9));
+    });
+
+
+    // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
     $('#' + id + '_grid').draggable();
     $('#' + id + '_viewport').css('z-index', 0);
     $('#' + id).css('z-index', 0);
-    listaOkien.push(id + '_window');
 }
 
 function closeWindow(id) {
