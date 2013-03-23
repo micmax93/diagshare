@@ -42,22 +42,6 @@ html, body {
     background: #64AAD0;
 }
 
-.imageWindow {
-    border: 4px solid black;
-    left: 20%;
-    top: 0;
-    position: absolute;
-    height: 800px;
-    width: 800px;
-    z-index: 0;
-}
-
-.imageWindow .image {
-    width: 100%;
-    height: 100%;
-    background: grey;
-}
-
 .titleBar {
     background: #FF8B00;
     font-size: 15px;
@@ -77,7 +61,6 @@ html, body {
     text-decoration: none;
 }
 
-
 .titleBar a.close {
     float: right;
     display: inline;
@@ -86,7 +69,6 @@ html, body {
     color: #034569;
     text-decoration: none;
 }
-
 
 .smallButton {
     display: block;
@@ -97,4 +79,35 @@ html, body {
     padding-left: 2px;
     padding-right: 2px;
     color: white;
+}
+
+.imageWindow {
+    border: 4px solid black;
+    left: 20%;
+    top: 0;
+    position: absolute;
+    height: 800px;
+    width: 800px;
+    z-index: 0;
+}
+
+.viewport {
+
+    overflow: hidden;
+    background: grey;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.imageGrid {
+    display:inline-block;
+    padding: 0;
+    line-height: 0;
+}
+
+.imageCanvas {
+    width: 100%;
+    height: 100%;
+    background: grey;
+    display: inline-block;
 }

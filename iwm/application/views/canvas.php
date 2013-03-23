@@ -16,7 +16,10 @@ foreach ($images as $k => $v) {
         <a href="javascript:changeFilter(\'' . $k . '_img\',0,0,-1);" class="smallButton">-</a>
         Reset: <a href="javascript:resetFilter(\'' . $k . '_img\');" class="smallButton">R</a>
         <a href="javascript:showHide(\'' . $k . '_window\');" class="close">X</a></div>
-        <div class="image" id="' . $k . '"></div>
+        <div class="viewport" id="' . $k . '_viewport">
+            <div class="imageGrid" id="' . $k . '_grid">
+            </div>
+        </div>
     </div>';
 }
 echo '
@@ -40,23 +43,11 @@ foreach ($images as $k => $v) {
         $('#" . $k . "').width(" . $size[0] . ");
         $('#" . $k . "').height(" . $size[1] . ");
 
-        map[" . $i . "] = new OpenLayers.Map('" . $k . "');
-            graphic[" . $i . "] = new OpenLayers.Layer.Image(
-                '" . $k . "',
-                '" . $v . "',
-                new OpenLayers.Bounds(-180, -88.759, 180, 88.759),
-                new OpenLayers.Size(" . $size[0] . ", " . $size[1] . "),
-                {numZoomLevels: 10}
-            );
-        map[" . $i . "].addLayers([graphic[" . $i . "]]);
-        map[" . $i . "].zoomToMaxExtent();
+        addCanvas('" . $k . "_grid','" . $k . "_img');
+        drawOnCanvas('" . $k . "_img','" . $v . "',1);
+        $('#" . $k . "_grid').draggable();
 
         $('#" . $k . "').css('z-index',0);
-        $('#" . $k . "').find('img').map(function(){
-            this.className='" . $k . "_img';
-            return this;
-        }).get();
-
         listaOkien.push('" . $k . "_window');
 
     ";
