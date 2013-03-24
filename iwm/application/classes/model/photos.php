@@ -36,4 +36,19 @@ class Model_Photos extends Model_Base
         $t=$q->find_all();
         return $t;
     }
+
+    public function getLinkArray()
+    {
+        $img = array(
+            "rowSize" => $this->x_count,
+            "numberOfRows" => $this->y_count,
+            "images" => array()
+            );
+        $path=url::base(TRUE, 'http') . 'application/views/img/' . $this->id . '.' . $this->filename . '/';
+        for($i=0;$i<($this->x_count*$this->y_count);$i++)
+        {
+            array_push($img["images"],$path . $i . '.jpg');
+        }
+        return $img;
+    }
 }
