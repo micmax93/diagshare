@@ -49,6 +49,7 @@ html, body {
     height: 50%;
     border-bottom: 2px dashed;
     background: #3C9DD0;
+    overflow: scroll;
 }
 
 #roomList ul {
@@ -162,4 +163,8 @@ html, body {
 
 .loading {
     color: red;
+}
+
+.roomz {
+    background: red;
 }

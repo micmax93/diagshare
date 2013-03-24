@@ -7,12 +7,8 @@
 
 
 echo '
-<p>
-Pokoje
-</p>
-<ul id="rooms">
-
-</ul>
+<div id="rooms">
+</div>
 <br>
     <script type="text/javascript">
     var data;
