@@ -1,0 +1,10 @@
+﻿database.php.sample - przykładowy config połączenia z bazą
+pgSchemat - schemat bazy danych (bez danych)
+imw_db_backup.tar - kopia zapasowa bazy danych
+
+Jak stworzyć bazę danych:
+	uruchamiamy pgAdmin
+	tworzymy rolę(użytkownika) iwm z hasłem iwm
+	tworzymy bazę danych iwm
+	na bazie danych wybieramy "Przywróć..."
+	wybieramy nasz plik z kopią zapasową i klikamy przywróć

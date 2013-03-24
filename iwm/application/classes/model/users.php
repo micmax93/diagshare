@@ -5,9 +5,9 @@
  * Date: 16.03.13
  */
 
-class Model_User extends Model_Base
+class Model_Users extends Model_Base
 {
-    public $_table_name = "user";
+    public $_table_name = "users";
 
 }
 

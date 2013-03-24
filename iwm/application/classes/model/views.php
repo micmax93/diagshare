@@ -4,25 +4,25 @@
  * User: micmax93
  * Date: 18.03.13
  */
-class Model_View extends Model_Base
+class Model_Views extends Model_Base
 {
-    public $_table_name = "view";
+    public $_table_name = "views";
 
     public function getPhoto()
     {
-        $p=new Model_Photo();
-        return $p->getItem($this->photoID);
+        $p=new Model_Photos();
+        return $p->getItem($this->photo_id);
     }
 
     public function getOwner()
     {
         $u=new Model_User();
-        return $u->getItem($this->ownerId);
+        return $u->getItem($this->owner_id);
     }
 
     public function endY()
     {
-        $photo=this.getPhoto();
+        $photo=$this->getPhoto();
         $myEnd=($this->y)+(($photo->height)/($this->scale));
 
         if($myEnd>($photo->height)) {return $photo->height;}
@@ -31,7 +31,7 @@ class Model_View extends Model_Base
 
     public function endX()
     {
-        $photo=this.getPhoto();
+        $photo=$this->getPhoto();
         $myEnd=($this->x)+(($photo->width)/($this->scale));
 
         if($myEnd>($photo->width)) {return $photo->width;}
@@ -40,13 +40,8 @@ class Model_View extends Model_Base
 
     public function getVisibleTags()
     {
-        $photo=this.getPhoto();
-        $tags=$photo->myTags();
-        $tags=$tags->where('x','>=',$this->x);
-        $tags=$tags->where('x','<=',$this->endX());
-        $tags=$tags->where('y','>=',$this->y);
-        $tags=$tags->where('y','<=',$this->endY());
-
-        return $tags->findAll();
+        $photo=$this->getPhoto();
+        $tags=$photo->getTags($this->x,$this->y,$this->endX(),$this->endY());
+        return $tags;
     }
 }

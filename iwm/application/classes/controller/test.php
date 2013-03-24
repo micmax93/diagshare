@@ -5,6 +5,7 @@ require("IwMController.php");
 class Controller_Test extends IwMController
 {
 
+
     public function action_index()
     {
         $image["qwd"] = url::base(TRUE, 'http') . 'application/views/img/xray.jpg';
