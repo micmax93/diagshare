@@ -7,24 +7,44 @@
  */
 
 function roomsReceived(data) {
-    var list = "";
+
+    var list = '';
     $.each(data, function (room, patients) {
-        list += '<li>' + room;
-        list += '<ul>';
+        list += '<h3>' + room + '</h3>';
         $.each(patients, function (patient, photos) {
-            list += '<li>' + patient;
-            list += '<ul>';
+
+            list += '<div class="roomz">';
+            list += '   <h3>' + patient + '</h3>';
+            list += '   <div>';
+            list += '       <ul>';
+
             $.each(photos, function (photo) {
-                list += '<li>';
-                list += '<a href="javascript:showHide(\''+photo+'_window\');">'+photo+'</a>';
-                list += '</li>';
+                list += '       <li>';
+                list += '           <a href="javascript:showHide(\'' + photo + '_window\');">' + photo + '</a>';
+                list += '       </li>';
             });
-            list += '</ul>';
-            list += '</li>';
+            list += '       </ul>';
+            list += '   </div>';
+            list += '</div>';
+
         });
-        list += '</ul>';
-        list += '</li>';
-        document.getElementById('rooms').innerHTML = list;
-        //items.push('<li id="' + key + '">' + val + '</li>');
+
+
     });
+    document.getElementById('rooms').innerHTML = list;
+
+    $(function () {
+        $("#rooms").accordion({
+            collapsible:true
+        });
+    });
+
+
+    $(function () {
+        $(".roomz").accordion({
+            collapsible:true
+        });
+    });
+
+
 }
