@@ -23,43 +23,59 @@ function drawOnCanvas(id, imageUrl, scale) {
     var img = new Image();
 
     img.onload = function () {
-
-        canvas.width = img.width*scale;
-        canvas.height = img.height*scale;
-        context.drawImage(img, 0, 0, img.width*scale, img.height*scale);
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        context.drawImage(img, 0, 0, img.width * scale, img.height * scale);
     };
     img.src = imageUrl;
 
 }
+
 
 function addNewLine(parentId) {
 
     $('#' + parentId).append("<br>");
 }
 
-function zoomCanvas(x, scale) {
+function zoom(id, scale) {
 
-    var canvas = document.getElementById(x);
-    var imageUrl = canvas.toDataURL("image/jpeg");
+    var grid = $('#' + id);
+    var h;
+    var w;
 
-    var context = canvas.getContext('2d');
-    var img = new Image();
+    h = grid.height();
+    w = grid.width();
 
-    img.onload = function () {
+    grid.height(grid.height() * scale);
+    grid.width(grid.width() * scale);
 
-        canvas.width = img.width*scale;
-        canvas.height = img.height*scale;
-        context.drawImage(img, 0, 0, img.width*scale, img.height*scale);
-    };
-    img.src = imageUrl;
-
-
-}
-
-function zoomGrid(parentId, level) {
-    var kanwy = document.getElementById(parentId).getElementsByClassName("imageCanvas");
-    for (var i = 0; i < kanwy.length; i++)
-        zoomCanvas(kanwy[i].id, parseInt(level));
+    h = h - grid.height();
+    w = w - grid.width();
+    grid.css('top', parseInt(grid.css('top')) + (h / 2));
+    grid.css('left', parseInt(grid.css('left')) + (w / 2));
 
 }
 
+
+function contrastGrid(id, value) {
+
+    var grid = document.getElementById(id);
+    var canvases = grid.getElementsByTagName("canvas");
+    for (var i = 0; i < canvases.length; i++) {
+        Caman('#' + canvases[i].id, function () {
+            this.contrast(value);
+            this.render();
+        });
+    }
+}
+
+function brightnessGrid(id, value) {
+    var grid = document.getElementById(id);
+    var canvases = grid.getElementsByTagName("canvas");
+    for (var i = 0; i < canvases.length; i++) {
+        Caman('#' + canvases[i].id, function () {
+            this.brightness(value);
+            this.render();
+        });
+    }
+}

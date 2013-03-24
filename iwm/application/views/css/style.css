@@ -3,6 +3,8 @@ html, body {
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
+    padding: 0;
+    background: #086CA2;
 }
 
 #container {
@@ -12,16 +14,26 @@ html, body {
     padding: 0;
 
 }
+#container h1 {
+    color: white;
+    text-align: center;
+    font-family: 'Share Tech Mono', sans-serif;
+    font-size: 40px;
+}
 
 #main {
     float: left;
-    width: 80%;
+    width: 84%;
     height: 100%;
     border-bottom: 2px solid;
     margin: 0;
     padding: 0;
-    background: #086CA2;
-    overflow: hidden;
+    background-image: -ms-linear-gradient(top right, #FFFFFF 0%, #086CA2 100%);
+    background-image: -moz-linear-gradient(top right, #FFFFFF 0%, #086CA2 100%);
+    background-image: -o-linear-gradient(top right, #FFFFFF 0%, #086CA2 100%);
+    background-image: -webkit-gradient(linear, right top, right bottom, color-stop(0, #FFFFFF), color-stop(1, #086CA2));
+    background-image: -webkit-linear-gradient(top right, #FFFFFF 0%, #086CA2 100%);
+    background-image: linear-gradient(to top left, #FFFFFF 0%, #086CA2 100%);
 }
 
 #sideBar {
@@ -29,17 +41,23 @@ html, body {
     border-right: 2px solid;
     border-bottom: 2px solid;
     height: 100%;
-    width: 19%;
+    width: 15%;
+    padding: 0px;
 }
 
 #roomList {
-    height: 30%;
+    height: 50%;
     border-bottom: 2px dashed;
     background: #3C9DD0;
 }
 
+#roomList ul {
+
+}
+
+
 #messageBox {
-    height: 70%;
+    height: 50%;
     background: #64AAD0;
 }
 
@@ -71,6 +89,34 @@ html, body {
     text-decoration: none;
 }
 
+.titleBarActive {
+    background: #FDD017;
+    font-size: 15px;
+    color: black;
+    height: 20px;
+}
+
+.titleBarActive p {
+    display: inline;
+    letter-spacing: 4px;
+}
+
+.titleBarActive a {
+    display: inline;
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.titleBarActive a.close {
+    float: right;
+    display: inline;
+    letter-spacing: 4px;
+    font-size: 15px;
+    color: #034569;
+    text-decoration: none;
+}
+
 .smallButton {
     display: block;
     background: #086CA2;
@@ -94,7 +140,6 @@ html, body {
 }
 
 .viewport {
-
     background: grey;
     overflow: hidden;
     white-space: nowrap;
@@ -112,6 +157,9 @@ html, body {
     height: 100%;
     background: grey;
     display: inline-block;
-    border: 1px solid;
-    border-color: red;
+
+}
+
+.loading {
+    color: red;
 }
