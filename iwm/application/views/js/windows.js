@@ -28,7 +28,6 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
         ' Brightness:' +
         '       <a href="javascript:brightnessGrid(\'' + id + '_grid\',20);" class="smallButton">+</a>' +
         '       <a href="javascript:brightnessGrid(\'' + id + '_grid\',-20);" class="smallButton">-</a>' +
-
         '       <a href="javascript:closeWindow(\'' + id + '_window\');" class="close">X</a>' +
         '   </div>' +
         '   <div class="viewport" id="' + id + '_viewport">' +

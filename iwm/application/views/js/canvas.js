@@ -58,6 +58,7 @@ function zoom(id, scale) {
 
 
 function contrastGrid(id, value) {
+
     var grid = document.getElementById(id);
     var canvases = grid.getElementsByTagName("canvas");
     for (var i = 0; i < canvases.length; i++) {

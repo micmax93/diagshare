@@ -2,7 +2,7 @@
 
 require("IwMController.php");
 
-class Controller_Test extends IwMController
+class Controller_IwM extends IwMController
 {
 
     public function action_index()
