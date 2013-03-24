@@ -107,6 +107,7 @@ function showHide(thing) {
     var el = document.getElementById(thing);
     if (el.style.display == "none") {
         el.style.display = "block";
+        firstPlanWindow(thing);
         //el.parentNode.style.height = parseInt(el.height) + "px";
     }
     else {

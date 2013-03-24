@@ -109,8 +109,26 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-Route::set('czat', '(<controller>(/<action>(/<id>)))')
+
+Route::set('glowna', '(<controller>(/<action>(/<id>)))')
     ->defaults(array(
     'controller' => 'iwm',
     'action' => 'index',
 ));
+
+
+
+Route::set('chat', '(chat(/<action>(/<id>)))')
+    ->defaults(array(
+    'controller' => 'chat',
+    'action' => 'index',
+));
+
+
+Route::set('pokoje', '(room(/<action>(/<id>)))')
+    ->defaults(array(
+    'controller' => 'room',
+    'action' => 'index',
+));
+
+
