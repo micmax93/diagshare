@@ -86,6 +86,8 @@ function brightnessGrid(id, value) {
 
 function canvasRevert(id) {
     var grid = document.getElementById(id);
+    grid.style.top = 0;
+    grid.style.left = 0;
     var canvases = grid.getElementsByTagName("canvas");
     for (var i = 0; i < canvases.length; i++) {
         Caman('#' + canvases[i].id, function () {

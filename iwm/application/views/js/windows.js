@@ -43,7 +43,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({ containment: "#main", opacity: 0.8 }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
+    $('#' + id + '_window').draggable({ containment:"#main", opacity:0.8 }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rowSize);
 
     // Dodaj kanwę
@@ -79,7 +79,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
-    $('#' + id + '_grid').draggable({cursor: "move"});
+    $('#' + id + '_grid').draggable({cursor:"move"});
     $('#' + id + '_viewport').css('z-index', 0);
     $('#' + id).css('z-index', 0);
 }
@@ -131,7 +131,7 @@ function showHideOrLoad(thing) {
         var data;
         $.ajax({
             dataType:"json",
-            url:base_url + "index.php/image/get/"+ thing,
+            url:base_url + "index.php/image/get/" + thing,
             data:data,
             success:imageReceived
         });
