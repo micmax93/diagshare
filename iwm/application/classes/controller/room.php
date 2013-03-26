@@ -16,7 +16,11 @@ class Controller_Room extends IwMController
             'Adam Kowalski' => array(
                 "Zestaw1" => "Zdjęcie klatki piersiowej",
                 "Obraz1" => "Inne zdjęcie"
-            )
+            ),
+         'Tomek Kowalski' => array(
+           "Zestaw1" => "Zdjęcie klatki piersiowej",
+           "Obraz1" => "Inne zdjęcie"
+         )
         );
         $rooms["Chirurgia"] = array(
 
