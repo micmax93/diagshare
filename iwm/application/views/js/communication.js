@@ -6,6 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 
+/**
+ * roomsReceived
+ * Funkcja ta tworzy strukturę html i umieszcza ją w panelu bocznym
+ * po odebraniu struktury danych pokojów i pacjentów.
+ *
+ * @param data
+ */
 function roomsReceived(data) {
 
     var list = '';
@@ -49,7 +56,11 @@ function roomsReceived(data) {
 
 }
 
-
+/**
+ * imageReceived()
+ * Poniższa funkcja dla otrzymanych danych powoduje utworzenie okna.
+ * @param v
+ */
 function imageReceived(v) {
     createWindow('main', v["name"], v["width"], v["height"], v["rowSize"], v["numberOfRows"], v["images"]);
 }

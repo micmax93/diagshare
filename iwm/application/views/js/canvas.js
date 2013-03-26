@@ -6,7 +6,14 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
+/**
+ * addCanvas()
+ * Do podanego elementu nadrzędnego dodaje nową kanwę
+ *
+ * @param parentId
+ * @param id
+ * @return {HTMLElement}
+ */
 function addCanvas(parentId, id) {
     var newCanvas = $('<canvas/>', {'id':id});
     newCanvas.className = "imageCanvas";
@@ -17,6 +24,13 @@ function addCanvas(parentId, id) {
 }
 
 
+/**
+ * drawOnCanvas()
+ * Dla kanwy o podanym id rysuje obraz z podanego URL w przyjętej skali.
+ * @param id
+ * @param imageUrl
+ * @param scale
+ */
 function drawOnCanvas(id, imageUrl, scale) {
     var canvas = document.getElementById(id);
     var context = canvas.getContext('2d');
@@ -31,12 +45,23 @@ function drawOnCanvas(id, imageUrl, scale) {
 
 }
 
-
+/**
+ * addNewLine()
+ * Robi <br> - sposób na nowy wiersz w gridzie
+ *
+ * @param parentId
+ */
 function addNewLine(parentId) {
 
     $('#' + parentId).append("<br>");
 }
 
+/**
+ * zoom()
+ * Powiększa i przesuwa grid w zależności od skali.
+ * @param id
+ * @param scale
+ */
 function zoom(id, scale) {
 
     var grid = $('#' + id);
@@ -58,6 +83,13 @@ function zoom(id, scale) {
 
 
 var contrastList = Array();
+/**
+ * contrastGrid()
+ * Zwiększa kontrast.
+ *
+ * @param id
+ * @param value
+ */
 function contrastGrid(id, value) {
 
     var grid = document.getElementById(id);
@@ -72,6 +104,14 @@ function contrastGrid(id, value) {
 
 
 var brightnessList = Array();
+
+/**
+ * brightnessGrid()
+ * Zwiększa jasność
+ *
+ * @param id
+ * @param value
+ */
 function brightnessGrid(id, value) {
     var grid = document.getElementById(id);
     var canvases = grid.getElementsByTagName("canvas");
@@ -84,6 +124,11 @@ function brightnessGrid(id, value) {
 
 }
 
+/**
+ * canvasRevert()
+ * Odwraca skutki działania filtrów i ustawia grid na pozycji (0,0)
+ * @param id
+ */
 function canvasRevert(id) {
     var grid = document.getElementById(id);
     grid.style.top = 0;
@@ -91,7 +136,7 @@ function canvasRevert(id) {
     var canvases = grid.getElementsByTagName("canvas");
     for (var i = 0; i < canvases.length; i++) {
         Caman('#' + canvases[i].id, function () {
-           this.revert();
+            this.revert();
         });
     }
 

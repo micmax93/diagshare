@@ -5,7 +5,19 @@
  */
 var listaOkien = Array();
 
-
+/**
+ * createWindow()
+ * Tworzy okno, jego elementy sterujące oraz grid i wywołuje addCanvas i drawOnCanvas
+ * w celu wyrysowania wszystkich zdjęć na canvasach.
+ * W miedzyczasie ustawia wszystkie parametry pozwalające na przesuwanie elementów.
+ * @param parentId
+ * @param id
+ * @param width
+ * @param height
+ * @param rows
+ * @param rowSize
+ * @param images
+ */
 function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
     // Oznacz wszystkie pozostałe okna jako nieaktywne
@@ -43,7 +55,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({ containment:"#main", opacity:0.8 }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
+    $('#' + id + '_window').draggable({opacity:0.8, containment:"parent" }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rowSize);
 
     // Dodaj kanwę
@@ -84,16 +96,27 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     $('#' + id).css('z-index', 0);
 }
 
+/**
+ * closeWindow()
+ * Zamyka okno - ukrywa, a potem usuwa z dokumentu i listy okien
+ *
+ * @param id
+ */
 function closeWindow(id) {
-
     $('#' + id).css('display', 'none').remove();
     for (var i = 0; i < listaOkien.length; i++) {
         if (listaOkien[i] == id)
             listaOkien.splice(i, 1);
 
+
     }
 }
 
+/**
+ * firstPlanWindow()
+ * Wyciąga okno na pierwszy plan i zmienia klasę paska tytułu
+ * @param name
+ */
 function firstPlanWindow(name) {
     var window;
     for (var i in listaOkien) {
@@ -108,6 +131,11 @@ function firstPlanWindow(name) {
 
 }
 
+/**
+ * showHide()
+ * Dla obiektu o podanym id ukrywa go bądź pokazuje (parametr display)
+ * @param thing
+ */
 function showHide(thing) {
     var el = document.getElementById(thing);
     if (el.style.display == "none") {
@@ -123,7 +151,14 @@ function showHide(thing) {
 
 }
 
-
+/**
+ * showHideOrLoad()
+ * Ukrywa bądź pokazuje okno.
+ * Jeżeli nie istnieje - zostanie zainicjalizowane pobranie metadanych.
+ * Funkcja imageReceived dokona dalszego wywołania createWindow dla odebranych danych.
+ *
+ * @param thing
+ */
 function showHideOrLoad(thing) {
     var el = document.getElementById(thing + '_window');
 
@@ -150,16 +185,29 @@ function showHideOrLoad(thing) {
 
 }
 
+/**
+ * menuRoll()
+ *
+ * Animowana funkcja ukrywania i rozwijania dla menu
+ *
+ * @param thing
+ */
 function menuRoll(thing) {
-    var el = document.getElementById(thing);
-    if (el.style.display == "none") {
-        el.style.display = "block";
-    }
-    else {
-        el.style.display = "none";
-        //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
+    $('#' + thing).animate({
+        height:'toggle'
+    }, 250, function () {
 
-    }
+    });
+
+    // Wariant statyczny
+    /* var el = document.getElementById(thing);
+     if (el.style.display == "none") {
+     el.style.display = "block";
+     }
+     else {
+     el.style.display = "none";
+     }*/
+
 
 }
 
