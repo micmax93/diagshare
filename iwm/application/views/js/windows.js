@@ -43,7 +43,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({ containment: "#main"}).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
+    $('#' + id + '_window').draggable({ containment: "#main", opacity: 0.8 }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rowSize);
 
     // Dodaj kanwę
