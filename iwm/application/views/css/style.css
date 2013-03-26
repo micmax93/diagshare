@@ -29,6 +29,7 @@ html, body {
     border-bottom: 2px solid;
     margin: 0;
     padding: 0;
+    overflow:hidden;
     background-image: -ms-linear-gradient(top right, #FFFFFF 0%, #086CA2 100%);
     background-image: -moz-linear-gradient(top right, #FFFFFF 0%, #086CA2 100%);
     background-image: -o-linear-gradient(top right, #FFFFFF 0%, #086CA2 100%);
@@ -64,6 +65,7 @@ html, body {
 }
 
 .titleBar {
+    cursor: default;
     background: #FF8B00;
     font-size: 15px;
     color: black;
@@ -92,6 +94,7 @@ html, body {
 }
 
 .titleBarActive {
+    cursor: default;
     background: #FDD017;
     font-size: 15px;
     color: black;

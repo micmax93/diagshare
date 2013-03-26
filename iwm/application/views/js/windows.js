@@ -29,6 +29,8 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
         ' Brightness:' +
         '       <a href="javascript:brightnessGrid(\'' + id + '_grid\',20);" class="smallButton">+</a>' +
         '       <a href="javascript:brightnessGrid(\'' + id + '_grid\',-20);" class="smallButton">-</a>' +
+        ' Revert:' +
+        '       <a href="javascript:canvasRevert(\'' + id + '_grid\',-20);" class="smallButton">O</a>' +
         '       <a href="javascript:closeWindow(\'' + id + '_window\');" class="close">X</a>' +
         '   </div>' +
         '   <div class="viewport" id="' + id + '_viewport">' +
@@ -40,7 +42,8 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
-    $('#' + id + '_window').draggable().css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
+
+    $('#' + id + '_window').draggable({ containment: "#main"}).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rowSize);
 
     // Dodaj kanwę
@@ -76,7 +79,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
-    $('#' + id + '_grid').draggable();
+    $('#' + id + '_grid').draggable({cursor: "move"});
     $('#' + id + '_viewport').css('z-index', 0);
     $('#' + id).css('z-index', 0);
 }

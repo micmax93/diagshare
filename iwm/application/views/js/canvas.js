@@ -57,6 +57,7 @@ function zoom(id, scale) {
 }
 
 
+var contrastList = Array();
 function contrastGrid(id, value) {
 
     var grid = document.getElementById(id);
@@ -69,6 +70,8 @@ function contrastGrid(id, value) {
     }
 }
 
+
+var brightnessList = Array();
 function brightnessGrid(id, value) {
     var grid = document.getElementById(id);
     var canvases = grid.getElementsByTagName("canvas");
@@ -78,4 +81,16 @@ function brightnessGrid(id, value) {
             this.render();
         });
     }
+
+}
+
+function canvasRevert(id) {
+    var grid = document.getElementById(id);
+    var canvases = grid.getElementsByTagName("canvas");
+    for (var i = 0; i < canvases.length; i++) {
+        Caman('#' + canvases[i].id, function () {
+           this.revert();
+        });
+    }
+
 }
