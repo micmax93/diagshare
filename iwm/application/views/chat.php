@@ -4,4 +4,27 @@
  * User: phisikus
  * Date: 15.03.13
  */
-echo 'Chat';
+echo '
+<div id="chatContent">
+<script type="text/javascript">
+$(function(){
+
+$("#chatInput").keyup(function (e) {
+    if (e.which == 13) {
+        sendChatMessage();
+    }
+ });
+
+});
+
+</script>
+<p id="chatRoomId">#pokój</p>
+<hr>
+<table id="chatList">
+</table>
+
+</div>
+<div id="chatControl">
+    <input type="text" id="chatInput"><button onclick="sendChatMessage()">Wyślij</button>
+</div>
+';

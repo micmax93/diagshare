@@ -64,3 +64,45 @@ function roomsReceived(data) {
 function imageReceived(v) {
     createWindow('main', v["name"], v["width"], v["height"], v["rowSize"], v["numberOfRows"], v["images"]);
 }
+
+
+/**
+ * sendChatMessage()
+ * Wysyła dane z czatu
+ * @param data
+ */
+function sendChatMessage() {
+    var mesg = document.getElementById('chatInput');
+    webSocket.send(mesg.value);
+    mesg.value = "";
+}
+
+
+function setupWebSocket() {
+
+    webSocket = new WebSocket(wsUri);
+    webSocket.onopen = function (evt) {
+
+    };
+    webSocket.onclose = function (evt) {
+        onClose(evt)
+    };
+    webSocket.onmessage = function (evt) {
+        onMessage(evt);
+    };
+    webSocket.onerror = function (evt) {
+        onError(evt);
+    };
+}
+
+function onClose(evt) {
+   alert('Rozłączono!');
+}
+function onMessage(evt) {
+    //alert(evt.data);
+    $('#chatList').append("<tr><td>" + evt.data + "</td></tr>");
+    //webSocket.close();
+}
+function onError(evt) {
+    alert('Błąd czatu: '+evt.data);
+}
