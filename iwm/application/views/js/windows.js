@@ -5,6 +5,7 @@
  */
 var listaOkien = Array();
 
+
 function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
     // Oznacz wszystkie pozostałe okna jako nieaktywne
@@ -82,10 +83,11 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
 function closeWindow(id) {
 
-    $('#' + id).css('display', 'none');
+    $('#' + id).css('display', 'none').remove();
     for (var i = 0; i < listaOkien.length; i++) {
         if (listaOkien[i] == id)
             listaOkien.splice(i, 1);
+
     }
 }
 
