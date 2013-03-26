@@ -7,8 +7,17 @@ var map = new Array();
 var zdjecia = new Array();
 var tc;
 
+
 ';
-$j = 0;
+
+echo "
+
+
+";
+
+
+// Ładowanie zdjęć - stare - statyczne
+/*$j = 0;
 foreach ($images as $k => $v) {
 
     $size = getimagesize($v["images"][0]);
@@ -30,7 +39,7 @@ foreach ($images as $k => $v) {
     ';
 
     $j++;
-}
+}  */
 
 echo '
 </script>

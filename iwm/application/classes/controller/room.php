@@ -36,8 +36,6 @@ class Controller_Room extends IwMController
             )
         );
 
-
-
         $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($rooms));
     }

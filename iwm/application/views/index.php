@@ -12,10 +12,14 @@ echo '
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery.mousewheel.js"></script>
  <script src="' . URL::base() . 'application/views/js/caman.full.min.js"></script>
+ <script src="' . URL::base() . 'application/views/js/communication.js"></script>
  <script src="' . URL::base() . 'application/views/js/functions.js"></script>
  <script src="' . URL::base() . 'application/views/js/windows.js"></script>
  <script src="' . URL::base() . 'application/views/js/canvas.js"></script>
  <script src="' . URL::base() . 'application/views/js/setup.js"></script>
+ <script type="text/javascript">
+  var base_url = "'.URL::base().'";
+ </script>
 </head>
 <body onload="setup()">
 <div id="container">

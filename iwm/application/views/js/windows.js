@@ -118,3 +118,44 @@ function showHide(thing) {
 
 }
 
+
+function showHideOrLoad(thing) {
+    var el = document.getElementById(thing + '_window');
+
+    if (!el) {
+        var data;
+        $.ajax({
+            dataType:"json",
+            url:base_url + "index.php/image/get/"+ thing,
+            data:data,
+            success:imageReceived
+        });
+    }
+
+    if (el.style.display == "none") {
+        el.style.display = "block";
+        firstPlanWindow(thing + '_window');
+        //el.parentNode.style.height = parseInt(el.height) + "px";
+    }
+    else {
+        el.style.display = "none";
+        //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
+
+    }
+
+}
+
+function menuRoll(thing) {
+    var el = document.getElementById(thing);
+    if (el.style.display == "none") {
+        el.style.display = "block";
+    }
+    else {
+        el.style.display = "none";
+        //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
+
+    }
+
+}
+
+

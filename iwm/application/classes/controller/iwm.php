@@ -7,37 +7,13 @@ class Controller_IwM extends IwMController
 
     public function action_index()
     {
-        $image["Zestaw1"] = array(
-            "rowSize" => "3",
-            "numberOfRows" => "3",
-            "images" =>
-            array(
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray2.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray3.jpg',
-                url::base(TRUE, 'http') . 'application/views/img/xray.jpg',
-            )
 
-        );
-
-
-        $image["Obraz1"] = array(
-            "rowSize" => "1",
-            "numberOfRows" => "1",
-            "images" => array(url::base(TRUE, 'http') . 'application/views/img/xray.jpg')
-        );
 
         $imageSettings["scale"] = 1;
         //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
         //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
 
         $kanwa = View::factory('canvas');
-        $kanwa->set('images', $image);
         $kanwa->set('imageSettings', $imageSettings);
 
         $rooms = View::factory('rooms');
