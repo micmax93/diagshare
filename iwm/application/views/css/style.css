@@ -53,7 +53,8 @@ html, body {
 }
 
 #roomList ul {
-
+    padding: 0;
+    margin-top: -2px;
 }
 
 
@@ -168,3 +169,5 @@ html, body {
 .roomz {
     background: red;
 }
+
+

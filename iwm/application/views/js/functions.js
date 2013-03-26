@@ -15,7 +15,7 @@ function roomsReceived(data) {
 
             list += '<div class="roomz">';
             list += '   <h3>' + patient + '</h3>';
-            list += '   <div>';
+            list += '   <div style="height: 100%;">';
             list += '       <ul>';
 
             $.each(photos, function (photo) {

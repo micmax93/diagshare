@@ -19,39 +19,13 @@ class Controller_Room extends IwMController
             )
         );
         $rooms["Chirurgia"] = array(
-            'Adam Kowalski' => array(
+
+            'Tomek Kowalski' => array(
                 "Zestaw1" => "Zdjęcie klatki piersiowej",
                 "Obraz1" => "Inne zdjęcie"
             )
         );
         $rooms["Kardiologia"] = array(
-            'Adam Kowalski' => array(
-                "Zestaw1" => "Zdjęcie klatki piersiowej",
-                "Obraz1" => "Inne zdjęcie"
-            )
-        );
-
-        $rooms["Pulmunologia"] = array(
-            'Adam Kowalski' => array(
-                "Zestaw1" => "Zdjęcie klatki piersiowej",
-                "Obraz1" => "Inne zdjęcie"
-            )
-        );
-
-        $rooms["Kardiochirurgia"] = array(
-            'Adam Kowalski' => array(
-                "Zestaw1" => "Zdjęcie klatki piersiowej",
-                "Obraz1" => "Inne zdjęcie"
-            )
-        );
-
-        $rooms["Dermatologia"] = array(
-            'Adam Kowalski' => array(
-                "Zestaw1" => "Zdjęcie klatki piersiowej",
-                "Obraz1" => "Inne zdjęcie"
-            )
-        );
-        $rooms["Ogólny"] = array(
             'Adam Kowalski' => array(
                 "Zestaw1" => "Zdjęcie klatki piersiowej",
                 "Obraz1" => "Inne zdjęcie"
