@@ -10,9 +10,13 @@ require("IwMController.php");
 
 class Controller_Image extends IwMController
 {
+
+
   public function action_get()
   {
     $name = $this->request->param("id");
+    preg_replace('/[\s\W]+/', '-', $name);
+
     $image["Zestaw1"] = array(
       "rowSize" => "3",
       "numberOfRows" => "3",
@@ -37,8 +41,8 @@ class Controller_Image extends IwMController
     $image["Obraz1"] = array(
       "rowSize" => "1",
       "numberOfRows" => "1",
-      "width" => "1500",
-      "height" => "700",
+      "width" => "1050",
+      "height" => "750",
       "images" => array(url::base(TRUE, 'http') . 'application/views/img/xray.jpg')
     );
 

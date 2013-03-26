@@ -24,7 +24,7 @@ echo '
 <body onload="setup()">
 <div id="container">
     <div id="sideBar">
-        <h1>diagShare</h1>
+        <h1>diagShare </h1>
         <div id="roomList">
         ' . $room . '
         </div>

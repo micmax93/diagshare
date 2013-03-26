@@ -51,6 +51,5 @@ function roomsReceived(data) {
 
 
 function imageReceived(v) {
-
-        createWindow('main',v["name"],v["width"],v["height"],v["rowSize"],v["numberOfRows"],v["images"]);
+    createWindow('main', v["name"], v["width"], v["height"], v["rowSize"], v["numberOfRows"], v["images"]);
 }

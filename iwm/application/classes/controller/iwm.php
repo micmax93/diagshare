@@ -8,14 +8,10 @@ class Controller_IwM extends IwMController
     public function action_index()
     {
 
-
-        $imageSettings["scale"] = 1;
         //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
         //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
 
         $kanwa = View::factory('canvas');
-        $kanwa->set('imageSettings', $imageSettings);
-
         $rooms = View::factory('rooms');
         $chat = View::factory('chat');
 
@@ -26,12 +22,6 @@ class Controller_IwM extends IwMController
         $widok->set('chat', $chat->render());
 
         $this->response->body($widok->render());
-    }
-
-
-    public function action_testing()
-    {
-
     }
 
 
