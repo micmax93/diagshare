@@ -82,7 +82,7 @@ function zoom(id, scale) {
 }
 
 
-var contrastList = Array();
+var contrast = Array();
 /**
  * contrastGrid()
  * Zwiększa kontrast.
@@ -93,17 +93,26 @@ var contrastList = Array();
 function contrastGrid(id, value) {
 
     var grid = document.getElementById(id);
+    if (id in contrast) {
+        contrast[id] += value;
+    }
+    else
+        contrast[id] = value;
+
     var canvases = grid.getElementsByTagName("canvas");
     for (var i = 0; i < canvases.length; i++) {
         Caman('#' + canvases[i].id, function () {
-            this.contrast(value);
+            this.revert();
+            if (id in brightness)
+                this.brightness(brightness[id]);
+            this.contrast(contrast[id]);
             this.render();
         });
     }
 }
 
 
-var brightnessList = Array();
+var brightness = Array();
 
 /**
  * brightnessGrid()
@@ -114,15 +123,27 @@ var brightnessList = Array();
  */
 function brightnessGrid(id, value) {
     var grid = document.getElementById(id);
+    if (id in brightness) {
+        brightness[id] += value;
+    }
+    else
+        brightness[id] = value;
+
     var canvases = grid.getElementsByTagName("canvas");
     for (var i = 0; i < canvases.length; i++) {
         Caman('#' + canvases[i].id, function () {
-            this.brightness(value);
+            this.revert();
+
+            if (id in contrast)
+                this.contrast(contrast[id]);
+
+            this.brightness(brightness[id]);
             this.render();
         });
     }
 
 }
+
 
 /**
  * canvasRevert()
