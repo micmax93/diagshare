@@ -76,9 +76,6 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
         }
 
     }
-    tc.addEventListener('mousedown', function () {
-        firstPlanWindow(id + '_window');
-    }, false);
 
     // Początkowe wycofanie - żeby było widać wszystkie elementy
     zoom(id + '_grid', 1 / (Math.max(rows, rowSize)));

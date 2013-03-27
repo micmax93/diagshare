@@ -28,3 +28,5 @@ $("#chatInput").keyup(function (e) {
     <input type="text" id="chatInput"><button onclick="sendChatMessage()">Wyślij</button>
 </div>
 ';
+
+
