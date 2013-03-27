@@ -203,7 +203,7 @@ html, body {
 }
 
 #chatContent {
-    height: 70%;
+    height: 60%;
     width: 100%;
     overflow-y: scroll;
 }
@@ -211,7 +211,6 @@ html, body {
 #chatContent table {
     width: 100%;
 }
-
 
 #chatContent td {
     width: 100%;
