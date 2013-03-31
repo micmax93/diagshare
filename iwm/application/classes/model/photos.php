@@ -7,8 +7,6 @@
 class Model_Photos extends Model_Base
 {
   public $_table_name = "photos";
-  public $height = 100;
-  public $width = 100;
 
   public function getPatient()
   {
@@ -37,6 +35,18 @@ class Model_Photos extends Model_Base
     return $t;
   }
 
+  public function getRelPath()
+  {
+      $path = 'application/views/img/' . $this->id . '.' . $this->filename . '/';
+      return $path;
+  }
+
+  public function getPath()
+  {
+      $path = url::base(TRUE, 'http') . 'application/views/img/' . $this->id . '.' . $this->filename . '/';
+      return $path;
+  }
+
   public function getLinkArray()
   {
     $img = array(
@@ -46,7 +56,7 @@ class Model_Photos extends Model_Base
       "height" => $this->height,
       "images" => array()
     );
-    $path = url::base(TRUE, 'http') . 'application/views/img/' . $this->id . '.' . $this->filename . '/';
+    $path=$this->getPath();
     for ($i = 0; $i < ($this->x_count * $this->y_count); $i++) {
       array_push($img["images"], $path . $i . '.jpg');
     }
