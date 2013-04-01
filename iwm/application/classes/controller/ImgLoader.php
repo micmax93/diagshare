@@ -28,7 +28,7 @@ class Controller_ImgLoader
 
     public function isLoaded()
     {
-        if(isset($_FILES['img_upload']))
+        if(isset($_FILES['img_upload']) and isset($_POST['img_title']))
         {
             $f = $_FILES['img_upload'];
             if(isset($f['name']))
@@ -38,6 +38,7 @@ class Controller_ImgLoader
         }
         return false;
     }
+
     public function loadAsImg()
     {
         $f = $_FILES['img_upload'];
@@ -101,7 +102,7 @@ class Controller_ImgLoader
     public function newPhoto($img_data)
     {
         $photo=new Model_Photos();
-        $photo->title='NPhoto';
+        $photo->title=$_POST['img_title'];
         $photo->x_count=$img_data['x']['num'];
         $photo->y_count=$img_data['y']['num'];
         $photo->width=$img_data['x']['out'];
@@ -152,11 +153,13 @@ class Controller_ImgLoader
 
                 echo "<br>part count= " . $img_data['x']['num'] . " x " . $img_data['y']['num'];
                 echo "<br>part size= " . $img_data['x']['part'] . " x " . $img_data['y']['part'];
-                echo "<br>Loading progres:";
 
-                //$photo=$this->newPhoto($img_data);
-                //$path=$photo->getRelPath();
-                $path='application/views/img/grids/'.$_FILES['img_upload']['name'].'/';
+                $photo=$this->newPhoto($img_data);
+                $path=$photo->getRelPath();
+                echo "<br>Saving path: " . $path;
+                //$path='application/views/img/grids/'.$_FILES['img_upload']['name'].'/';
+
+                echo "<br>Loading progres:";
                 $this->splitSaveImg($path,$img_data);
             }
             else

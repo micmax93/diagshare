@@ -1,6 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 require("IwMController.php");
+require("ImgLoader.php");
 
 class Controller_IwM extends IwMController
 {
