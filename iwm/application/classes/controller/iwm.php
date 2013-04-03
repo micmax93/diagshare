@@ -1,17 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 require("IwMController.php");
-require("ImgLoader.php");
 
 class Controller_IwM extends IwMController
 {
 
     public function action_index()
     {
-        $imgLoader=new Controller_ImgLoader();
-        $imgLoader->action_test();
-        return;
-
         //  $image["DupaJAsio"] = URL::base().'application/views/img/xray.jpg';
         //  $image["xray2"] = URL::base().'application/views/img/xray2.jpg';
 
