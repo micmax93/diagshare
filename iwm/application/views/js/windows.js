@@ -123,9 +123,10 @@ function firstPlanWindow(name) {
 
     }
     window = document.getElementById(name);
-    window.style.zIndex = 1;
-    window.getElementsByTagName("div")[0].className = "titleBarActive";
-
+    if (window) {
+        window.style.zIndex = 1;
+        window.getElementsByTagName("div")[0].className = "titleBarActive";
+    }
 }
 
 /**
@@ -168,15 +169,19 @@ function showHideOrLoad(thing) {
             success: imageReceived
         });
     }
-
-    if (el.style.display == "none") {
-        el.style.display = "block";
-        firstPlanWindow(thing + '_window');
-        //el.parentNode.style.height = parseInt(el.height) + "px";
-    }
     else {
-        el.style.display = "none";
-        //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
+        if (el.style.display == "none") {
+            el.style.display = "block";
+
+            firstPlanWindow(thing + '_window');
+            //el.parentNode.style.height = parseInt(el.height) + "px";
+        }
+        else {
+            el.style.display = "none";
+
+            //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
+
+        }
 
     }
 
@@ -242,4 +247,31 @@ function getBoardState() {
     return windows;
 }
 
+
+/**
+ * setBoardState()
+ *
+ * Odtwarza zwrócony przez getBoardState stan.
+ *
+ */
+var currentView = Array();
+function setBoardState(state) {
+    state = '[{"title":"Zestaw1","photoId":"Zestaw1","top":"20px","left":"500px","zoom":"","gridTop":"","gridLeft":"","gridHeight":"200px","gridWidth":"200px","display":""}]';
+    var windows = JSON.parse(state);
+    var window;
+    for (var i = 0; i < windows.length; i++) {
+        currentView[windows[i].title] = windows[i];
+        showHideOrLoad(windows[i].title);
+        window = document.getElementById(windows[i].title + "_window");
+
+    }
+
+
+}
+
+
+function applyView(x) {
+    //alert(x);
+    //alert(currentView[x].title);
+}
 
