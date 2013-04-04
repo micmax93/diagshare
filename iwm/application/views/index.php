@@ -19,14 +19,15 @@ echo '
  <script src="' . URL::base() . 'application/views/js/caman.full.min.js"></script>
  <script src="' . URL::base() . 'application/views/js/communication.js"></script>
  <script src="' . URL::base() . 'application/views/js/functions.js"></script>
- <script src="' . URL::base() . 'application/views/js/windows.js"></script>
  <script src="' . URL::base() . 'application/views/js/canvas.js"></script>
+ <script src="' . URL::base() . 'application/views/js/windows.js"></script>
  <script src="' . URL::base() . 'application/views/js/setup.js"></script>
 </head>
 <body onload="setup()">
 <div id="container">
     <div id="sideBar">
         <h1>diagShare </h1>
+        <button onclick="alert(JSON.stringify(getBoardState()));">StanPlanszy</button>
         <div id="roomList">
         ' . $room . '
         </div>

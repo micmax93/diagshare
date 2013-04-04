@@ -55,7 +55,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({opacity:0.8, containment:"parent" }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
+    $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent" }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rowSize);
 
     // Dodaj kanwę
@@ -88,7 +88,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
-    $('#' + id + '_grid').draggable({cursor:"move"});
+    $('#' + id + '_grid').draggable({cursor: "move"});
     $('#' + id + '_viewport').css('z-index', 0);
     $('#' + id).css('z-index', 0);
 }
@@ -162,10 +162,10 @@ function showHideOrLoad(thing) {
     if (!el) {
         var data;
         $.ajax({
-            dataType:"json",
-            url:base_url + "index.php/image/get/" + thing,
-            data:data,
-            success:imageReceived
+            dataType: "json",
+            url: base_url + "index.php/image/get/" + thing,
+            data: data,
+            success: imageReceived
         });
     }
 
@@ -191,7 +191,7 @@ function showHideOrLoad(thing) {
  */
 function menuRoll(thing) {
     $('#' + thing).animate({
-        height:'toggle'
+        height: 'toggle'
     }, 250, function () {
 
     });
@@ -206,6 +206,40 @@ function menuRoll(thing) {
      }*/
 
 
+}
+
+
+/**
+ * getBoardState()
+ *
+ * Pobiera w postaci JSON stan okien otwartych na planszy oraz przekształcenia wewnątrz
+ */
+function getBoardState() {
+
+    var windows = Array();
+    var el;
+    var grid;
+    var win = {};
+
+    for (var i = 0; i < listaOkien.length; i++) {
+        el = document.getElementById(listaOkien[i]);
+        grid = document.getElementById(el.id.substr(0, el.id.length - 7) + "_grid");
+        win = {};
+        win.title = el.id.substr(0, el.id.length - 7);
+        win.photoId = el.id.substr(0, el.id.length - 7);
+        win.top = el.style.top;
+        win.left = el.style.left;
+        win.zoom = el.style.left;
+        win.brightness = brightness[grid.id];
+        win.contrast = contrast[grid.id];
+        win.gridTop = grid.style.top;
+        win.gridLeft = grid.style.left;
+        win.gridHeight = grid.style.height;
+        win.gridWidth = grid.style.width;
+        win.display = el.style.display;
+        windows.push(win);
+    }
+    return windows;
 }
 
 

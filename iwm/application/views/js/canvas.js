@@ -62,6 +62,7 @@ function addNewLine(parentId) {
  * @param id
  * @param scale
  */
+
 function zoom(id, scale) {
 
     var grid = $('#' + id);
@@ -154,6 +155,8 @@ function canvasRevert(id) {
     var grid = document.getElementById(id);
     grid.style.top = 0;
     grid.style.left = 0;
+    contrast[grid.id] = 0;
+    brightness[grid.id] = 0;
     var canvases = grid.getElementsByTagName("canvas");
     for (var i = 0; i < canvases.length; i++) {
         Caman('#' + canvases[i].id, function () {
