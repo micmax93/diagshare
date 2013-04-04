@@ -90,7 +90,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
     $('#' + id + '_grid').draggable({cursor: "move"});
     $('#' + id + '_viewport').css('z-index', 0);
-    $('#' + id).css('z-index', 0);
+    $('#' + id + '_window').css('z-index', 1);
 }
 
 /**
@@ -242,9 +242,12 @@ function getBoardState() {
         win.gridHeight = grid.style.height;
         win.gridWidth = grid.style.width;
         win.display = el.style.display;
-        win.zindex = el.style.zIndex;
+        win.firstPlan = el.style.zIndex;
         windows.push(win);
     }
+    windows.sort(function (a, b) {
+        return (a.firstPlan - b.firstPlan);
+    });
     return windows;
 }
 
@@ -264,17 +267,13 @@ function setBoardState(state) {
     }
     listaOkien.length = 0;
 
-    state = '[{"title":"Zestaw1","photoId":"Zestaw1","top":"84px","left":"422px","zoom":"422px","brightness":0,"contrast":-20,"gridTop":"152.667px","gridLeft":"-16.3333px","gridHeight":"164.7px","gridWidth":"164.7px","display":"","zIndex":"1"},{"title":"Obraz1","photoId":"Obraz1","top":"32px","left":"686.833px","zoom":"686.833px","brightness":100,"gridTop":"-478.333px","gridLeft":"244.667px","gridHeight":"750px","gridWidth":"1050px","display":"","zIndex":"0"}]';
+    state = '[{"title":"Zestaw1","photoId":"Zestaw1","top":"84px","left":"422px","zoom":"422px","brightness":0,"contrast":-20,"gridTop":"152.667px","gridLeft":"-16.3333px","gridHeight":"164.7px","gridWidth":"164.7px","display":"","firstPlan":"1"},{"title":"Obraz1","photoId":"Obraz1","top":"79px","left":"457.833px","zoom":"457.833px","brightness":100,"gridTop":"-478.333px","gridLeft":"244.667px","gridHeight":"750px","gridWidth":"1050px","display":"","firstPlan":"0"}]';
     var windows = JSON.parse(state);
-    var window;
     for (var i = 0; i < windows.length; i++) {
         currentView[windows[i].title] = windows[i];
         showHideOrLoad(windows[i].title);
-        window = document.getElementById(windows[i].title + "_window");
 
     }
-
-
 }
 
 function isNumber(n) {
@@ -287,13 +286,12 @@ function applyView(x) {
     if (el && currentView[x]) {
         el.style.top = currentView[x].top;
         el.style.left = currentView[x].left;
-        el.style.zIndex = currentView[x].zindex;
+        el.style.zIndex = currentView[x].firstPlan;
         el.display = currentView[x].display;
         grid.style.top = currentView[x].gridTop;
         grid.style.left = currentView[x].gridLeft;
         grid.style.height = currentView[x].gridHeight;
         grid.style.width = currentView[x].gridWidth;
-
 
         if (isNumber(currentView[x].contrast))
             contrast[grid.id] = currentView[x].contrast;
