@@ -242,6 +242,7 @@ function getBoardState() {
         win.gridHeight = grid.style.height;
         win.gridWidth = grid.style.width;
         win.display = el.style.display;
+        win.zindex = el.style.zIndex;
         windows.push(win);
     }
     return windows;
@@ -256,7 +257,14 @@ function getBoardState() {
  */
 var currentView = Array();
 function setBoardState(state) {
-    state = '[{"title":"Zestaw1","photoId":"Zestaw1","top":"20px","left":"500px","zoom":"","gridTop":"","gridLeft":"","gridHeight":"200px","gridWidth":"200px","display":""}]';
+
+    // zamknij okna i usuń
+    for (var i = 0; i < listaOkien.length; i++) {
+        $('#' + listaOkien[i]).css('display', 'none').remove();
+    }
+    listaOkien.length = 0;
+
+    state = '[{"title":"Zestaw1","photoId":"Zestaw1","top":"84px","left":"422px","zoom":"422px","brightness":0,"contrast":-20,"gridTop":"152.667px","gridLeft":"-16.3333px","gridHeight":"164.7px","gridWidth":"164.7px","display":"","zIndex":"1"},{"title":"Obraz1","photoId":"Obraz1","top":"32px","left":"686.833px","zoom":"686.833px","brightness":100,"gridTop":"-478.333px","gridLeft":"244.667px","gridHeight":"750px","gridWidth":"1050px","display":"","zIndex":"0"}]';
     var windows = JSON.parse(state);
     var window;
     for (var i = 0; i < windows.length; i++) {
@@ -269,9 +277,45 @@ function setBoardState(state) {
 
 }
 
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
 function applyView(x) {
-    //alert(x);
-    //alert(currentView[x].title);
+    var el = document.getElementById(x + '_window');
+    var grid = document.getElementById(x + '_grid');
+    if (el && currentView[x]) {
+        el.style.top = currentView[x].top;
+        el.style.left = currentView[x].left;
+        el.style.zIndex = currentView[x].zindex;
+        el.display = currentView[x].display;
+        grid.style.top = currentView[x].gridTop;
+        grid.style.left = currentView[x].gridLeft;
+        grid.style.height = currentView[x].gridHeight;
+        grid.style.width = currentView[x].gridWidth;
+
+
+        if (isNumber(currentView[x].contrast))
+            contrast[grid.id] = currentView[x].contrast;
+        if (isNumber(currentView[x].brightness))
+            brightness[grid.id] = currentView[x].brightness;
+
+
+        //alert('w');
+
+    }
+}
+
+function applyViewFilers(canvas) {
+    var grid = canvas.parentNode;
+    Caman('#' + canvas.id, function () {
+        this.revert();
+        if (isNumber(contrast[grid.id]))
+            this.contrast(contrast[grid.id]);
+        if (isNumber(brightness[grid.id]))
+            this.brightness(brightness[grid.id]);
+        this.render();
+
+    });
 }
 

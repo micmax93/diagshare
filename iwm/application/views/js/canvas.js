@@ -15,7 +15,7 @@
  * @return {HTMLElement}
  */
 function addCanvas(parentId, id) {
-    var newCanvas = $('<canvas/>', {'id':id});
+    var newCanvas = $('<canvas/>', {'id': id});
     newCanvas.className = "imageCanvas";
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
@@ -40,6 +40,7 @@ function drawOnCanvas(id, imageUrl, scale) {
         canvas.width = img.width * scale;
         canvas.height = img.height * scale;
         context.drawImage(img, 0, 0, img.width * scale, img.height * scale);
+        applyViewFilers(canvas);
     };
     img.src = imageUrl;
 
@@ -62,9 +63,7 @@ function addNewLine(parentId) {
  * @param id
  * @param scale
  */
-
 function zoom(id, scale) {
-
     var grid = $('#' + id);
     var h;
     var w;
