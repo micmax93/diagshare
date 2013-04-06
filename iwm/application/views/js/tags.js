@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
+
 /**
  * addTag()
  * Dodaje tag i umożliwia jego przesuwanie.
@@ -16,11 +17,18 @@
  * @param content
  */
 function addTag(parentId, id, top, left, content) {
-    $('#' + parentId).append('<div class="imageTag" id="' + id + '">' + content + '</div>');
-    $('#' + id).css('top', top).css('left', left).draggable({opacity:0.6}).click(function () {
-        var pole = this.innerHTML;
-        //this.innerHTML = "<input "
-        //document.getElementById(id).contentEditable = 'true';
+    $('#' + parentId).append('<div class="imageTag" id="' + id + '"><p>' + content + '</p></div>');
+    $('#' + id).css('top', top).css('left', left).draggable({opacity:0.6}).dblclick(function () {
+        if ($(this).hasClass("in-edit")) {
+            this.innerHTML = "<p>" + this.childNodes[0].value + "</p>";
+            $(this).removeClass("in-edit");
+            updateTag(id, this.childNodes[0].innerHTML);
+        }
+        else {
+            $(this).addClass("in-edit");
+            this.innerHTML = '<input value="' + this.childNodes[0].innerHTML + '">';
+
+        }
     });
 }
 
@@ -38,6 +46,10 @@ function fixTagsPositions(gridId, scale) {
     });
 }
 
+
+function updateTag(id, value) {
+    alert(id + ' :' + value);
+}
 
 //var h = parseFloat(this.style.top) / parseFloat(grid.height());
 //var w = parseFloat(this.style.left) / parseFloat(grid.width());
