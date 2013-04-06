@@ -10,11 +10,6 @@ var tc;
 
 ';
 
-echo "
-
-
-";
-
 
 // Ładowanie zdjęć - stare - statyczne
 /*$j = 0;
