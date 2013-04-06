@@ -20,6 +20,7 @@ function addCanvas(parentId, id) {
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
     retCanvas.className = "imageCanvas";
+    addTag(parentId,60,60,"ewfoifjoiwjfeoijwfejowjefjwef");
     return retCanvas;
 }
 

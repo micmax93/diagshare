@@ -6,6 +6,7 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function addTag(canvas, top, left, content) {
-
+function addTag(parentId, top, left, content) {
+    $('#' + parentId).append('<div class="imageTag">Elo</div>');
+    $('#' + parentId + ' > .imageTag').draggable({opacity: 0.6});
 }

@@ -248,14 +248,15 @@ html, body {
 .imageTag {
     background: #ffff00;
     color: black;
-    padding: 5px;
-    display: inline;
+    padding: 10px;
+    position: absolute;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-left: 1px solid red;
     border-bottom: 1px solid red;
     cursor: default;
-    font-size: 10px;
-
+    top: 90%;
+    left: 90%;
+    font-size: 12px;
 }
