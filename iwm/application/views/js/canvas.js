@@ -15,12 +15,12 @@
  * @return {HTMLElement}
  */
 function addCanvas(parentId, id) {
-    var newCanvas = $('<canvas/>', {'id': id});
+    var newCanvas = $('<canvas/>', {'id':id});
     newCanvas.className = "imageCanvas";
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
     retCanvas.className = "imageCanvas";
-    addTag(parentId,60,60,"ewfoifjoiwjfeoijwfejowjefjwef");
+    addTag(parentId, id + '_tag', 0, 0, "Los");
     return retCanvas;
 }
 
@@ -72,14 +72,20 @@ function zoom(id, scale) {
     h = grid.height();
     w = grid.width();
 
+    if (((h < 150) || (w < 150)) && (scale < 1)) return;
+
+    fixTagsPositions(id, scale);
+
     grid.height(grid.height() * scale);
     grid.width(grid.width() * scale);
 
     h = h - grid.height();
     w = w - grid.width();
+
     grid.css('top', parseInt(grid.css('top')) + (h / 2));
     grid.css('left', parseInt(grid.css('left')) + (w / 2));
 
+    var tags = document.getElementsByClassName('imageTag');
 }
 
 

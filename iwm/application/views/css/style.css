@@ -222,7 +222,6 @@ html, body {
     border-radius: 4px;
 }
 
-
 #chatControl {
 
     background: white;
@@ -236,7 +235,6 @@ html, body {
     margin-left: 10px;
 }
 
-
 #chatRoomId {
     color: white;
     text-align: center;
@@ -244,19 +242,16 @@ html, body {
     letter-spacing: 6px;
 }
 
-
 .imageTag {
     background: #ffff00;
     color: black;
     padding: 10px;
     position: absolute;
-    border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
     border-left: 1px solid red;
-    border-bottom: 1px solid red;
+    border-top: 1px solid red;
     cursor: default;
-    top: 90%;
-    left: 90%;
     font-size: 12px;
 }
