@@ -20,7 +20,7 @@ function addCanvas(parentId, id) {
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
     retCanvas.className = "imageCanvas";
-    addTag(parentId, id + '_tag', 0, 0, "Los");
+    addTag(parentId, id + '_tag', Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), id);
     return retCanvas;
 }
 
