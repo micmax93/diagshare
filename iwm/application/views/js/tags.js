@@ -6,6 +6,14 @@
  * To change this template use File | Settings | File Templates.
  */
 
+function tag(tagId, Tagtop, Tagleft, Tagcontent) {
+    var id = id;
+    var top = Tagtop;
+    var left = Tagleft;
+    var content = Tagcontent;
+
+}
+
 
 /**
  * addTag()
@@ -18,7 +26,7 @@
  */
 function addTag(parentId, id, top, left, content) {
     $('#' + parentId).append('<div class="imageTag" id="' + id + '"><p>' + content + '</p></div>');
-    $('#' + id).css('top', top).css('left', left).draggable({opacity:0.6}).dblclick(function () {
+    $('#' + id).css('top', top).css('left', left).draggable({opacity: 0.6}).dblclick(function () {
         if ($(this).hasClass("in-edit")) {
             this.innerHTML = "<p>" + this.childNodes[0].value + "</p>";
             $(this).removeClass("in-edit");
@@ -27,9 +35,8 @@ function addTag(parentId, id, top, left, content) {
         else {
             $(this).addClass("in-edit");
             this.innerHTML = '<input value="' + this.childNodes[0].innerHTML + '">';
-
         }
-    });
+    }).attr('basicTop', top).attr('basicLeft', left);
 }
 
 /**

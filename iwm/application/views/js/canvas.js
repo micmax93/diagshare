@@ -15,7 +15,7 @@
  * @return {HTMLElement}
  */
 function addCanvas(parentId, id) {
-    var newCanvas = $('<canvas/>', {'id':id});
+    var newCanvas = $('<canvas/>', {'id': id});
     newCanvas.className = "imageCanvas";
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
@@ -72,7 +72,9 @@ function zoom(id, scale) {
     h = grid.height();
     w = grid.width();
 
+    // Ograniczenie skalowania
     if (((h < 150) || (w < 150)) && (scale < 1)) return;
+    if (((h > 8000) || (w > 8000)) && (scale > 1)) return;
 
     fixTagsPositions(id, scale);
 
@@ -81,6 +83,8 @@ function zoom(id, scale) {
 
     h = h - grid.height();
     w = w - grid.width();
+
+    $('#chatList').append("<tr><td>" + grid.height() + " " + grid.width() + "</td></tr>");
 
     grid.css('top', parseInt(grid.css('top')) + (h / 2));
     grid.css('left', parseInt(grid.css('left')) + (w / 2));

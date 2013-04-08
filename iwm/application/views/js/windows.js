@@ -33,8 +33,8 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
         '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');">' +
         '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');"><p>' + id + ' [' + width * rowSize + 'x' + height * rows + ']</p>' +
         'Zoom:' +
-        '       <a href="javascript:zoom(\'' + id + '_grid\',1.1);" class="smallButton">+</a>' +
-        '       <a href="javascript:zoom(\'' + id + '_grid\',0.9);" class="smallButton">-</a>' +
+        '       <a href="javascript:zoom(\'' + id + '_grid\',1.2);" class="smallButton">+</a>' +
+        '       <a href="javascript:zoom(\'' + id + '_grid\',0.8);" class="smallButton">-</a>' +
         ' Contrast:' +
         '       <a href="javascript:contrastGrid(\'' + id + '_grid\',-20);" class="smallButton">+</a>' +
         '       <a href="javascript:contrastGrid(\'' + id + '_grid\',20);" class="smallButton">-</a>' +
@@ -83,7 +83,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
 
     // using the event helper
     $('#' + id + '_viewport').bind('mousewheel', function (event, delta, deltaX, deltaY) {
-        zoom(id + '_grid', ((delta > 0) ? 1.1 : 0.9));
+        zoom(id + '_grid', ((delta > 0) ? 1.2 : 0.8));
     });
 
 
@@ -260,6 +260,9 @@ function getBoardState() {
  */
 var currentView = Array();
 function setBoardState(state) {
+    // nadpisanie predefiniowanym stanem
+    state = '[{"title":"Obraz1","photoId":"Obraz1","top":"79px","left":"562.833px","zoom":"562.833px","brightness":0,"contrast":0,"gridTop":"47.6667px","gridLeft":"-663.333px","gridHeight":"750px","gridWidth":"1050px","display":"","firstPlan":"0"},{"title":"Zestaw1","photoId":"Zestaw1","top":"26px","left":"361px","zoom":"361px","brightness":0,"contrast":-20,"gridTop":"-61.3333px","gridLeft":"220.667px","gridHeight":"164.7px","gridWidth":"164.7px","display":"","firstPlan":"1"}]';
+
 
     // zamknij okna i usuń
     for (var i = 0; i < listaOkien.length; i++) {
@@ -267,8 +270,8 @@ function setBoardState(state) {
     }
     listaOkien.length = 0;
 
-    state = '[{"title":"Zestaw1","photoId":"Zestaw1","top":"84px","left":"422px","zoom":"422px","brightness":0,"contrast":-20,"gridTop":"152.667px","gridLeft":"-16.3333px","gridHeight":"164.7px","gridWidth":"164.7px","display":"","firstPlan":"1"},{"title":"Obraz1","photoId":"Obraz1","top":"79px","left":"457.833px","zoom":"457.833px","brightness":100,"gridTop":"-478.333px","gridLeft":"244.667px","gridHeight":"750px","gridWidth":"1050px","display":"","firstPlan":"0"}]';
     var windows = JSON.parse(state);
+    currentView = Array();
     for (var i = 0; i < windows.length; i++) {
         currentView[windows[i].title] = windows[i];
         showHideOrLoad(windows[i].title);
@@ -279,7 +282,12 @@ function setBoardState(state) {
 function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
-
+/**
+ * applyFilter()
+ * Aplikuje na istniejących oknach parametry dla aktywnego widoku (nie dotyczy zawartości)
+ *
+ * @param x
+ */
 function applyView(x) {
     var el = document.getElementById(x + '_window');
     var grid = document.getElementById(x + '_grid');
@@ -304,6 +312,11 @@ function applyView(x) {
     }
 }
 
+/**
+ * applyViewFilters()
+ * Po załadowaniu treści okien aplikowane są filtry za pomocą tej funkcji
+ * @param canvas
+ */
 function applyViewFilers(canvas) {
     var grid = canvas.parentNode;
     Caman('#' + canvas.id, function () {
