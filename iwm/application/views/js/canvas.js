@@ -14,12 +14,14 @@
  * @param id
  * @return {HTMLElement}
  */
-function addCanvas(parentId, id) {
+function addCanvas(parentId, id, width, height) {
     var newCanvas = $('<canvas/>', {'id': id});
     newCanvas.className = "imageCanvas";
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
     retCanvas.className = "imageCanvas";
+    retCanvas.width = width;
+    retCanvas.height = height;
     return retCanvas;
 }
 
@@ -33,17 +35,21 @@ function addCanvas(parentId, id) {
  * @param y
  * @param scale
  */
+var img = Array();
 function drawImage(id, imageUrl, x, y, scale) {
     var canvas = document.getElementById(id);
     var context = canvas.getContext('2d');
-    var img = new Image();
-
-    img.onload = function () {
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        context.drawImage(img, x, y, img.width * scale, img.height * scale);
+    var i = img.length;
+    alert(i);
+    img[i] = new Image();
+    var drawImageOnLoad = function (context, img, x, y, scale) {
+        return function () {
+            context.drawImage(img, x, y, img.width * scale, img.height * scale);
+        }
     };
-    img.src = imageUrl;
+
+    img[i].onload = drawImageOnLoad(context, img[i], x, y, scale);
+    img[i].src = imageUrl;
 }
 
 
