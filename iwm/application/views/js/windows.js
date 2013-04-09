@@ -73,7 +73,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
             // Rysuj zdjęcie
             drawImage(id + '_img', images[i], x * width, y * height, 1);
             if (((x + 1) % rowSize) == 0) {
-                x = 0;
+                x = -1;
                 y++;
             }
 

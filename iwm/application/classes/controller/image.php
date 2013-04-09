@@ -43,7 +43,7 @@ class Controller_Image extends IwMController
       "numberOfRows" => "1",
       "width" => "1050",
       "height" => "750",
-      "images" => array(url::base(TRUE, 'http') . 'application/views/img/xray.jpg')
+      "images" => array(url::base(TRUE, 'http') . 'application/views/img/xray5.jpg')
     );
 
     $image[$name]["name"] = $name;

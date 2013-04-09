@@ -40,7 +40,6 @@ function drawImage(id, imageUrl, x, y, scale) {
     var canvas = document.getElementById(id);
     var context = canvas.getContext('2d');
     var i = img.length;
-    alert(i);
     img[i] = new Image();
     var drawImageOnLoad = function (context, img, x, y, scale) {
         return function () {
