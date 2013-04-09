@@ -103,11 +103,8 @@ function zoom(id, scale) {
     gcX2 = grid.width() / 2 + parseFloat(grid.css('top'));
     gcY2 = grid.height() / 2 + parseFloat(grid.css('left'));
 
-   // grid.css('top', parseInt(grid.css('top')) + (gcX - gcX2));
-   // grid.css('left', parseInt(grid.css('left')) + (gcY - gcY2));
-
-    grid.css('top', parseInt(grid.css('top')) + (ax - bx));
-    grid.css('left', parseInt(grid.css('left')) + (ay - by));
+    grid.css('top', parseInt(grid.css('top')) + (gcX - gcX2));
+    grid.css('left', parseInt(grid.css('left')) + (gcY - gcY2));
 
 
 
