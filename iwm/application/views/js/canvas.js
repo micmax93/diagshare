@@ -72,28 +72,34 @@ function drawImage(id, imageUrl, x, y, scale, last) {
  */
 function zoom(id, scale) {
     var grid = $('#' + id);
-    var h;
-    var w;
+    var vp = grid.parent();
+    var vcX, vcY;
+    var gcX, gcY;
+    var gcX2, gcY2;
 
-    h = grid.height();
-    w = grid.width();
+    // Środek viewportu i środek gridu
+    vcX = (vp.width() / 2);
+    vcY = (vp.height() / 2);
+    gcX = grid.width() / 2 + parseFloat(grid.css('top'));
+    gcY = grid.height() / 2 + parseFloat(grid.css('left'));
+    //$('#chatList').append("<tr><td>(" + vcX + "," + vcY + ")  (" + gcX + "," + gcY + ")</td></tr>");
+
 
     // Ograniczenie skalowania
-    if (((h < 150) || (w < 150)) && (scale < 1)) return;
-    if (((h > 8000) || (w > 8000)) && (scale > 1)) return;
+    if (((grid.height() < 150) || (grid.width() < 150)) && (scale < 1)) return;
+    if (((grid.height() > 8000) || (grid.width() > 8000)) && (scale > 1)) return;
 
     fixTagsPositions(id, scale);
 
     grid.height(grid.height() * scale);
     grid.width(grid.width() * scale);
 
-    h = h - grid.height();
-    w = w - grid.width();
+    gcX2 = grid.width() / 2 + parseFloat(grid.css('top'));
+    gcY2 = grid.height() / 2 + parseFloat(grid.css('left'));
 
-    //$('#chatList').append("<tr><td>" + grid.height() + " " + grid.width() + "</td></tr>");
+    grid.css('top', parseInt(grid.css('top')) + (gcX - gcX2));
+    grid.css('left', parseInt(grid.css('left')) + (gcY - gcY2));
 
-    grid.css('top', parseInt(grid.css('top')) + (h / 2));
-    grid.css('left', parseInt(grid.css('left')) + (w / 2));
 
     var tags = document.getElementsByClassName('imageTag');
 }
