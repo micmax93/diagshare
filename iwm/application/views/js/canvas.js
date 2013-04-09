@@ -25,28 +25,6 @@ function addCanvas(parentId, id) {
 
 
 /**
- * drawOnCanvas()
- * Dla kanwy o podanym id rysuje obraz z podanego URL w przyjętej skali.
- * @param id
- * @param imageUrl
- * @param scale
- */
-function drawOnCanvas(id, imageUrl, scale) {
-    var canvas = document.getElementById(id);
-    var context = canvas.getContext('2d');
-    var img = new Image();
-
-    img.onload = function () {
-        canvas.width = img.width * scale;
-        canvas.height = img.height * scale;
-        context.drawImage(img, 0, 0, img.width * scale, img.height * scale);
-        applyViewFilers(canvas);
-    };
-    img.src = imageUrl;
-
-}
-
-/**
  * drawImage()
  * Rysuje obraz na kanwie startując z podanej pozycji dla podanej skali
  * @param id
@@ -66,19 +44,8 @@ function drawImage(id, imageUrl, x, y, scale) {
         context.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
     img.src = imageUrl;
-
 }
 
-/**
- * addNewLine()
- * Robi <br> - sposób na nowy wiersz w gridzie
- *
- * @param parentId
- */
-function addNewLine(parentId) {
-
-    $('#' + parentId).append("<br>");
-}
 
 /**
  * zoom()
@@ -117,64 +84,58 @@ function zoom(id, scale) {
 
 var contrast = Array();
 /**
- * contrastGrid()
+ * contrastCanvas()
  * Zwiększa kontrast.
  *
  * @param id
  * @param value
  */
-function contrastGrid(id, value) {
+function contrastCanvas(id, value) {
 
-    var grid = document.getElementById(id);
+    var canvas = document.getElementById(id);
     if (id in contrast) {
         contrast[id] += value;
     }
     else
         contrast[id] = value;
 
-    var canvases = grid.getElementsByTagName("canvas");
-    for (var i = 0; i < canvases.length; i++) {
-        Caman('#' + canvases[i].id, function () {
-            this.revert();
-            if (id in brightness)
-                this.brightness(brightness[id]);
-            this.contrast(contrast[id]);
-            this.render();
-        });
-    }
+    Caman('#' + canvas.id, function () {
+        this.revert();
+        if (id in brightness)
+            this.brightness(brightness[id]);
+        this.contrast(contrast[id]);
+        this.render();
+    });
+
 }
 
 
 var brightness = Array();
 
 /**
- * brightnessGrid()
+ * brightnessCanvas()
  * Zwiększa jasność
  *
  * @param id
  * @param value
  */
-function brightnessGrid(id, value) {
-    var grid = document.getElementById(id);
+function brightnessCanvas(id, value) {
+    var canvas = document.getElementById(id);
     if (id in brightness) {
         brightness[id] += value;
     }
     else
         brightness[id] = value;
 
-    var canvases = grid.getElementsByTagName("canvas");
-    for (var i = 0; i < canvases.length; i++) {
-        Caman('#' + canvases[i].id, function () {
-            this.revert();
+    Caman('#' + canvas.id, function () {
+        this.revert();
 
-            if (id in contrast)
-                this.contrast(contrast[id]);
+        if (id in contrast)
+            this.contrast(contrast[id]);
 
-            this.brightness(brightness[id]);
-            this.render();
-        });
-    }
-
+        this.brightness(brightness[id]);
+        this.render();
+    });
 }
 
 
