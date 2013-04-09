@@ -76,6 +76,7 @@ function zoom(id, scale) {
     var vcX, vcY;
     var gcX, gcY;
     var gcX2, gcY2;
+    var ax,ay,bx,by;
 
     // Środek viewportu i środek gridu
     vcX = (vp.width() / 2);
@@ -83,7 +84,8 @@ function zoom(id, scale) {
     gcX = grid.width() / 2 + parseFloat(grid.css('top'));
     gcY = grid.height() / 2 + parseFloat(grid.css('left'));
     //$('#chatList').append("<tr><td>(" + vcX + "," + vcY + ")  (" + gcX + "," + gcY + ")</td></tr>");
-
+    ax = grid.width();
+    ay = grid.height();
 
     // Ograniczenie skalowania
     if (((grid.height() < 150) || (grid.width() < 150)) && (scale < 1)) return;
@@ -94,11 +96,19 @@ function zoom(id, scale) {
     grid.height(grid.height() * scale);
     grid.width(grid.width() * scale);
 
+    bx = grid.width();
+    by = grid.height();
+
+
     gcX2 = grid.width() / 2 + parseFloat(grid.css('top'));
     gcY2 = grid.height() / 2 + parseFloat(grid.css('left'));
 
-    grid.css('top', parseInt(grid.css('top')) + (gcX - gcX2));
-    grid.css('left', parseInt(grid.css('left')) + (gcY - gcY2));
+   // grid.css('top', parseInt(grid.css('top')) + (gcX - gcX2));
+   // grid.css('left', parseInt(grid.css('left')) + (gcY - gcY2));
+
+    grid.css('top', parseInt(grid.css('top')) + (ax - bx));
+    grid.css('left', parseInt(grid.css('left')) + (ay - by));
+
 
 
     var tags = document.getElementsByClassName('imageTag');

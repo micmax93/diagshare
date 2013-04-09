@@ -72,7 +72,8 @@ html, body {
     background: #FF8B00;
     font-size: 15px;
     color: black;
-    height: 20px;
+    height: 19px;
+    overflow: hidden;
 }
 
 .titleBar p {
@@ -101,7 +102,8 @@ html, body {
     background: #FDD017;
     font-size: 15px;
     color: black;
-    height: 20px;
+    height: 19px;
+    overflow: hidden;
 }
 
 .titleBarActive p {
@@ -145,6 +147,7 @@ html, body {
     width: 800px;
     z-index: 0;
     overflow: hidden;
+    resize: both;
 }
 
 .viewport {
