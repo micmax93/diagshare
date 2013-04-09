@@ -20,7 +20,6 @@ function addCanvas(parentId, id) {
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
     retCanvas.className = "imageCanvas";
-    addTag(parentId, id + '_tag', Math.floor(Math.random() * 1000), Math.floor(Math.random() * 1000), id);
     return retCanvas;
 }
 
@@ -42,6 +41,29 @@ function drawOnCanvas(id, imageUrl, scale) {
         canvas.height = img.height * scale;
         context.drawImage(img, 0, 0, img.width * scale, img.height * scale);
         applyViewFilers(canvas);
+    };
+    img.src = imageUrl;
+
+}
+
+/**
+ * drawImage()
+ * Rysuje obraz na kanwie startując z podanej pozycji dla podanej skali
+ * @param id
+ * @param imageUrl
+ * @param x
+ * @param y
+ * @param scale
+ */
+function drawImage(id, imageUrl, x, y, scale) {
+    var canvas = document.getElementById(id);
+    var context = canvas.getContext('2d');
+    var img = new Image();
+
+    img.onload = function () {
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        context.drawImage(img, x, y, img.width * scale, img.height * scale);
     };
     img.src = imageUrl;
 
@@ -84,7 +106,7 @@ function zoom(id, scale) {
     h = h - grid.height();
     w = w - grid.width();
 
-    $('#chatList').append("<tr><td>" + grid.height() + " " + grid.width() + "</td></tr>");
+    //$('#chatList').append("<tr><td>" + grid.height() + " " + grid.width() + "</td></tr>");
 
     grid.css('top', parseInt(grid.css('top')) + (h / 2));
     grid.css('left', parseInt(grid.css('left')) + (w / 2));
