@@ -58,21 +58,26 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent" }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rowSize);
 
+
+    tc = addCanvas(id + '_grid', id + '_img');
     // Dodaj kanwę
     if (!Array.isArray(images)) {
-        tc = addCanvas(id + '_grid', id + '_img');
         // Rysuj zdjęcie
-        drawOnCanvas(id + '_img', images, 1);
-
+        drawImage(id + '_img', images, 0, 0, 1);
     }
     else {
+        var x = -1;
+        var y = 0;
         for (var i = 0; i < images.length; i++) {
-
-            tc = addCanvas(id + '_grid', id + '_img' + i);
-            if (((i + 1) % rowSize) == 0)
-                addNewLine(id + '_grid');
+            x++;
             // Rysuj zdjęcie
-            drawOnCanvas(id + '_img' + i, images[i], 1);
+            drawImage(id + '_img', images[i], x * width, y * height, 1);
+            if (((x + 1) % rowSize) == 0)
+            {
+                x = 0;
+                y++;
+            }
+
         }
 
     }
