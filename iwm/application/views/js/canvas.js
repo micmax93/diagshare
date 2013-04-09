@@ -36,7 +36,7 @@ function addCanvas(parentId, id, width, height) {
  * @param scale
  */
 var img = Array();
-function drawImage(id, imageUrl, x, y, scale) {
+function drawImage(id, imageUrl, x, y, scale, last) {
     var canvas = document.getElementById(id);
     var context = canvas.getContext('2d');
     var i = img.length;
@@ -47,7 +47,19 @@ function drawImage(id, imageUrl, x, y, scale) {
         }
     };
 
-    img[i].onload = drawImageOnLoad(context, img[i], x, y, scale);
+    var drawImageOnLoadAndCallView = function (canvas, context, img, x, y, scale) {
+        return function () {
+            context.drawImage(img, x, y, img.width * scale, img.height * scale);
+            applyViewFilers(canvas);
+        }
+    };
+
+
+    if (!last)
+        img[i].onload = drawImageOnLoad(context, img[i], x, y, scale);
+    else
+        img[i].onload = drawImageOnLoadAndCallView(canvas, context, img[i], x, y, scale);
+
     img[i].src = imageUrl;
 }
 
@@ -151,6 +163,8 @@ function brightnessCanvas(id, value) {
  */
 function canvasRevert(id) {
     var grid = document.getElementById(id);
+    $(grid).height($(grid).attr('basicHeight'));
+    $(grid).width($(grid).attr('basicWidth'));
     grid.style.top = 0;
     grid.style.left = 0;
     contrast[grid.id] = 0;

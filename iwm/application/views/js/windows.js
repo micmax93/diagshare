@@ -56,7 +56,7 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
     listaOkien.push(id + '_window');
 
     $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent" }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
-    $('#' + id + '_grid').width(width * rowSize).height(height * rows);
+    $('#' + id + '_grid').width(width * rowSize).height(height * rows).attr('basicHeight', height * rows).attr('basicWidth', width * rowSize);
 
 
     tc = addCanvas(id + '_grid', id + '_img', width * rowSize, height * rows);
@@ -71,7 +71,10 @@ function createWindow(parentId, id, width, height, rows, rowSize, images) {
         for (var i = 0; i < images.length; i++) {
             x++;
             // Rysuj zdjęcie
-            drawImage(id + '_img', images[i], x * width, y * height, 1);
+            if ((i + 1) == images.length)
+                drawImage(id + '_img', images[i], x * width, y * height, 1, 1);
+            else
+                drawImage(id + '_img', images[i], x * width, y * height, 1);
             if (((x + 1) % rowSize) == 0) {
                 x = -1;
                 y++;
@@ -235,8 +238,8 @@ function getBoardState() {
         win.top = el.style.top;
         win.left = el.style.left;
         win.zoom = el.style.left;
-        win.brightness = brightness[grid.id];
-        win.contrast = contrast[grid.id];
+        win.brightness = brightness[win.photoId + "_img"];
+        win.contrast = contrast[win.photoId + "_img"];
         win.gridTop = grid.style.top;
         win.gridLeft = grid.style.left;
         win.gridHeight = grid.style.height;
@@ -261,7 +264,7 @@ function getBoardState() {
 var currentView = Array();
 function setBoardState(state) {
     // nadpisanie predefiniowanym stanem
-    state = '[{"title":"Obraz1","photoId":"Obraz1","top":"79px","left":"562.833px","zoom":"562.833px","brightness":0,"contrast":0,"gridTop":"47.6667px","gridLeft":"-663.333px","gridHeight":"750px","gridWidth":"1050px","display":"","firstPlan":"0"},{"title":"Zestaw1","photoId":"Zestaw1","top":"26px","left":"361px","zoom":"361px","brightness":0,"contrast":-20,"gridTop":"-61.3333px","gridLeft":"220.667px","gridHeight":"164.7px","gridWidth":"164.7px","display":"","firstPlan":"1"}]';
+    state = '[{"title":"Obraz1","photoId":"Obraz1","top":"40px","left":"","zoom":"","brightness":60,"gridTop":"107.667px","gridLeft":"55.6667px","gridHeight":"144.8px","gridWidth":"203.2px","display":"","firstPlan":"0"},{"title":"Zestaw1","photoId":"Zestaw1","top":"199px","left":"1136.83px","zoom":"1136.83px","brightness":-40,"contrast":60,"gridTop":"-1442.33px","gridLeft":"-1507.33px","gridHeight":"3715.2px","gridWidth":"3715.2px","display":"","firstPlan":"1"}]';
 
 
     // zamknij okna i usuń
