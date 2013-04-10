@@ -12,16 +12,16 @@ class Controller_Image extends IwMController
 {
 
 
-  public function action_get()
-  {
-    $id = $this->request->param("id");
-    preg_replace('/[\s\W]+/', '-', $id);
+    public function action_get()
+    {
+        $id = $this->request->param("id");
+        preg_replace('/[\s\W]+/', '-', $id);
 
-    $photos = new Model_Photos();
-    $image = $photos->getItem($id)->getLinkArray();
-
-    $this->response->headers('Content-Type', 'application/json');
-    $this->response->body(json_encode($image));
-  }
+        $photos = new Model_Photos();
+        $image = $photos->getItem($id)->getLinkArray();
+        $this->response->header('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($image));
+    }
 
 }
