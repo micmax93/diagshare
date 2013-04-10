@@ -113,23 +113,26 @@ Kohana::modules(array(
 
 Route::set('glowna', '(<controller>(/<action>(/<id>)))')
     ->defaults(array(
-    'controller' => 'iwm',
-    'action' => 'index',
-));
-
+        'controller' => 'iwm',
+        'action' => 'index',
+    ));
 
 
 Route::set('chat', '(chat(/<action>(/<id>)))')
     ->defaults(array(
-    'controller' => 'chat',
-    'action' => 'index',
-));
+        'controller' => 'chat',
+        'action' => 'index',
+    ));
 
 
 Route::set('pokoje', '(room(/<action>(/<id>)))')
     ->defaults(array(
-    'controller' => 'room',
-    'action' => 'index',
-));
+        'controller' => 'room',
+        'action' => 'index',
+    ));
 
-
+Route::set('ImgLoader', '(imgloader(/<action>(/<id>)))')
+    ->defaults(array(
+        'controller' => 'imgloader',
+        'action' => 'index',
+    ));
