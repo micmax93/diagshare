@@ -19,7 +19,7 @@ class Controller_Image extends IwMController
 
         $photos = new Model_Photos();
         $image = $photos->getItem($id)->getLinkArray();
-        $this->response->header('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Access-Control-Allow-Origin', '*');
         $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($image));
     }
