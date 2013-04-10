@@ -97,7 +97,12 @@ function zoom(id, scale) {
     vph = vp.height();
     vpw = vp.width();
 
-
+    // Inspirowane:
+    // http://jsfiddle.net/YFPRB
+    // Na poczatku obliczamy w jakim procencie gridu znajduje się środek viewportu:
+    // (vph/2)
+    // obliczamy też różnicę w wymiarach przed i po skalowaniu (ax, ay, bx, by)
+    // od pozycji odejmujemy iloczyn procentu i delty wymiarów przed i po skalowaniu (dw,dh)
     grid.css('top', top - (dh * (((vph / 2) - top) / ay)));
     grid.css('left', left - (dw * (((vpw / 2) - left) / ax)));
 
