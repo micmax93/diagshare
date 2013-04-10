@@ -1,3 +1,6 @@
 1. Poprawić zwracanie widoku [uwzględnić zmiany w ID zdjecia] -> Marcin
 2. Uwzględnienie obserwowania wielu resource dla każdego klienta w WebSocket - > Elf
-3. 
+3. Konta użytkowników [modele+obsługa sesji] -> Marcin
+4. Okno logowania [osobna podstrona, ochrona before()]-> Marcin
+5. Dodawanie Pacjentów, Pokoi, Zdjęć [każdy user ma prawo] -> Marcin
+6. Zakładamy że kohana odpowiada za sesje i można tymi sesjami przesyłać pewne wygenerowane hasze które zostaną użyte w komunikacji z WebSocket do autoryzacji. -> Elf
