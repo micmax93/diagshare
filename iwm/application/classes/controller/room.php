@@ -12,30 +12,7 @@ class Controller_Room extends IwMController
 
     public function action_get()
     {
-       $rooms["OIOM"] = array(
-            'Adam Kowalski' => array(
-                "Zestaw1" => "Zdjęcie klatki piersiowej",
-                "Obraz1" => "Inne zdjęcie"
-            ),
-         'Tomek Kowalski' => array(
-           "Zestaw1" => "Zdjęcie klatki piersiowej",
-           "Obraz1" => "Inne zdjęcie"
-         )
-        );
-        $rooms["Chirurgia"] = array(
-
-            'Tomek Kowalski' => array(
-                "Zestaw1" => "Zdjęcie klatki piersiowej",
-                "Obraz1" => "Inne zdjęcie"
-            )
-        );
-        $rooms["Kardiologia"] = array(
-            'Adam Kowalski' => array(
-                "Zestaw1" => "Zdjęcie klatki piersiowej",
-                "Obraz1" => "Inne zdjęcie"
-            )
-        );
-
+        $rooms = Model_Rooms::getStructTree();
         $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($rooms));
     }

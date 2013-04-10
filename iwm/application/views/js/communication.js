@@ -27,13 +27,15 @@ function roomsReceived(data) {
             list += '   <div id="patientLink' + lid + '" style="display:none;">';
             list += '       <ul>';
 
-            $.each(photos, function (photo) {
+            for (var key in photos) {
                 list += '       <li>';
                 //list += '           <a href="javascript:showHide(\'' + photo + '_window\');">' + photo + '</a>';
-                list += '           <a href="javascript:showHideOrLoad(\'' + photo + '\');">' + photo + '</a>';
+                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');">' + key + '</a>';
                 list += '       </li>';
 
-            });
+            }
+
+
             list += '       </ul>';
             list += '   </div>';
             list += '</div>';
@@ -62,7 +64,7 @@ function roomsReceived(data) {
  * @param v
  */
 function imageReceived(v) {
-    createWindow('main', v["name"], v["width"], v["height"], v["rowSize"], v["numberOfRows"], v["images"]);
+    createWindow('main', v["title"], v["width"], v["height"], v["rowSize"], v["numberOfRows"], v["images"]);
     applyView(v["name"]);
 }
 
@@ -97,7 +99,7 @@ function setupWebSocket() {
 }
 
 function onClose(evt) {
-   alert('Rozłączono!');
+    alert('Rozłączono!');
 }
 function onMessage(evt) {
     //alert(evt.data);
@@ -105,5 +107,5 @@ function onMessage(evt) {
     //webSocket.close();
 }
 function onError(evt) {
-    alert('Błąd czatu: '+evt.data);
+    alert('Błąd czatu: ' + evt.data);
 }
