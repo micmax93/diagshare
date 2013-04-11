@@ -4,7 +4,25 @@
 
 -- Dumped from database version 9.1.8
 -- Dumped by pg_dump version 9.1.8
--- Started on 2013-04-11 10:44:21 CEST
+-- Started on 2013-04-11 10:47:50 CEST
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 1967 (class 1262 OID 16716)
+-- Name: iwm; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE iwm WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'pl_PL.UTF-8' LC_CTYPE = 'pl_PL.UTF-8';
+
+
+ALTER DATABASE iwm OWNER TO postgres;
+
+\connect iwm
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -420,9 +438,7 @@ ALTER TABLE ONLY views ALTER COLUMN id SET DEFAULT nextval('views_id_seq'::regcl
 -- Data for Name: patients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY patients (id, name, date, status, description, room_id, owner_id) FROM stdin;
-1	Jan	2013-03-24	CRITICAL	Ostry przypadek niewydolności mózgowej spowodowanej wystawieniem na szkodliwy wpływ pseudo-bazy danych.	1	2
-\.
+INSERT INTO patients (id, name, date, status, description, room_id, owner_id) VALUES (1, 'Jan', '2013-03-24', 'CRITICAL', 'Ostry przypadek niewydolności mózgowej spowodowanej wystawieniem na szkodliwy wpływ pseudo-bazy danych.', 1, 2);
 
 
 --
@@ -440,10 +456,8 @@ SELECT pg_catalog.setval('patients_id_seq', 1, true);
 -- Data for Name: photos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY photos (id, patient_id, filename, title, x_count, y_count, width, height) FROM stdin;
-1	1	xray.jpg	Prześwietlenie	1	1	200	200
-11	1	Katie_Melua_9_1600x1200_Wallpaper.jpg	Katie	8	6	1600	1200
-\.
+INSERT INTO photos (id, patient_id, filename, title, x_count, y_count, width, height) VALUES (1, 1, 'xray.jpg', 'Prześwietlenie', 1, 1, 200, 200);
+INSERT INTO photos (id, patient_id, filename, title, x_count, y_count, width, height) VALUES (11, 1, 'Katie_Melua_9_1600x1200_Wallpaper.jpg', 'Katie', 8, 6, 1600, 1200);
 
 
 --
@@ -461,12 +475,10 @@ SELECT pg_catalog.setval('photos_id_seq', 11, true);
 -- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY posts (id, patient_id, tag_id, owner_id, content) FROM stdin;
-1	1	\N	2	Zalecam pavulonik.
-2	\N	1	1	Chyba tak.
-3	\N	2	1	Chyba nie.
-4	\N	1	2	Na pewno nie.
-\.
+INSERT INTO posts (id, patient_id, tag_id, owner_id, content) VALUES (1, 1, NULL, 2, 'Zalecam pavulonik.');
+INSERT INTO posts (id, patient_id, tag_id, owner_id, content) VALUES (2, NULL, 1, 1, 'Chyba tak.');
+INSERT INTO posts (id, patient_id, tag_id, owner_id, content) VALUES (3, NULL, 2, 1, 'Chyba nie.');
+INSERT INTO posts (id, patient_id, tag_id, owner_id, content) VALUES (4, NULL, 1, 2, 'Na pewno nie.');
 
 
 --
@@ -484,9 +496,7 @@ SELECT pg_catalog.setval('posts_id_seq', 4, true);
 -- Data for Name: rooms; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY rooms (id, name, owner_id) FROM stdin;
-1	OIOM	1
-\.
+INSERT INTO rooms (id, name, owner_id) VALUES (1, 'OIOM', 1);
 
 
 --
@@ -504,10 +514,8 @@ SELECT pg_catalog.setval('rooms_id_seq', 1, true);
 -- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY tags (id, photo_id, owner_id, title, x, y) FROM stdin;
-1	1	1	Guz	5	8
-2	1	2	Tasiemiec	12	15
-\.
+INSERT INTO tags (id, photo_id, owner_id, title, x, y) VALUES (1, 1, 1, 'Guz', 5, 8);
+INSERT INTO tags (id, photo_id, owner_id, title, x, y) VALUES (2, 1, 2, 'Tasiemiec', 12, 15);
 
 
 --
@@ -525,11 +533,9 @@ SELECT pg_catalog.setval('tags_id_seq', 2, true);
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY users (id, name, password) FROM stdin;
-1	test_user	user
-2	nxt_user	paswd
-5	nxt2_user	paswd
-\.
+INSERT INTO users (id, name, password) VALUES (1, 'test_user', 'user');
+INSERT INTO users (id, name, password) VALUES (2, 'nxt_user', 'paswd');
+INSERT INTO users (id, name, password) VALUES (5, 'nxt2_user', 'paswd');
 
 
 --
@@ -547,10 +553,8 @@ SELECT pg_catalog.setval('users_id_seq', 5, true);
 -- Data for Name: views; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY views (id, owner_id, status, photo_id, x, y, scale, contrast, brightness) FROM stdin;
-1	1	PUBLIC	1	0	0	1	\N	\N
-2	2	PRIVATE	1	10	10	1.19999999999999996	\N	\N
-\.
+INSERT INTO views (id, owner_id, status, photo_id, x, y, scale, contrast, brightness) VALUES (1, 1, 'PUBLIC', 1, 0, 0, 1, NULL, NULL);
+INSERT INTO views (id, owner_id, status, photo_id, x, y, scale, contrast, brightness) VALUES (2, 2, 'PRIVATE', 1, 10, 10, 1.19999999999999996, NULL, NULL);
 
 
 --
@@ -784,7 +788,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-04-11 10:44:22 CEST
+-- Completed on 2013-04-11 10:47:50 CEST
 
 --
 -- PostgreSQL database dump complete
