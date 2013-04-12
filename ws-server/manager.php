@@ -1,11 +1,10 @@
 #!/php -q
 <?php
-require_once("websocket.server.php");
 
 class Manager
 {
-    public $user_list;
-    public $resource_list;
+    protected $user_list;
+    protected $resource_list;
 
     function new_user($uid,$uws)
     {
@@ -41,7 +40,7 @@ class Manager
     {
         return isset($this->user_list[$user]);
     }
-    public function send_update($type,$id)
+    public function send_update($type,$id,$admin=null,$hash=null)
     {
         $n=0;
         if(isset($this->resource_list[$type][$id]))
@@ -61,7 +60,7 @@ class Manager
         $this->say("Resource $type($id) update notify send to $n users");
     }
 
-    public function say($msg) {
+    protected function say($msg) {
         echo '<CMD>' . "$msg \r\n";
     }
 }
@@ -70,7 +69,7 @@ class Manager
 
 class SecureManager extends Manager
 {
-    function randString($len)
+    protected function rand_string($len)
     {
         $str='';
         for($i=0;$i<$len;$i++)
@@ -79,7 +78,7 @@ class SecureManager extends Manager
         }
         return $str;
     }
-    function encodeString($str)
+    protected function encode_string($str)
     {
         $str2='';
         for($i=0;$i<strlen($str);$i++)
@@ -91,13 +90,13 @@ class SecureManager extends Manager
         return $hash;
     }
 
-    public $admin_list;
+    protected $admin_list;
     public function new_admin($uid,$uws)
     {
         $this->admin_list[$uid]['ws']=$uws;
-        $str=$this->randString(16);
+        $str=$this->rand_string(16);
         $this->admin_list[$uid]['code']=$str;
-        $this->admin_list[$uid]['hash']=$this->encodeString($str);
+        $this->admin_list[$uid]['hash']=$this->encode_string($str);
         $this->say("New admin id=$uid");
     }
     public function send_verify($uid)
@@ -124,6 +123,7 @@ class SecureManager extends Manager
     }
     public function remove_user($uid)
     {
+        if(!$this->user_exists($uid)) {return;}
         if($this->is_admin($uid))
         {
             $this->remove_admin($uid);
@@ -133,7 +133,7 @@ class SecureManager extends Manager
             parent::remove_user($uid);
         }
     }
-    public function send_update($admin,$hash,$type,$id)
+    public function send_update($type,$id,$admin=null,$hash=null)
     {
         if($this->admin_list[$admin]['hash']==$hash)
         {
@@ -142,38 +142,27 @@ class SecureManager extends Manager
     }
 }
 
+class CommunicationInterpreter
+{
+    protected $chanel_list;
+    protected $manager;
 
-class BroadcastServer implements IWebSocketServerObserver {
-
-    protected $debug = true;
-    protected $server;
-
-    public $master;
-    public $manager;
-
-    public function __construct() {
-        $this->server = new WebSocketServer("tcp://0.0.0.0:12345", 'superdupersecretkey');
-        $this->server->addObserver($this);
-
+    public function __construct()
+    {
         $this->manager=new SecureManager();
     }
-
-    public function onConnect(IWebSocketConnection $user) {
-        $this->say("{$user->getId()} connected");
-        //$this->users_set[$user->getId()]=$user;
+    public function newChanel($chanelId,$socket)
+    {
+        $this->chanel_list[$chanelId]=$socket;
     }
-
-    function valid_struct($data)
+    function isValidStruct($data)
     {
         return (isset($data->cmd) and isset($data->type) and isset($data->id));
     }
-
-    public function onMessage(IWebSocketConnection $user, IWebSocketMessage $msg) {
-        $this->say("{$user->getId()} says '{$msg->getData()}'");
-
-        $data=json_decode($msg->getData());
-        $sender=$user->getId();
-        if(!$this->valid_struct($data)) {return;}
+    public function messageReceived($sender,$msg)
+    {
+        $data=json_decode($msg);
+        if(!$this->isValidStruct($data)) {return;}
 
         if(!$this->manager->user_exists($sender))
         {
@@ -181,12 +170,12 @@ class BroadcastServer implements IWebSocketServerObserver {
             {
                 if($data->type=='admin')
                 {
-                    $this->manager->new_admin($sender,$user);
+                    $this->manager->new_admin($sender,$this->chanel_list[$sender]);
                     $this->manager->send_verify($sender);
                 }
                 if($data->type=='user')
                 {
-                    $this->manager->new_user($sender,$user);
+                    $this->manager->new_user($sender,$this->chanel_list[$sender]);
                 }
             }
         }
@@ -198,7 +187,7 @@ class BroadcastServer implements IWebSocketServerObserver {
                 {
                     if(isset($data->hash))
                     {
-                        $this->manager->send_update($sender,$data->hash,$data->type,$data->id);
+                        $this->manager->send_update($data->type,$data->id,$sender,$data->hash);
                     }
                 }
             }
@@ -215,27 +204,11 @@ class BroadcastServer implements IWebSocketServerObserver {
             }
         }
     }
-
-    public function onDisconnect(IWebSocketConnection $user) {
-        $this->say("{$user->getId()} disconnected");
-        $this->manager->remove_user($user->getId());
+    public function chanelDisconnected($chanelId)
+    {
+        unset($this->chanel_list[$chanelId]);
+        $this->manager->remove_user($chanelId);
     }
-
-    public function onAdminMessage(IWebSocketConnection $user, IWebSocketMessage $msg) {
-        $frame = WebSocketFrame::create(WebSocketOpcode::PongFrame);
-        $user->sendFrame($frame);
-    }
-
-    public function say($msg) {
-        echo '<COM>' . "$msg \r\n";
-    }
-
-    public function run() {
-        $this->server->run();
-    }
-
 }
 
-//{"cmd":"request","type":"tag","id":3}
-$server = new BroadcastServer();
-$server->run();
+?>
