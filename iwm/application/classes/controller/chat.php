@@ -38,4 +38,23 @@ class Controller_Chat extends IwMController
 //        $ws=new WebSocketBroadcastAdmin();
 //        $ws->update($type,$id);
     }
+
+    public function action_index()
+    {
+        $type="tag";
+        $id=3;
+        if(isset($_POST['update']))
+        {
+            WebSocketBroadcastAdmin::single_update($_POST['type'],$_POST['id']);
+            $type=$_POST['type'];
+            $id=$_POST['id'];
+        }
+        echo '<h3>Admin site</h3>';
+        echo '<form enctype="multipart/form-data" method="post">
+                <input type="text" size="32" name="type" value="'.$type.'"><br>';
+        echo '<input type="number" size="32" name="id" value="'.$id.'"><br>
+                <input type="submit" name="update" value="update">
+                </form>';
+
+    }
 }

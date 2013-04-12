@@ -15,10 +15,7 @@
                 return new Array(num + 1).join(this);
             }
 
-
-
             var socket;
-
 
             function createSocket(host) {
 
@@ -30,6 +27,11 @@
             }
 
             function init() {
+                if(socket!=null)
+                {
+                    socket.close();
+                    socket = null;
+                }
                 var host = "ws://" + window.location.host + ":12345/echo";
                 try {
                     socket = createSocket(host);
@@ -47,14 +49,9 @@
                 catch (ex) {
                     log(ex);
                 }
-                $("msg").focus();
             }
 
-            function send() {
-
-
-                var msg = document.getElementById('msg').value;
-
+            function send(msg) {
                 try {
                     socket.send(msg);
                     log('Sent (' + msg.length + " bytes): " + msg);
@@ -62,10 +59,33 @@
                     log(ex);
                 }
             }
+
+            function sendMsg(cmd,type,id)
+            {
+                var str='{"cmd":"'+cmd+'","type":"'+type+'","id":'+id+'}';
+                send(str);
+            }
+
             function quit() {
                 log("Goodbye!");
                 socket.close();
                 socket = null;
+            }
+            function register()
+            {
+                sendMsg('register','user','0');
+            }
+            function request()
+            {
+                var type = document.getElementById('type').value;
+                var id = document.getElementById('id').value;
+                sendMsg('request',type,id);
+            }
+            function ignore()
+            {
+                var type = document.getElementById('type').value;
+                var id = document.getElementById('id').value;
+                sendMsg('ignore',type,id);
             }
 
             // Utilities
@@ -75,20 +95,20 @@
             function log(msg) {
                 $("log").innerHTML += "<br>" + msg;
             }
-            function onkey(event) {
-                if (event.keyCode == 13) {
-                    send();
-                }
-            }
+            //
         </script>
 
     </head>
-    <body onload="init()">
-        <h3>WebSocket Test</h3>
+    <body>
+        <h3>User site</h3>
+        <button onclick="init()">connect</button>
+        <button onclick="register()">register</button>
+        <button onclick="quit()">quit</button>
         <div id="log"></div>
-        <input id="msg" type="textbox" onkeypress="onkey(event)"/>
-        <button onclick="send()">Send</button>
-        <button onclick="quit()">Quit</button>
-        <div>Server will echo your response!</div>
+        <br>
+        <input id="type" type="textbox" value="tag"/>
+        <input id="id" type="textbox" value="3"/>
+        <button onclick="request()">request</button>
+        <button onclick="ignore()">ignore</button>
     </body>
 </html>

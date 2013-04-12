@@ -1,40 +1,10 @@
 #!/php -q
 <?php
-// Run from command prompt > php demo.php
 require_once("websocket.server.php");
+require("manager.php");
 
-/**
- * This demo resource handler will respond to all messages sent to /echo/ on the socketserver below
- *
- * All this handler does is echoing the responds to the user
- * @author Chris
- *
- */
-class DemoEchoHandler extends WebSocketUriHandler {
 
-    public function onMessage(IWebSocketConnection $user, IWebSocketMessage $msg) {
-        $this->say("[ECHO] {$msg->getData()}");
-        // Echo
-        $user->sendMessage($msg);
-    }
-
-    public function onAdminMessage(IWebSocketConnection $user, IWebSocketMessage $obj) {
-        $this->say("[DEMO] Admin TEST received!");
-
-        $frame = WebSocketFrame::create(WebSocketOpcode::PongFrame);
-        $user->sendFrame($frame);
-    }
-
-}
-
-/**
- * Demo socket server. Implements the basic eventlisteners and attaches a resource handler for /echo/ urls.
- *
- *
- * @author Chris
- *
- */
-class DemoSocketServer implements IWebSocketServerObserver {
+class SecureBroadcastServer implements IWebSocketServerObserver {
 
     protected $debug = true;
     protected $server;
@@ -43,7 +13,7 @@ class DemoSocketServer implements IWebSocketServerObserver {
         $this->server = new WebSocketServer("ssl://0.0.0.0:12345", 'superdupersecretkey');
         $this->server->addObserver($this);
 
-        $this->server->addUriHandler("echo", new DemoEchoHandler());
+        $this->interpreter=new CommunicationInterpreter();
 
         $this->setupSSL();
     }
@@ -66,14 +36,17 @@ class DemoSocketServer implements IWebSocketServerObserver {
 
     public function onConnect(IWebSocketConnection $user) {
         $this->say("{$user->getId()} connected");
+        $this->interpreter->newChanel($user->getId(),$user);
     }
 
     public function onMessage(IWebSocketConnection $user, IWebSocketMessage $msg) {
         $this->say("{$user->getId()} says '{$msg->getData()}'");
+        $this->interpreter->messageReceived($user->getId(),$msg->getData());
     }
 
     public function onDisconnect(IWebSocketConnection $user) {
         $this->say("{$user->getId()} disconnected");
+        $this->interpreter->chanelDisconnected($user->getId());
     }
 
     public function onAdminMessage(IWebSocketConnection $user, IWebSocketMessage $msg) {
@@ -82,7 +55,7 @@ class DemoSocketServer implements IWebSocketServerObserver {
     }
 
     public function say($msg) {
-        echo "$msg \r\n";
+        echo '<COM>' . "$msg \r\n";
     }
 
     public function run() {
@@ -92,5 +65,5 @@ class DemoSocketServer implements IWebSocketServerObserver {
 }
 
 // Start server
-$server = new DemoSocketServer("ssl://0.0.0.0:12345");
+$server = new SecureBroadcastServer("ssl://0.0.0.0:12345");
 $server->run();
