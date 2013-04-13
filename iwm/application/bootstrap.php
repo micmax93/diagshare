@@ -136,3 +136,9 @@ Route::set('ImgLoader', '(imgloader(/<action>(/<id>)))')
         'controller' => 'imgloader',
         'action' => 'index',
     ));
+
+Route::set('User', '(user(/<action>(/<id>)))')
+    ->defaults(array(
+        'controller' => 'user',
+        'action' => 'index',
+    ));
