@@ -92,8 +92,13 @@ function zoom(id, scale) {
     var dh, dw, top, left, vph, vpw;
     dw = bx - ax;
     dh = by - ay;
+
     top = parseFloat(grid.css('top'));
     left = parseFloat(grid.css('left'));
+    if (isNaN(top)) {
+        top = 0;
+        left = 0;
+    }
     vph = vp.height();
     vpw = vp.width();
 
