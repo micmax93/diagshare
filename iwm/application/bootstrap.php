@@ -95,7 +95,7 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-    // 'auth'       => MODPATH.'auth',       // Basic authentication
+    'auth' => MODPATH . 'auth', // Basic authentication
     // 'cache'      => MODPATH.'cache',      // Caching with multiple backends
     // 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
     'database' => MODPATH . 'database', // Database access
@@ -105,6 +105,8 @@ Kohana::modules(array(
     // 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
     'kohana-postgresql' => MODPATH . 'kohana-postgresql'
 ));
+
+Cookie::$salt = 'HokusPokusCzaryMary';
 
 /**
  * Set the routes. Each route must have a minimum of a name, a URI and a set of

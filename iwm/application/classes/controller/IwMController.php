@@ -7,5 +7,15 @@
 
 class IwMController extends Controller
 {
+    public function before()
+    {
+       if($this->request->controller() != "user")
+       {
+           if(!Auth::instance()->logged_in())
+           {
+               $this->request->redirect("user/login");
+           }
+       }
+    }
 
 }
