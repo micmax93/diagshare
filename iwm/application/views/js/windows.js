@@ -18,7 +18,7 @@ var listaOkien = Array();
  * @param rowSize
  * @param images
  */
-function createWindow(parentId, id, width, height, rowSize, rows, photoId,images) {
+function createWindow(parentId, id, width, height, rowSize, rows, photoId, images) {
 
     // Oznacz wszystkie pozostałe okna jako nieaktywne
     var window;
@@ -29,7 +29,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId,images
     }
     // Dodaj diva ze strukturą okna
     $('#' + parentId).append('' +
-        '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');" photoId="'+photoId+'">' +
+        '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');" photoId="' + photoId + '">' +
         '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');" id="' + id + '_title"><p>' + id + ' [' + width * rowSize + 'x' + height * rows + ']</p>' +
         ' Zoom:' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',1.2);" class="smallButton">+</a>' +
@@ -286,7 +286,7 @@ function setBoardState(state) {
     currentView = Array();
     for (var i = 0; i < windows.length; i++) {
         currentView[windows[i].title] = windows[i];
-        showHideOrLoad(windows[i].photoId,windows[i].title);
+        showHideOrLoad(windows[i].photoId, windows[i].title);
     }
 }
 
@@ -315,9 +315,9 @@ function applyView(x) {
         grid.style.width = currentView[x].gridWidth;
 
         if (isNumber(currentView[x].contrast))
-            contrast[grid.id] = currentView[x].contrast;
+            contrast[x + '_img'] = currentView[x].contrast;
         if (isNumber(currentView[x].brightness))
-            brightness[grid.id] = currentView[x].brightness;
+            brightness[x + '_img'] = currentView[x].brightness;
 
 
         //alert('w');
@@ -334,10 +334,10 @@ function applyViewFilers(canvas) {
     var grid = canvas.parentNode;
     Caman('#' + canvas.id, function () {
         this.revert();
-        if (isNumber(contrast[grid.id]))
-            this.contrast(contrast[grid.id]);
-        if (isNumber(brightness[grid.id]))
-            this.brightness(brightness[grid.id]);
+        if (isNumber(contrast[canvas.id]))
+            this.contrast(contrast[canvas.id]);
+        if (isNumber(brightness[canvas.id]))
+            this.brightness(brightness[canvas.id]);
         this.render();
 
     });
