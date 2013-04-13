@@ -32,7 +32,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, images) {
     $('#' + parentId).append('' +
         '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');">' +
         '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');" id="' + id + '_title"><p>' + id + ' [' + width * rowSize + 'x' + height * rows + ']</p>' +
-        'Zoom:' +
+        ' Zoom:' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',1.2);" class="smallButton">+</a>' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',0.8);" class="smallButton">-</a>' +
         ' Contrast:' +
@@ -51,11 +51,17 @@ function createWindow(parentId, id, width, height, rowSize, rows, images) {
         '   </div>' +
         '</div>' +
         '');
+    // Obliczenie skali okna
+    var scale = 1;
+    if (height * rows >= 1000) scale = 0.5;
+    if (height * rows <= 200) scale = 3;
+    if (width * rowSize <= 200) scale = 3;
+    if (width * rowSize >= 1000) scale = 0.5;
 
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title' }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
+    $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title' }).css('top', (listaOkien.length * 20)).width(width * rowSize * scale).height(height * scale * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rows).attr('basicHeight', height * rows).attr('basicWidth', width * rowSize);
 
 
@@ -283,6 +289,8 @@ function setBoardState(state) {
 function isNumber(n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
+
+
 /**
  * applyFilter()
  * Aplikuje na istniejących oknach parametry dla aktywnego widoku (nie dotyczy zawartości)
