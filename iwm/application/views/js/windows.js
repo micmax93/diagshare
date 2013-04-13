@@ -53,10 +53,15 @@ function createWindow(parentId, id, width, height, rowSize, rows, images) {
         '');
     // Obliczenie skali okna
     var scale = 1;
-    if (height * rows >= 1000) scale = 0.5;
-    if (height * rows <= 200) scale = 3;
-    if (width * rowSize <= 200) scale = 3;
-    if (width * rowSize >= 1000) scale = 0.5;
+    var ratio = (height * rows) / (width * rowSize);
+    var maxWidth = 0.7 * screen.width;
+    var maxHeight = 0.7 * screen.height;
+
+    if (height * rows <= 700) scale = 700 / (height * rows);
+    if (width * rowSize <= 700) scale = 700 / (width * rowSize);
+    if (height * rows >= maxHeight) scale = 1000 / (height * rows);
+    if (width * rowSize >= maxWidth) scale = 1000 / (width * rowSize);
+
 
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
