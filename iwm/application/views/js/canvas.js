@@ -90,8 +90,8 @@ function zoom(id, scale) {
 
 
     var dh, dw, top, left, vph, vpw;
-    dh = bx - ax;
-    dw = by - ay;
+    dw = bx - ax;
+    dh = by - ay;
     top = parseFloat(grid.css('top'));
     left = parseFloat(grid.css('left'));
     vph = vp.height();
