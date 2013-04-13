@@ -50,8 +50,8 @@ function roomsReceived(data) {
 
     $(function () {
         $("#rooms").accordion({
-            collapsible:true,
-            autoHeight:true
+            collapsible: true,
+            autoHeight: true
         });
     });
 
@@ -64,8 +64,8 @@ function roomsReceived(data) {
  * @param v
  */
 function imageReceived(v) {
-    createWindow('main', v["title"], v["width"], v["height"], v["rowSize"], v["numberOfRows"], v["images"]);
-    applyView(v["name"]);
+    createWindow('main', v["title"], v["width"], v["height"], v["rowSize"], v["numberOfRows"], v["id"], v["images"]);
+    applyView(v["title"]);
 }
 
 

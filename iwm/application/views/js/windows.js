@@ -18,7 +18,7 @@ var listaOkien = Array();
  * @param rowSize
  * @param images
  */
-function createWindow(parentId, id, width, height, rowSize, rows, images) {
+function createWindow(parentId, id, width, height, rowSize, rows, photoId,images) {
 
     // Oznacz wszystkie pozostałe okna jako nieaktywne
     var window;
@@ -27,10 +27,9 @@ function createWindow(parentId, id, width, height, rowSize, rows, images) {
         window.style.zIndex = 0;
         window.getElementsByTagName("div")[0].className = "titleBar";
     }
-
     // Dodaj diva ze strukturą okna
     $('#' + parentId).append('' +
-        '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');">' +
+        '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');" photoId="'+photoId+'">' +
         '   <div class="titleBarActive" onmousedown="firstPlanWindow(\'' + id + '_window\');" id="' + id + '_title"><p>' + id + ' [' + width * rowSize + 'x' + height * rows + ']</p>' +
         ' Zoom:' +
         '       <a href="javascript:zoom(\'' + id + '_grid\',1.2);" class="smallButton">+</a>' +
@@ -171,7 +170,8 @@ function showHide(thing) {
  * Jeżeli nie istnieje - zostanie zainicjalizowane pobranie metadanych.
  * Funkcja imageReceived dokona dalszego wywołania createWindow dla odebranych danych.
  *
- * @param thing
+ * @param id
+ * @param name
  */
 function showHideOrLoad(id, name) {
     var el = document.getElementById(name + '_window');
@@ -243,12 +243,12 @@ function getBoardState() {
         grid = document.getElementById(el.id.substr(0, el.id.length - 7) + "_grid");
         win = {};
         win.title = el.id.substr(0, el.id.length - 7);
-        win.photoId = el.id.substr(0, el.id.length - 7);
+        win.photoId = $(el).attr('photoId');
         win.top = el.style.top;
         win.left = el.style.left;
         win.zoom = el.style.left;
-        win.brightness = brightness[win.photoId + "_img"];
-        win.contrast = contrast[win.photoId + "_img"];
+        win.brightness = brightness[win.title + "_img"];
+        win.contrast = contrast[win.title + "_img"];
         win.gridTop = grid.style.top;
         win.gridLeft = grid.style.left;
         win.gridHeight = grid.style.height;
@@ -273,7 +273,7 @@ function getBoardState() {
 var currentView = Array();
 function setBoardState(state) {
     // nadpisanie predefiniowanym stanem
-    state = '[{"title":"Obraz1","photoId":"Obraz1","top":"40px","left":"","zoom":"","brightness":60,"gridTop":"107.667px","gridLeft":"55.6667px","gridHeight":"144.8px","gridWidth":"203.2px","display":"","firstPlan":"0"},{"title":"Zestaw1","photoId":"Zestaw1","top":"199px","left":"1136.83px","zoom":"1136.83px","brightness":-40,"contrast":60,"gridTop":"-1442.33px","gridLeft":"-1507.33px","gridHeight":"3715.2px","gridWidth":"3715.2px","display":"","firstPlan":"1"}]';
+    state = '[{"title":"Prześwietlenie","photoId":"1","top":"20px","left":"","zoom":"","contrast":60,"gridTop":"-732.22px","gridLeft":"-675.4px","gridHeight":"1489.2px","gridWidth":"1489.2px","display":"","firstPlan":"0"},{"title":"Katie","photoId":"11","top":"155px","left":"895px","zoom":"895px","brightness":40,"gridTop":"-599px","gridLeft":"-4957px","gridHeight":"6193.2px","gridWidth":"8257.2px","display":"","firstPlan":"0"},{"title":"Monica","photoId":"13","top":"176px","left":"600px","zoom":"600px","brightness":40,"contrast":140,"gridTop":"","gridLeft":"","gridHeight":"533px","gridWidth":"800px","display":"","firstPlan":"1"}]';
 
 
     // zamknij okna i usuń
@@ -286,8 +286,7 @@ function setBoardState(state) {
     currentView = Array();
     for (var i = 0; i < windows.length; i++) {
         currentView[windows[i].title] = windows[i];
-        showHideOrLoad(windows[i].title);
-
+        showHideOrLoad(windows[i].photoId,windows[i].title);
     }
 }
 

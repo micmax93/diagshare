@@ -55,6 +55,7 @@ class Model_Photos extends Model_Base
             "width" => $this->width / $this->x_count,
             "height" => $this->height / $this->y_count,
             "title" => $this->title,
+            "id" => $this->id,
             "images" => array()
         );
         $path = $this->getPath();
