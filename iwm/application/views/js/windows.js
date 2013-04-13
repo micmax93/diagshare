@@ -93,7 +93,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, images) {
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
     $('#' + id + '_grid').draggable({cursor:"move"});
     $('#' + id + '_viewport').css('z-index', 0);
-    $('#' + id + '_window').css('z-index', 1);
+    $('#' + id + '_window').css('z-index', 1).resizable();
 
     //addTag(id + '_grid',id+'_tag',100,100,id+'_tag');
 }
