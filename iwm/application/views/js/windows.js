@@ -55,7 +55,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, images) {
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({opacity:0.8, containment:"parent", handle:'#' + id + '_title' }).css('top', (listaOkien.length * 20)).css('left',30).width(width * rowSize).height(height * rows + 20);
+    $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title' }).css('top', (listaOkien.length * 20)).width(width * rowSize).height(height * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rows).attr('basicHeight', height * rows).attr('basicWidth', width * rowSize);
 
 
@@ -91,9 +91,9 @@ function createWindow(parentId, id, width, height, rowSize, rows, images) {
 
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
-    $('#' + id + '_grid').draggable({cursor:"move"});
+    $('#' + id + '_grid').draggable({cursor: "move"});
     $('#' + id + '_viewport').css('z-index', 0);
-    $('#' + id + '_window').css('z-index', 1).resizable();
+    $('#' + id + '_window').css('z-index', 1);
 
     //addTag(id + '_grid',id+'_tag',100,100,id+'_tag');
 }
@@ -162,29 +162,25 @@ function showHide(thing) {
  *
  * @param thing
  */
-function showHideOrLoad(thing) {
-    var el = document.getElementById(thing + '_window');
+function showHideOrLoad(id, name) {
+    var el = document.getElementById(name + '_window');
 
     if (!el) {
         var data;
         $.ajax({
-            dataType:"json",
-            url:base_url + "index.php/image/get/" + thing,
-            data:data,
-            success:imageReceived
+            dataType: "json",
+            url: base_url + "index.php/image/get/" + id,
+            data: data,
+            success: imageReceived
         });
     }
     else {
         if (el.style.display == "none") {
             el.style.display = "block";
-
-            firstPlanWindow(thing + '_window');
-            //el.parentNode.style.height = parseInt(el.height) + "px";
+            firstPlanWindow(name + '_window');
         }
         else {
             el.style.display = "none";
-
-            //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
 
         }
 
@@ -201,7 +197,7 @@ function showHideOrLoad(thing) {
  */
 function menuRoll(thing) {
     $('#' + thing).animate({
-        height:'toggle'
+        height: 'toggle'
     }, 250, function () {
 
     });

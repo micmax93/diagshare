@@ -148,7 +148,7 @@ html, body {
     position: absolute;
     z-index: 0;
     overflow: hidden;
-    /*resize: both;*/
+    resize: both;
 }
 
 .viewport {
