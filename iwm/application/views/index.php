@@ -36,6 +36,9 @@ echo '
         <div id="messageBox">
         ' . $chat . '
         </div>
+        <div id="chatControl">
+            <input type="text" id="chatInput"><button onclick="sendChatMessage()">Wyślij</button>
+        </div>
 
     </div>
     <div id="main">' . $canvas . '

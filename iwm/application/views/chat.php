@@ -18,15 +18,15 @@ $("#chatInput").keyup(function (e) {
 });
 
 </script>
+
 <p id="chatRoomId">#pokój</p>
 <hr>
 <table id="chatList">
 </table>
 
 </div>
-<div id="chatControl">
-    <input type="text" id="chatInput"><button onclick="sendChatMessage()">Wyślij</button>
-</div>
+
+
 ';
 
 

@@ -1,7 +1,7 @@
 html, body {
     height: 100%;
     width: 100%;
-    margin: 0 auto;
+    margin: auto;
     overflow: hidden;
     padding: 0;
     background: #086CA2;
@@ -46,10 +46,11 @@ html, body {
     height: 100%;
     width: 15%;
     padding: 0px;
+    margin: 0 auto;
 }
 
 #roomList {
-    height: 50%;
+    height: 40%;
     border-bottom: 2px dashed;
     background: #3C9DD0;
     overflow: scroll;
@@ -62,9 +63,11 @@ html, body {
 }
 
 #messageBox {
-    height: 50%;
+
+    height: 40%;
     background: #64AAD0;
     overflow-x: hidden;
+    margin-bottom: 0px;
 }
 
 .titleBar {
@@ -205,9 +208,10 @@ html, body {
 }
 
 #chatContent {
-    height: 60%;
+    height: 100%;
     width: 100%;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #chatContent table {
@@ -224,16 +228,20 @@ html, body {
 }
 
 #chatControl {
-
     background: white;
-    height: 20%;
-    width: 100%;
-    overflow: hidden;
-    padding: 3px;
+    width: 98%;
+
+    padding: 2px;
+
 }
 
 #chatControl input {
-    margin-left: 10px;
+    width: 70%;
+}
+
+#chatControl button {
+    width: 20%;
+    font-size: 11px;
 }
 
 #chatRoomId {
