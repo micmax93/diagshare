@@ -7,9 +7,10 @@
  */
 
 function userAuthorized(v) {
-    alert(v["status"]);
-    //window.location = "authorized";
+    if(v["status"] == "ok")
+        window.location = "authorized";
 }
+
 function authorizeUser() {
     var user = document.getElementById('userInput').value;
     var pass = document.getElementById('passwordInput').value;

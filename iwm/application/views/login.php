@@ -21,7 +21,7 @@ echo '
   <p style="background:white;padding:3px;">
     login: <input type="text" id="userInput"><br>
     hasło: <input type="password" id="passwordInput"><br>
-    <button onclick="authorizeUser()">Zaloguj</button>
+    <button onclick="javascript:authorizeUser();">Zaloguj</button>
   </p>
   </div>
     </div>

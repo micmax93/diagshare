@@ -28,8 +28,9 @@ echo '
 <div id="container">
     <div id="sideBar">
         <h1>diagShare </h1>
-        <button onclick="alert(JSON.stringify(getBoardState()));">get</button>
-        <button onclick="setBoardState();">set</button>
+        <!--<button onclick="alert(JSON.stringify(getBoardState()));">get</button>
+        <button onclick="setBoardState();">set</button>-->
+        <a href="index.php/user/logout">Wyloguj</a>
         <div id="roomList">
         ' . $room . '
         </div>

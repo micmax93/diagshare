@@ -35,15 +35,24 @@ class Controller_User extends IwMController
         ;
         //$this->request->post('password');
         $muser = new Model_User();
+        $user = $muser->getUserByUsername($this->request->post('username'));
+        if ($user->id != 0) {
+            if (Auth::instance()->login($user->username, $this->request->post('password')))
+                $res["status"] = "ok";
+            else
+                $res["status"] = "fail";
 
-        $res["status"] = $this->request->post('username');
+        } else
+            $res["status"] = "fail";
+
+
         $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($res));
     }
 
     public function action_authorized()
     {
-        $this->request->redirect('/');
+        echo "<body onload=\"javascript:window.location ='" . url::base() . "';\"> ";
     }
 
 
