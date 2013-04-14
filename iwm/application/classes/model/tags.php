@@ -8,33 +8,38 @@ class Model_Tags extends Model_Base
 {
     public $_table_name = "tags";
 
+    public function getAllItemsForPhoto($id)
+    {
+        return ORM::factory('tags')->where('photo_id', '=', $id)->find_all();
+    }
+
     public function getOwner()
     {
-        $u=new Model_User();
+        $u = new Model_User();
         return $u->getItem($this->owner_id);
     }
 
     public function getPhoto()
     {
-        $p=new Model_Photos();
+        $p = new Model_Photos();
         return $p->getItem($this->photoID);
     }
 
 
     public function myPosts()
     {
-        $p=new Model_Posts();
-        return $p->newQuery()->where('tag_id','=',$this->id)->find_all();
+        $p = new Model_Posts();
+        return $p->newQuery()->where('tag_id', '=', $this->id)->find_all();
     }
 
     public function getAllPostsAfter($lastPost)
     {
-        $p=new Model_Posts();
+        $p = new Model_Posts();
 
-        $p=$p->newQuery();
-        $p=$p->where('tag_id','=',$this->id);
-        $p=$p->where('id','>',$lastPost);
-        $p=$p->order_by('id','ASC');
+        $p = $p->newQuery();
+        $p = $p->where('tag_id', '=', $this->id);
+        $p = $p->where('id', '>', $lastPost);
+        $p = $p->order_by('id', 'ASC');
 
         return $p->find_all();
     }

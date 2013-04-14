@@ -144,3 +144,10 @@ Route::set('User', '(user(/<action>(/<id>)))')
         'controller' => 'user',
         'action' => 'index',
     ));
+
+
+Route::set('Tag', '(tag(/<action>(/<id>)))')
+    ->defaults(array(
+        'controller' => 'tag',
+        'action' => 'index',
+    ));
