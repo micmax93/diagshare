@@ -121,8 +121,18 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
 function closeWindow(id) {
     $('#' + id).css('display', 'none').remove();
     for (var i = 0; i < listaOkien.length; i++) {
-        if (listaOkien[i] == id)
+
+
+        if (listaOkien[i] == id) {
+            var name = listaOkien[i].substr(0, listaOkien[i].length - 7) + "_img";
+
+            if (contrast.hasOwnProperty(name))
+                delete contrast[name];
+            if (brightness.hasOwnProperty(name))
+                delete brightness[name];
+
             listaOkien.splice(i, 1);
+        }
 
 
     }
