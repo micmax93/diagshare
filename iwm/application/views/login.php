@@ -14,6 +14,18 @@ echo '
  <script src="' . URL::base() . 'application/views/js/setup.js"></script>
 </head>
 <body onload="setup()" >
+<script type="text/javascript">
+$(function(){
+
+$("#passwordInput").keyup(function (e) {
+    if (e.which == 13) {
+        authorizeUser();
+    }
+ });
+
+});
+
+</script>
 <div onmouseover="javascript:$(this).draggable()" class="imageWindow ui-draggable" id="Login_window" onmousedown="firstPlanWindow(\'Login_window\');" photoid="-1" style="top: 20px;z-index: 1;">
 <div class="titleBarActive" onmousedown="firstPlanWindow(\'Login_window\');" id="Login_title">
 <p>Logowanie</p></div>
