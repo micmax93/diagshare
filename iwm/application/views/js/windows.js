@@ -49,6 +49,10 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         '       </div>' +
         '   </div>' +
         '</div>' +
+        '<script type="text/javascript">' +
+        '   document.getElementById(\'' + id + '_grid\').addEventListener(\'dblclick\',' +
+        '   function(e) { gridClicked(e,this.id); }, false); ' +
+        '</script>' +
         '');
     // Obliczenie skali okna
     var scale = 1;

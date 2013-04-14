@@ -58,5 +58,23 @@ function updateTag(id, value) {
     alert(id + ' :' + value);
 }
 
+
+/**
+ * gridClicked()
+ * Ustawia tag w miejscu kliknięcia na grid
+ * @param e
+ * @param id
+ */
+function gridClicked(e, id) {
+    var x = e.pageX - $(e.target).offset().left;
+    var y = e.pageY - $(e.target).offset().top;
+
+    var ratioX = $(e.target.parentNode).attr('basicHeight') / parseFloat($(e.target.parentNode).height());
+    var ratioY = $(e.target.parentNode).attr('basicWidth') / parseFloat($(e.target.parentNode).width());
+
+    addTag(e.target.parentNode.id, e.target.parentNode.id + '_tag' + Math.floor(Math.random() * 1000), y, x, "Elo");
+//    alert(x * ratioX + " " + y * ratioY);
+}
+
 //var h = parseFloat(this.style.top) / parseFloat(grid.height());
 //var w = parseFloat(this.style.left) / parseFloat(grid.width());
