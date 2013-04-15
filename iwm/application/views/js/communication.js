@@ -96,7 +96,6 @@ function addTags(photoId, canvasId) {
  */
 function tagsReceived(v, gridId) {
     for (var i = 0; i < v.length; i++) {
-        alert(v[i]["id"]);
         addTag(gridId, "tag_" + v[i]["id"], v[i]["y"] + "px", v[i]["x"] + "px", v[i]["title"]);
     }
 

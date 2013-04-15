@@ -13,6 +13,20 @@ class Model_Tags extends Model_Base
         return ORM::factory('tags')->where('photo_id', '=', $id)->find_all();
     }
 
+    public function setTag($id, $photoId, $ownerId, $title, $x, $y)
+    {
+        if ($id != 0)
+            $tag = ORM::factory('tags')->where('id', '=', $id)->find();
+        else
+            $tag = ORM::factory('tags');
+
+        $tag->photo_id = $photoId;
+        $tag->owner_id = $ownerId;
+        $tag->title = $title;
+        $tag->x = $x;
+        $tag->y = $y;
+    }
+
     public function getOwner()
     {
         $u = new Model_User();
@@ -22,7 +36,7 @@ class Model_Tags extends Model_Base
     public function getPhoto()
     {
         $p = new Model_Photos();
-        return $p->getItem($this->photoID);
+        return $p->getItem($this->photoId);
     }
 
 
