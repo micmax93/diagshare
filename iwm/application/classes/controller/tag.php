@@ -17,6 +17,7 @@ class Controller_Tag extends IwMController
 
         $mtag = new Model_Tags();
         $tags = $mtag->getAllItemsForPhoto($id);
+        $tags_arr = array();
         foreach ($tags as $tag) {
             $tags_arr[] = array(
                 'id' => $tag->id,

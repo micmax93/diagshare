@@ -39,16 +39,6 @@ function addTag(parentId, id, top, left, content) {
     }).attr('basicTop', top).attr('basicLeft', left);
 }
 
-/**
- * addTags()
- * Zleca pobranie informacji o tagach przynależnych do danego zdjęcia i naniesienie ich na kanwę.
- * @param photoId
- * @param canvas
- */
-function addTags(photoId,canvas)
-{
-
-}
 
 /**
  * fixTagsPositions()

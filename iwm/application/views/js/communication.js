@@ -50,8 +50,8 @@ function roomsReceived(data) {
 
     $(function () {
         $("#rooms").accordion({
-            collapsible: true,
-            autoHeight: true
+            collapsible:true,
+            autoHeight:true
         });
     });
 
@@ -69,7 +69,33 @@ function imageReceived(v) {
 }
 
 
-function tagsReceived(v) {
+/**
+ * addTags()
+ * Zleca pobranie tagów dla zdjęcia.
+ * @param photoId
+ * @param canvasId
+ */
+function addTags(photoId, canvasId) {
+    var data;
+    $.ajax({
+        dataType:"json",
+        url:"index.php/tag/getAll/" + photoId,
+        data:data,
+        success:function (v) {
+            tagsReceived(v, canvasId);
+        }
+    });
+
+}
+
+/**
+ * tagsReceived()
+ * Funkcja po otrzymaniu danych o tagach zaaplikuje je do zdjęcia
+ *
+ * @param v
+ */
+function tagsReceived(v, canvasId) {
+    alert(v["photoId"]);
 
 }
 

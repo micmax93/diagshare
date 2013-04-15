@@ -69,7 +69,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title' }).css('top', (listaOkien.length * 20)).width(width * rowSize * scale).height(height * scale * rows + 20);
+    $('#' + id + '_window').draggable({opacity:0.8, containment:"parent", handle:'#' + id + '_title' }).css('top', (listaOkien.length * 20)).width(width * rowSize * scale).height(height * scale * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rows).attr('basicHeight', height * rows).attr('basicWidth', width * rowSize);
 
 
@@ -104,15 +104,13 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     });
 
     // Wyświetl tagi przynależne do zdjęcia.
-    addTags(photoId,canvasId);
-
+    addTags(photoId, id + '_img');
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
-    $('#' + id + '_grid').draggable({cursor: "move"});
+    $('#' + id + '_grid').draggable({cursor:"move"});
     $('#' + id + '_viewport').css('z-index', 0);
     $('#' + id + '_window').css('z-index', 1);
 
-    //addTag(id + '_grid',id+'_tag',100,100,id+'_tag');
 }
 
 /**
@@ -196,10 +194,10 @@ function showHideOrLoad(id, name) {
     if (!el) {
         var data;
         $.ajax({
-            dataType: "json",
-            url: base_url + "index.php/image/get/" + id,
-            data: data,
-            success: imageReceived
+            dataType:"json",
+            url:"index.php/image/get/" + id,
+            data:data,
+            success:imageReceived
         });
     }
     else {
@@ -225,7 +223,7 @@ function showHideOrLoad(id, name) {
  */
 function menuRoll(thing) {
     $('#' + thing).animate({
-        height: 'toggle'
+        height:'toggle'
     }, 250, function () {
 
     });
