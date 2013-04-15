@@ -1,6 +1,6 @@
 #!/php -q
 <?php
-require_once("websocket.server.php");
+require_once("ws_lib/websocket.server.php");
 require("manager.php");
 
 

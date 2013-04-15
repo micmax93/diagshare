@@ -69,6 +69,11 @@ function imageReceived(v) {
 }
 
 
+function tagsReceived(v) {
+
+}
+
+
 /**
  * sendChatMessage()
  * Wysyła dane z czatu

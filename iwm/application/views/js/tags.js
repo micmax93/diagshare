@@ -40,6 +40,17 @@ function addTag(parentId, id, top, left, content) {
 }
 
 /**
+ * addTags()
+ * Zleca pobranie informacji o tagach przynależnych do danego zdjęcia i naniesienie ich na kanwę.
+ * @param photoId
+ * @param canvas
+ */
+function addTags(photoId,canvas)
+{
+
+}
+
+/**
  * fixTagsPositions()
  * Naprawia pozycje tagów w trakcie zoomowania
  * @param gridId

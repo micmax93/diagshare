@@ -103,6 +103,9 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         zoom(id + '_grid', ((delta > 0) ? 1.2 : 0.8));
     });
 
+    // Wyświetl tagi przynależne do zdjęcia.
+    addTags(photoId,canvasId);
+
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
     $('#' + id + '_grid').draggable({cursor: "move"});

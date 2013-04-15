@@ -32,7 +32,7 @@
                     socket.close();
                     socket = null;
                 }
-                var host = "ws://" + window.location.host + ":12345/echo";
+                var host = "wss://" + window.location.host + ":12345/echo";
                 try {
                     socket = createSocket(host);
                     log('WebSocket - status ' + socket.readyState);
