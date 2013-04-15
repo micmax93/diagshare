@@ -56,7 +56,6 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         '');
     // Obliczenie skali okna
     var scale = 1;
-    var ratio = (height * rows) / (width * rowSize);
     var maxWidth = 0.7 * screen.width;
     var maxHeight = 0.7 * screen.height;
 
@@ -70,7 +69,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     listaOkien.push(id + '_window');
 
     $('#' + id + '_window').draggable({opacity:0.8, containment:"parent", handle:'#' + id + '_title' }).css('top', (listaOkien.length * 20)).width(width * rowSize * scale).height(height * scale * rows + 20);
-    $('#' + id + '_grid').width(width * rowSize).height(height * rows).attr('basicHeight', height * rows).attr('basicWidth', width * rowSize);
+    $('#' + id + '_grid').width(width * rowSize).height(height * rows).attr('basicHeight', height * rows).attr('basicWidth', width * rowSize).attr('zoom',1);
 
 
     tc = addCanvas(id + '_grid', id + '_img', width * rowSize, height * rows);

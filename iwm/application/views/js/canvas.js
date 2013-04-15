@@ -15,7 +15,7 @@
  * @return {HTMLElement}
  */
 function addCanvas(parentId, id, width, height) {
-    var newCanvas = $('<canvas/>', {'id': id});
+    var newCanvas = $('<canvas/>', {'id':id});
     newCanvas.className = "imageCanvas";
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
@@ -80,6 +80,7 @@ function zoom(id, scale) {
     // Ograniczenie skalowania
     if (((grid.height() < 150) || (grid.width() < 150)) && (scale < 1)) return;
     if (((grid.height() > 8000) || (grid.width() > 8000)) && (scale > 1)) return;
+    grid.attr('zoom', grid.attr('zoom') * scale);
 
     fixTagsPositions(id, scale);
 
@@ -190,10 +191,13 @@ function canvasRevert(id) {
     contrast[grid.id] = 0;
     brightness[grid.id] = 0;
     var canvases = grid.getElementsByTagName("canvas");
+    fixTagsPositions(grid.id, 1 / ($(grid).attr('zoom')));
+    $(grid).attr('zoom', 1);
     for (var i = 0; i < canvases.length; i++) {
         Caman('#' + canvases[i].id, function () {
             this.revert();
         });
     }
+
 
 }
