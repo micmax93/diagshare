@@ -26,7 +26,7 @@ function tag(tagId, Tagtop, Tagleft, Tagcontent) {
  */
 function addTag(parentId, id, top, left, content) {
     $('#' + parentId).append('<div class="imageTag" id="' + id + '"><p>' + content + '</p></div>');
-    $('#' + id).css('top', top).css('left', left).draggable({opacity: 0.6}).dblclick(function () {
+    $('#' + id).css('top', top).css('left', left).draggable({opacity:0.6}).dblclick(function () {
         if ($(this).hasClass("in-edit")) {
             this.innerHTML = "<p>" + this.childNodes[0].value + "</p>";
             $(this).removeClass("in-edit");
@@ -73,8 +73,8 @@ function gridClicked(e, id) {
     var ratioX = $(e.target.parentNode).attr('basicHeight') / parseFloat($(e.target.parentNode).height());
     var ratioY = $(e.target.parentNode).attr('basicWidth') / parseFloat($(e.target.parentNode).width());
 
-    addTag(e.target.parentNode.id, e.target.parentNode.id + '_tag' + Math.floor(Math.random() * 1000), y, x, "Elo");
-//    alert(x * ratioX + " " + y * ratioY);
+//    addTag(e.target.parentNode.id, e.target.parentNode.id + '_tag' + Math.floor(Math.random() * 1000), y, x, "Elo");
+
 }
 
 //var h = parseFloat(this.style.top) / parseFloat(grid.height());

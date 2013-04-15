@@ -104,7 +104,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     });
 
     // Wyświetl tagi przynależne do zdjęcia.
-    addTags(photoId, id + '_img');
+    addTags(photoId, id + '_grid');
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
     $('#' + id + '_grid').draggable({cursor:"move"});

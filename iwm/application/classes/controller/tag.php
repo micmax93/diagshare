@@ -24,8 +24,8 @@ class Controller_Tag extends IwMController
                 'photo_id' => $tag->photo_id,
                 'owner_id' => $tag->owner_id,
                 'title' => $tag->title,
-                'x' => $tag->id,
-                'y' => $tag->id,
+                'x' => $tag->x,
+                'y' => $tag->y,
 
             );
 

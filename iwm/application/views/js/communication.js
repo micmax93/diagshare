@@ -29,7 +29,6 @@ function roomsReceived(data) {
 
             for (var key in photos) {
                 list += '       <li>';
-                //list += '           <a href="javascript:showHide(\'' + photo + '_window\');">' + photo + '</a>';
                 list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');">' + key + '</a>';
                 list += '       </li>';
 
@@ -93,9 +92,14 @@ function addTags(photoId, canvasId) {
  * Funkcja po otrzymaniu danych o tagach zaaplikuje je do zdjęcia
  *
  * @param v
+ * @param gridId
  */
-function tagsReceived(v, canvasId) {
-    alert(v["photoId"]);
+function tagsReceived(v, gridId) {
+    for (var i = 0; i < v.length; i++) {
+        alert(v[i]["id"]);
+        addTag(gridId, "tag_" + v[i]["id"], v[i]["y"] + "px", v[i]["x"] + "px", v[i]["title"]);
+    }
+
 
 }
 
