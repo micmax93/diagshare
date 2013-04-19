@@ -30,7 +30,7 @@ echo '
         <h1>diagShare </h1>
         <!--<button onclick="alert(JSON.stringify(getBoardState()));">get</button>
         <button onclick="setBoardState();">set</button>-->
-        <a href="index.php/user/logout" class="sidebarButton">Wyloguj</a>
+        <a href="index.php/user/logout" class="sidebarButton">Logout</a>
         <div id="roomList">
         ' . $room . '
         </div>
@@ -38,7 +38,7 @@ echo '
         ' . $chat . '
         </div>
         <div id="chatControl">
-    <input type="text" id="chatInput"><button onclick="sendChatMessage()">Wyślij</button>
+    <input type="text" id="chatInput"><button onclick="sendChatMessage()">Send</button>
     </div>
 
     </div>

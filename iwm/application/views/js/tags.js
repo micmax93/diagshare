@@ -26,17 +26,21 @@ function tag(tagId, Tagtop, Tagleft, Tagcontent) {
  */
 function addTag(parentId, id, top, left, content) {
     $('#' + parentId).append('<div class="imageTag" id="' + id + '"><p>' + content + '</p></div>');
-    $('#' + id).css('top', top).css('left', left).draggable({opacity:0.6}).dblclick(function () {
-        if ($(this).hasClass("in-edit")) {
-            this.innerHTML = "<p>" + this.childNodes[0].value + "</p>";
-            $(this).removeClass("in-edit");
-            updateTag(id, this.childNodes[0].innerHTML);
-        }
-        else {
-            $(this).addClass("in-edit");
-            this.innerHTML = '<input value="' + this.childNodes[0].innerHTML + '">';
-        }
-    }).attr('basicTop', top).attr('basicLeft', left);
+    $('#' + id).css('top', top).css('left', left).draggable({opacity: 0.6, stop: function () {
+        updateTagPosition(id);
+    }}).dblclick(function () {
+            if ($(this).hasClass("in-edit")) {
+                this.innerHTML = "<p>" + this.childNodes[0].value + "</p>";
+                $(this).removeClass("in-edit");
+                updateTagText(id, this.childNodes[0].innerHTML);
+            }
+            else {
+                $(this).addClass("in-edit");
+                this.innerHTML = '<input value="' + this.childNodes[0].innerHTML + '" id="' + id + '_text"><button onclick="updateTagTextHideEdit(\'' + id + '\');"><img src="application/views/img/tick.png"></button>' +
+                    '<button onclick="deleteTag(\'' + id + '\');"><img src="application/views/img/remove.png"></button>';
+
+            }
+        }).attr('basicTop', top).attr('basicLeft', left);
 }
 
 
@@ -54,9 +58,45 @@ function fixTagsPositions(gridId, scale) {
     });
 }
 
-
-function updateTag(id, value) {
+/**
+ * updateTagText()
+ * Aktualizuje tytuł tagu
+ * @param id
+ * @param value
+ */
+function updateTagText(id, value) {
     alert(id + ' :' + value);
+}
+
+/**
+ * updateTagPosition()
+ * @param id
+ * @param top
+ * @param left
+ */
+function updateTagPosition(id) {
+    var el = document.getElementById(id);
+
+}
+
+/**
+ * deleteTag()
+ * @param id
+ */
+function deleteTag(id) {
+
+}
+
+/**
+ * updateTagTextHideEdit()
+ * Aktualizuje tytuł tagu i zamyka pole edycji.
+ * @param id
+ */
+function updateTagTextHideEdit(id) {
+    var input = document.getElementById(id + '_text');
+    input.parentNode.innerHTML = "<p>" + input.value + "</p>";
+    $('#' + id).removeClass("in-edit");
+    updateTagText(id, input.value);
 }
 
 
@@ -73,7 +113,7 @@ function gridClicked(e, id) {
     var ratioX = $(e.target.parentNode).attr('basicHeight') / parseFloat($(e.target.parentNode).height());
     var ratioY = $(e.target.parentNode).attr('basicWidth') / parseFloat($(e.target.parentNode).width());
 
-//    addTag(e.target.parentNode.id, e.target.parentNode.id + '_tag' + Math.floor(Math.random() * 1000), y, x, "Elo");
+//    addTag(e.target.parentNode.id, e.target.parentNode.id + '_tag' + Math.floor(Math.random() * 1000), y, x, "Tag nr. "+);
 
 }
 
