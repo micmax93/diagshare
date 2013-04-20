@@ -65,7 +65,14 @@ function fixTagsPositions(gridId, scale) {
  * @param value
  */
 function updateTagText(id, value) {
-    alert(id + ' :' + value);
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "index.php/tag/set/" + id.substr(4),
+        data: {title: value},
+        success: function (v) {
+        }
+    });
 }
 
 /**
@@ -76,7 +83,17 @@ function updateTagText(id, value) {
  */
 function updateTagPosition(id) {
     var el = document.getElementById(id);
-
+    var zoom = $(el.parentNode).attr('zoom');
+    var y = parseFloat(el.style.top) / zoom;
+    var x = parseFloat(el.style.left) / zoom;
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "index.php/tag/set/" + id.substr(4),
+        data: {x: x, y: y},
+        success: function (v) {
+        }
+    });
 }
 
 /**

@@ -61,6 +61,35 @@ class Controller_Tag extends IwMController
 
     }
 
+    public function action_set()
+    {
+
+        $id = $this->request->param("id");
+        preg_replace('/[\s\W]+/', '-', $id);
+        $tag = new Model_Tags();
+
+        if ($id != 0)
+            $tag = $tag->getItem($id);
+
+        $post = $this->request->post();
+        if (!empty($post['title'])) $tag->title = $post['title'];
+        if (!empty($post['photo_id'])) $tag->photo_id = $post['photo_id'];
+        if (!empty($post['owner_id'])) $tag->owner_id = $post['owner_id'];
+        if (!empty($post['x'])) $tag->x = $post['x'];
+        if (!empty($post['y'])) $tag->y = $post['y'];
+        if ($tag->save()) {
+            $res = array("id" => $tag->id, "status" => "ok");
+        } else {
+            $res = array("id" => $tag->id, "status" => "failed");
+        }
+
+        $this->response->headers('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($res));
+
+
+    }
+
     public function action_delete()
     {
         $id = $this->request->param("id");
