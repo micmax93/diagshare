@@ -83,17 +83,19 @@ function updateTagText(id, value) {
  */
 function updateTagPosition(id) {
     var el = document.getElementById(id);
+    var win = el.parentNode.parentNode.parentNode;
     var zoom = $(el.parentNode).attr('zoom');
     var y = parseFloat(el.style.top) / zoom;
     var x = parseFloat(el.style.left) / zoom;
-    $.ajax({
+
+    /*$.ajax({
         type: "POST",
         dataType: "json",
         url: "index.php/tag/set/" + id.substr(4),
-        data: {x: x, y: y},
+        data: {x: x, y: y, photo_id: $(win).attr('photoid'), title: el.},
         success: function (v) {
         }
-    });
+    });*/
 }
 
 /**
@@ -139,9 +141,25 @@ function updateTagTextHideEdit(id) {
 function gridClicked(e, id) {
     var x = e.pageX - $(e.target).offset().left;
     var y = e.pageY - $(e.target).offset().top;
+    var zoom = $(e.target.parentNode).attr('zoom');
+    var photoId = $(e.target.parentNode.parentNode.parentNode).attr('photoid');
+    x = parseInt(x / zoom);
+    y = parseInt(y / zoom);
 
-    var ratioX = $(e.target.parentNode).attr('basicHeight') / parseFloat($(e.target.parentNode).height());
-    var ratioY = $(e.target.parentNode).attr('basicWidth') / parseFloat($(e.target.parentNode).width());
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        url: "index.php/tag/set/0",
+        y: y,
+        x: x,
+        data: {x: x, y: y, id: 0, photo_id: photoId, title: "Tag"},
+        grid: e.target.parentNode.id,
+        success: function (v) {
+            if (v["status"] == "ok")
+                addTag(this.grid, "tag_" + v["id"], this.y * zoom, this.x * zoom, "Tag");
+        }
+    });
+
 
 //    addTag(e.target.parentNode.id, e.target.parentNode.id + '_tag' + Math.floor(Math.random() * 1000), y, x, "Tag nr. "+);
 

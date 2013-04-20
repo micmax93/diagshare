@@ -15,9 +15,10 @@ class Model_Tags extends Model_Base
 
     public function setTag($id, $photoId, $ownerId, $title, $x, $y)
     {
-        if ($id != 0)
+        if ($id != 0) {
+            if (ORM::factory('tags')->where('id', '=', $id)->count_all() == 0) return -1;
             $tag = ORM::factory('tags')->where('id', '=', $id)->find();
-        else
+        } else
             $tag = ORM::factory('tags');
 
         $tag->photo_id = $photoId;
@@ -25,6 +26,8 @@ class Model_Tags extends Model_Base
         $tag->title = $title;
         $tag->x = $x;
         $tag->y = $y;
+        $tag->save();
+        return $tag->id;
     }
 
     public function getOwner()
