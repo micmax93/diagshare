@@ -61,5 +61,24 @@ class Controller_Tag extends IwMController
 
     }
 
+    public function action_delete()
+    {
+        $id = $this->request->param("id");
+        preg_replace('/[\s\W]+/', '-', $id);
+
+        $mtag = new Model_Tags();
+        if ($mtag->deleteItem($id)) {
+            $res = array("id" => $id, "status" => "ok");
+        } else {
+            $res = array("id" => $id, "status" => "failed");
+        }
+
+        $this->response->headers('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($res));
+
+
+    }
+
 
 }

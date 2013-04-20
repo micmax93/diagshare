@@ -84,6 +84,19 @@ function updateTagPosition(id) {
  * @param id
  */
 function deleteTag(id) {
+    var tag = document.getElementById(id);
+    $.ajax({
+        dataType: "json",
+        url: "index.php/tag/delete/" + tag.id.substr(4),
+        tag: tag,
+        success: function (v) {
+            if (v["status"] == "ok") {
+                var tag = document.getElementById("tag_" + v["id"]);
+                tag.parentNode.removeChild(tag);
+            }
+
+        }
+    });
 
 }
 

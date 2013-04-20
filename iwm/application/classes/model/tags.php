@@ -1,4 +1,4 @@
-    <?php
+<?php
 /**
  * Created by JetBrains PhpStorm.
  * User: micmax93
@@ -56,5 +56,18 @@ class Model_Tags extends Model_Base
         $p = $p->order_by('id', 'ASC');
 
         return $p->find_all();
+    }
+
+    public function deleteItem($id)
+    {
+        if (ORM::factory('tags')->where('id', '=', $id)->count_all() == 0) return false;
+        $tag = ORM::factory('tags')->where('id', '=', $id)->find();
+        if (count($tag) == 0) return false;
+        $posts = $tag->myPosts();
+        foreach ($posts as $post) {
+            $post->delete();
+        }
+        $tag->delete();
+        return true;
     }
 }
