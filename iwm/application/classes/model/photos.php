@@ -64,4 +64,51 @@ class Model_Photos extends Model_Base
         }
         return $img;
     }
+
+    public function setPhoto($arr)
+    {
+        if ($arr["id"] != 0) {
+            if (ORM::factory('photos')->where('id', '=', $arr["id"])->count_all() == 0) return -1;
+            $item = ORM::factory('photos')->where('id', '=', $arr["id"])->find();
+        } else
+            $item = ORM::factory('photos');
+        foreach ($arr as $k => $v) {
+            if ($k != "id")
+                $item->$k = $v;
+        }
+        $item->save();
+        return $item->id;
+    }
+
+    /**
+     * Usuwa katalog
+     * @param $dir
+     * @return bool
+     */
+    function deleteDirectory($dir) {
+        if (!file_exists($dir)) return true;
+        if (!is_dir($dir) || is_link($dir)) return unlink($dir);
+        foreach (scandir($dir) as $item) {
+            if ($item == '.' || $item == '..') continue;
+            if (!deleteDirectory($dir . "/" . $item)) {
+                chmod($dir . "/" . $item, 0777);
+                if (!deleteDirectory($dir . "/" . $item)) return false;
+            };
+        }
+        return rmdir($dir);
+    }
+
+    public function deletePhoto($id)
+    {
+        if (ORM::factory('photos')->where('id', '=', $id)->count_all() == 0) return -1;
+        $photo = ORM::factory('photos')->where('id', '=', $id)->find();
+
+        $path = url::base(TRUE, 'http') . 'application/views/img/' . $photo->id . "." . $photo->filename;
+        $ret = $photo->deleteDirectory($path);
+
+        $photo->delete();
+
+        return $ret;
+    }
+
 }

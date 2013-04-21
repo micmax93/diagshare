@@ -508,7 +508,6 @@ SELECT pg_catalog.setval('patients_id_seq', 1, true);
 INSERT INTO photos VALUES (1, 1, 'xray.jpg', 'Prześwietlenie', 1, 1, 200, 200);
 INSERT INTO photos VALUES (11, 1, 'Katie_Melua_9_1600x1200_Wallpaper.jpg', 'Katie', 8, 6, 1600, 1200);
 INSERT INTO photos VALUES (14, 1, 'Skull_x-ray.jpg', 'Czaszka', 3, 1, 648, 463);
-INSERT INTO photos VALUES (13, 1, 'monica.jpeg', 'Monica', 4, 1, 800, 533);
 
 
 --
@@ -853,7 +852,7 @@ ALTER TABLE ONLY tags
 --
 
 ALTER TABLE ONLY tags
-    ADD CONSTRAINT tags_photo_id_fkey FOREIGN KEY (photo_id) REFERENCES photos(id);
+    ADD CONSTRAINT tags_photo_id_fkey FOREIGN KEY (photo_id) REFERENCES photos(id) ON DELETE CASCADE;
 
 
 --

@@ -24,4 +24,22 @@ class Controller_Image extends IwMController
         $this->response->body(json_encode($image));
     }
 
+    public function action_delete()
+    {
+        $id = $this->request->param("id");
+        preg_replace('/[\s\W]+/', '-', $id);
+        $photos = new Model_Photos();
+        $photos->deletePhoto($id);
+
+        if ($photos->deletePhoto($id)) {
+            $res = array("status" => "ok");
+        } else {
+            $res = array("status" => "failed");
+        }
+
+        $this->response->headers('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($res));
+    }
+
 }
