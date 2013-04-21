@@ -7,7 +7,7 @@
  */
 
 function userAuthorized(v) {
-    if(v["status"] == "ok")
+    if (v["status"] == "ok")
         window.location = "authorized";
 }
 
@@ -23,4 +23,10 @@ function authorizeUser() {
 }
 
 
-
+function popupWindow(title, url) {
+    var newWindow = window.open(url, title, 'height=400,width=400,toolbar=no,scrollbars=no,location=no,resizable =yes');
+    if (window.focus) {
+        newWindow.focus()
+    }
+    return false;
+}

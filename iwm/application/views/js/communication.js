@@ -33,7 +33,7 @@ function roomsReceived(data) {
                 list += '       </li>';
 
             }
-            list += '<li class="photoListItemAdd"><a href="javascript:addPhoto(\'' + patient + '\');">Add...</a></li>';
+            list += '<li class="photoListItemAdd"><a href="javascript:popupWindow(\'Image Upload\',\'index.php/image/load/' + patient + '\');">Add...</a></li>';
 
 
             list += '       </ul>';

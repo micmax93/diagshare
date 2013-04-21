@@ -24,6 +24,13 @@ class Controller_Image extends IwMController
         $this->response->body(json_encode($image));
     }
 
+    public function action_load()
+    {
+        $widok = View::factory('loadimg');
+        $widok->set('patientId', 0);
+        $this->response->body($widok->render());
+    }
+
     public function action_delete()
     {
         $id = $this->request->param("id");
@@ -41,5 +48,6 @@ class Controller_Image extends IwMController
         $this->response->headers('Content-Type', 'application/json');
         $this->response->body(json_encode($res));
     }
+
 
 }
