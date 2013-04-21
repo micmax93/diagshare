@@ -4,25 +4,7 @@
 
 -- Dumped from database version 9.1.9
 -- Dumped by pg_dump version 9.1.9
--- Started on 2013-04-21 13:42:57 CEST
-
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
---
--- TOC entry 1979 (class 1262 OID 16384)
--- Name: iwm; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE iwm WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'pl_PL.UTF-8' LC_CTYPE = 'pl_PL.UTF-8';
-
-
-ALTER DATABASE iwm OWNER TO postgres;
-
-\connect iwm
+-- Started on 2013-04-21 14:48:30 CEST
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -50,8 +32,8 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 SET search_path = public, pg_catalog;
 
 --
--- TOC entry 190 (class 1255 OID 16385)
--- Dependencies: 6 540
+-- TOC entry 190 (class 1255 OID 16700)
+-- Dependencies: 540 6
 -- Name: xor(boolean, boolean); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -69,7 +51,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 162 (class 1259 OID 16544)
+-- TOC entry 161 (class 1259 OID 16701)
 -- Dependencies: 1904 1905 6
 -- Name: patients; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -88,8 +70,8 @@ CREATE TABLE patients (
 ALTER TABLE public.patients OWNER TO postgres;
 
 --
--- TOC entry 163 (class 1259 OID 16552)
--- Dependencies: 6 162
+-- TOC entry 162 (class 1259 OID 16709)
+-- Dependencies: 6 161
 -- Name: patients_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -105,7 +87,7 @@ ALTER TABLE public.patients_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 1983 (class 0 OID 0)
--- Dependencies: 163
+-- Dependencies: 162
 -- Name: patients_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -113,7 +95,7 @@ ALTER SEQUENCE patients_id_seq OWNED BY patients.id;
 
 
 --
--- TOC entry 164 (class 1259 OID 16554)
+-- TOC entry 163 (class 1259 OID 16711)
 -- Dependencies: 1907 6
 -- Name: photos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -133,8 +115,8 @@ CREATE TABLE photos (
 ALTER TABLE public.photos OWNER TO postgres;
 
 --
--- TOC entry 165 (class 1259 OID 16561)
--- Dependencies: 164 6
+-- TOC entry 164 (class 1259 OID 16718)
+-- Dependencies: 163 6
 -- Name: photos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -150,7 +132,7 @@ ALTER TABLE public.photos_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 1984 (class 0 OID 0)
--- Dependencies: 165
+-- Dependencies: 164
 -- Name: photos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -158,7 +140,7 @@ ALTER SEQUENCE photos_id_seq OWNED BY photos.id;
 
 
 --
--- TOC entry 166 (class 1259 OID 16563)
+-- TOC entry 165 (class 1259 OID 16720)
 -- Dependencies: 1910 6
 -- Name: posts; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -176,8 +158,8 @@ CREATE TABLE posts (
 ALTER TABLE public.posts OWNER TO postgres;
 
 --
--- TOC entry 167 (class 1259 OID 16570)
--- Dependencies: 6 166
+-- TOC entry 166 (class 1259 OID 16727)
+-- Dependencies: 6 165
 -- Name: posts_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -193,7 +175,7 @@ ALTER TABLE public.posts_id_seq OWNER TO postgres;
 
 --
 -- TOC entry 1985 (class 0 OID 0)
--- Dependencies: 167
+-- Dependencies: 166
 -- Name: posts_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -201,7 +183,7 @@ ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 
 
 --
--- TOC entry 161 (class 1259 OID 16414)
+-- TOC entry 167 (class 1259 OID 16729)
 -- Dependencies: 6
 -- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -217,7 +199,7 @@ CREATE SEQUENCE roles_id_seq
 ALTER TABLE public.roles_id_seq OWNER TO postgres;
 
 --
--- TOC entry 168 (class 1259 OID 16572)
+-- TOC entry 168 (class 1259 OID 16731)
 -- Dependencies: 1911 6
 -- Name: roles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -232,7 +214,7 @@ CREATE TABLE roles (
 ALTER TABLE public.roles OWNER TO postgres;
 
 --
--- TOC entry 169 (class 1259 OID 16579)
+-- TOC entry 169 (class 1259 OID 16738)
 -- Dependencies: 6
 -- Name: roles_users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -246,7 +228,7 @@ CREATE TABLE roles_users (
 ALTER TABLE public.roles_users OWNER TO postgres;
 
 --
--- TOC entry 170 (class 1259 OID 16582)
+-- TOC entry 170 (class 1259 OID 16741)
 -- Dependencies: 6
 -- Name: rooms; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -261,7 +243,7 @@ CREATE TABLE rooms (
 ALTER TABLE public.rooms OWNER TO postgres;
 
 --
--- TOC entry 171 (class 1259 OID 16585)
+-- TOC entry 171 (class 1259 OID 16744)
 -- Dependencies: 170 6
 -- Name: rooms_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -286,7 +268,7 @@ ALTER SEQUENCE rooms_id_seq OWNED BY rooms.id;
 
 
 --
--- TOC entry 172 (class 1259 OID 16587)
+-- TOC entry 172 (class 1259 OID 16746)
 -- Dependencies: 1913 1914 1915 6
 -- Name: tags; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -304,8 +286,8 @@ CREATE TABLE tags (
 ALTER TABLE public.tags OWNER TO postgres;
 
 --
--- TOC entry 173 (class 1259 OID 16593)
--- Dependencies: 6 172
+-- TOC entry 173 (class 1259 OID 16752)
+-- Dependencies: 172 6
 -- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -329,7 +311,7 @@ ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
 
 
 --
--- TOC entry 174 (class 1259 OID 16595)
+-- TOC entry 174 (class 1259 OID 16754)
 -- Dependencies: 6
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -348,7 +330,7 @@ CREATE TABLE users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 175 (class 1259 OID 16601)
+-- TOC entry 175 (class 1259 OID 16760)
 -- Dependencies: 6 174
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -373,7 +355,7 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- TOC entry 176 (class 1259 OID 16603)
+-- TOC entry 176 (class 1259 OID 16762)
 -- Dependencies: 1918 1919 1920 1921 6
 -- Name: views; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -394,8 +376,8 @@ CREATE TABLE views (
 ALTER TABLE public.views OWNER TO postgres;
 
 --
--- TOC entry 177 (class 1259 OID 16610)
--- Dependencies: 176 6
+-- TOC entry 177 (class 1259 OID 16769)
+-- Dependencies: 6 176
 -- Name: views_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -419,8 +401,8 @@ ALTER SEQUENCE views_id_seq OWNED BY views.id;
 
 
 --
--- TOC entry 1906 (class 2604 OID 16612)
--- Dependencies: 163 162
+-- TOC entry 1906 (class 2604 OID 16771)
+-- Dependencies: 162 161
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -428,8 +410,8 @@ ALTER TABLE ONLY patients ALTER COLUMN id SET DEFAULT nextval('patients_id_seq':
 
 
 --
--- TOC entry 1908 (class 2604 OID 16613)
--- Dependencies: 165 164
+-- TOC entry 1908 (class 2604 OID 16772)
+-- Dependencies: 164 163
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -437,8 +419,8 @@ ALTER TABLE ONLY photos ALTER COLUMN id SET DEFAULT nextval('photos_id_seq'::reg
 
 
 --
--- TOC entry 1909 (class 2604 OID 16614)
--- Dependencies: 167 166
+-- TOC entry 1909 (class 2604 OID 16773)
+-- Dependencies: 166 165
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -446,7 +428,7 @@ ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regcl
 
 
 --
--- TOC entry 1912 (class 2604 OID 16615)
+-- TOC entry 1912 (class 2604 OID 16774)
 -- Dependencies: 171 170
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
@@ -455,7 +437,7 @@ ALTER TABLE ONLY rooms ALTER COLUMN id SET DEFAULT nextval('rooms_id_seq'::regcl
 
 
 --
--- TOC entry 1916 (class 2604 OID 16616)
+-- TOC entry 1916 (class 2604 OID 16775)
 -- Dependencies: 173 172
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
@@ -464,7 +446,7 @@ ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclas
 
 
 --
--- TOC entry 1917 (class 2604 OID 16617)
+-- TOC entry 1917 (class 2604 OID 16776)
 -- Dependencies: 175 174
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
@@ -473,7 +455,7 @@ ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regcl
 
 
 --
--- TOC entry 1922 (class 2604 OID 16618)
+-- TOC entry 1922 (class 2604 OID 16777)
 -- Dependencies: 177 176
 -- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
@@ -482,8 +464,8 @@ ALTER TABLE ONLY views ALTER COLUMN id SET DEFAULT nextval('views_id_seq'::regcl
 
 
 --
--- TOC entry 1959 (class 0 OID 16544)
--- Dependencies: 162 1975
+-- TOC entry 1958 (class 0 OID 16701)
+-- Dependencies: 161 1975
 -- Data for Name: patients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -492,7 +474,7 @@ INSERT INTO patients VALUES (1, 'Jan', '2013-03-24', 'CRITICAL', 'Ostry przypade
 
 --
 -- TOC entry 1990 (class 0 OID 0)
--- Dependencies: 163
+-- Dependencies: 162
 -- Name: patients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -500,19 +482,18 @@ SELECT pg_catalog.setval('patients_id_seq', 1, true);
 
 
 --
--- TOC entry 1961 (class 0 OID 16554)
--- Dependencies: 164 1975
+-- TOC entry 1960 (class 0 OID 16711)
+-- Dependencies: 163 1975
 -- Data for Name: photos; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 INSERT INTO photos VALUES (1, 1, 'xray.jpg', 'Prześwietlenie', 1, 1, 200, 200);
 INSERT INTO photos VALUES (11, 1, 'Katie_Melua_9_1600x1200_Wallpaper.jpg', 'Katie', 8, 6, 1600, 1200);
-INSERT INTO photos VALUES (14, 1, 'Skull_x-ray.jpg', 'Czaszka', 3, 1, 648, 463);
 
 
 --
 -- TOC entry 1991 (class 0 OID 0)
--- Dependencies: 165
+-- Dependencies: 164
 -- Name: photos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -520,8 +501,8 @@ SELECT pg_catalog.setval('photos_id_seq', 14, true);
 
 
 --
--- TOC entry 1963 (class 0 OID 16563)
--- Dependencies: 166 1975
+-- TOC entry 1962 (class 0 OID 16720)
+-- Dependencies: 165 1975
 -- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -529,7 +510,7 @@ SELECT pg_catalog.setval('photos_id_seq', 14, true);
 
 --
 -- TOC entry 1992 (class 0 OID 0)
--- Dependencies: 167
+-- Dependencies: 166
 -- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -537,7 +518,7 @@ SELECT pg_catalog.setval('posts_id_seq', 4, true);
 
 
 --
--- TOC entry 1965 (class 0 OID 16572)
+-- TOC entry 1965 (class 0 OID 16731)
 -- Dependencies: 168 1975
 -- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -547,7 +528,7 @@ INSERT INTO roles VALUES (1, 'login', 'Podstawowa rola umożliwiająca logowanie
 
 --
 -- TOC entry 1993 (class 0 OID 0)
--- Dependencies: 161
+-- Dependencies: 167
 -- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -555,7 +536,7 @@ SELECT pg_catalog.setval('roles_id_seq', 3, true);
 
 
 --
--- TOC entry 1966 (class 0 OID 16579)
+-- TOC entry 1966 (class 0 OID 16738)
 -- Dependencies: 169 1975
 -- Data for Name: roles_users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -564,7 +545,7 @@ INSERT INTO roles_users VALUES (7, 1);
 
 
 --
--- TOC entry 1967 (class 0 OID 16582)
+-- TOC entry 1967 (class 0 OID 16741)
 -- Dependencies: 170 1975
 -- Data for Name: rooms; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -582,7 +563,7 @@ SELECT pg_catalog.setval('rooms_id_seq', 1, true);
 
 
 --
--- TOC entry 1969 (class 0 OID 16587)
+-- TOC entry 1969 (class 0 OID 16746)
 -- Dependencies: 172 1975
 -- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -592,9 +573,6 @@ INSERT INTO tags VALUES (115, 1, 7, 'Kciuk prawej ręki', 110, 87);
 INSERT INTO tags VALUES (116, 1, 7, 'Kciuk lewej dłoni', 92, 93);
 INSERT INTO tags VALUES (122, 11, 7, 'Nos', 939, 387);
 INSERT INTO tags VALUES (120, 11, 7, 'Oko', 751, 189);
-INSERT INTO tags VALUES (123, 14, 7, 'Łeb', 278, 126);
-INSERT INTO tags VALUES (125, 14, 7, 'Łeb2 ', 251, 62);
-INSERT INTO tags VALUES (127, 14, 7, 'Reszta trupa', 381, 237);
 
 
 --
@@ -607,7 +585,7 @@ SELECT pg_catalog.setval('tags_id_seq', 127, true);
 
 
 --
--- TOC entry 1971 (class 0 OID 16595)
+-- TOC entry 1971 (class 0 OID 16754)
 -- Dependencies: 174 1975
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -627,7 +605,7 @@ SELECT pg_catalog.setval('users_id_seq', 7, true);
 
 
 --
--- TOC entry 1973 (class 0 OID 16603)
+-- TOC entry 1973 (class 0 OID 16762)
 -- Dependencies: 176 1975
 -- Data for Name: views; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -646,8 +624,8 @@ SELECT pg_catalog.setval('views_id_seq', 2, true);
 
 
 --
--- TOC entry 1924 (class 2606 OID 16620)
--- Dependencies: 162 162 1976
+-- TOC entry 1924 (class 2606 OID 16779)
+-- Dependencies: 161 161 1976
 -- Name: patients_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -656,8 +634,8 @@ ALTER TABLE ONLY patients
 
 
 --
--- TOC entry 1926 (class 2606 OID 16622)
--- Dependencies: 162 162 1976
+-- TOC entry 1926 (class 2606 OID 16781)
+-- Dependencies: 161 161 1976
 -- Name: patients_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -666,8 +644,8 @@ ALTER TABLE ONLY patients
 
 
 --
--- TOC entry 1930 (class 2606 OID 16624)
--- Dependencies: 166 166 1976
+-- TOC entry 1930 (class 2606 OID 16783)
+-- Dependencies: 165 165 1976
 -- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -676,8 +654,8 @@ ALTER TABLE ONLY posts
 
 
 --
--- TOC entry 1928 (class 2606 OID 16626)
--- Dependencies: 164 164 1976
+-- TOC entry 1928 (class 2606 OID 16785)
+-- Dependencies: 163 163 1976
 -- Name: primary_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -686,7 +664,7 @@ ALTER TABLE ONLY photos
 
 
 --
--- TOC entry 1932 (class 2606 OID 16628)
+-- TOC entry 1932 (class 2606 OID 16787)
 -- Dependencies: 168 168 1976
 -- Name: role_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -696,7 +674,7 @@ ALTER TABLE ONLY roles
 
 
 --
--- TOC entry 1934 (class 2606 OID 16630)
+-- TOC entry 1934 (class 2606 OID 16789)
 -- Dependencies: 169 169 169 1976
 -- Name: roles_users_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -706,7 +684,7 @@ ALTER TABLE ONLY roles_users
 
 
 --
--- TOC entry 1936 (class 2606 OID 16632)
+-- TOC entry 1936 (class 2606 OID 16791)
 -- Dependencies: 170 170 1976
 -- Name: rooms_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -716,7 +694,7 @@ ALTER TABLE ONLY rooms
 
 
 --
--- TOC entry 1938 (class 2606 OID 16634)
+-- TOC entry 1938 (class 2606 OID 16793)
 -- Dependencies: 170 170 1976
 -- Name: rooms_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -726,7 +704,7 @@ ALTER TABLE ONLY rooms
 
 
 --
--- TOC entry 1940 (class 2606 OID 16636)
+-- TOC entry 1940 (class 2606 OID 16795)
 -- Dependencies: 172 172 1976
 -- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -736,7 +714,7 @@ ALTER TABLE ONLY tags
 
 
 --
--- TOC entry 1942 (class 2606 OID 16638)
+-- TOC entry 1942 (class 2606 OID 16797)
 -- Dependencies: 174 174 1976
 -- Name: users_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -746,7 +724,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 1944 (class 2606 OID 16640)
+-- TOC entry 1944 (class 2606 OID 16799)
 -- Dependencies: 174 174 1976
 -- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -756,7 +734,7 @@ ALTER TABLE ONLY users
 
 
 --
--- TOC entry 1946 (class 2606 OID 16642)
+-- TOC entry 1946 (class 2606 OID 16801)
 -- Dependencies: 176 176 1976
 -- Name: views_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
@@ -766,8 +744,8 @@ ALTER TABLE ONLY views
 
 
 --
--- TOC entry 1947 (class 2606 OID 16643)
--- Dependencies: 162 174 1943 1976
+-- TOC entry 1947 (class 2606 OID 16802)
+-- Dependencies: 161 1943 174 1976
 -- Name: patients_owner_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -776,8 +754,8 @@ ALTER TABLE ONLY patients
 
 
 --
--- TOC entry 1948 (class 2606 OID 16648)
--- Dependencies: 162 1937 170 1976
+-- TOC entry 1948 (class 2606 OID 16807)
+-- Dependencies: 161 1937 170 1976
 -- Name: patients_room_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -786,8 +764,8 @@ ALTER TABLE ONLY patients
 
 
 --
--- TOC entry 1949 (class 2606 OID 16653)
--- Dependencies: 162 164 1925 1976
+-- TOC entry 1949 (class 2606 OID 16812)
+-- Dependencies: 163 1925 161 1976
 -- Name: photos_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -796,8 +774,8 @@ ALTER TABLE ONLY photos
 
 
 --
--- TOC entry 1950 (class 2606 OID 16658)
--- Dependencies: 1943 174 166 1976
+-- TOC entry 1950 (class 2606 OID 16817)
+-- Dependencies: 165 1943 174 1976
 -- Name: posts_owner_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -806,8 +784,8 @@ ALTER TABLE ONLY posts
 
 
 --
--- TOC entry 1951 (class 2606 OID 16663)
--- Dependencies: 162 166 1925 1976
+-- TOC entry 1951 (class 2606 OID 16822)
+-- Dependencies: 165 1925 161 1976
 -- Name: posts_patient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -816,8 +794,8 @@ ALTER TABLE ONLY posts
 
 
 --
--- TOC entry 1952 (class 2606 OID 16668)
--- Dependencies: 1939 166 172 1976
+-- TOC entry 1952 (class 2606 OID 16827)
+-- Dependencies: 1939 172 165 1976
 -- Name: posts_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -826,8 +804,8 @@ ALTER TABLE ONLY posts
 
 
 --
--- TOC entry 1953 (class 2606 OID 16673)
--- Dependencies: 170 1943 174 1976
+-- TOC entry 1953 (class 2606 OID 16832)
+-- Dependencies: 174 1943 170 1976
 -- Name: rooms_owner_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -836,8 +814,8 @@ ALTER TABLE ONLY rooms
 
 
 --
--- TOC entry 1954 (class 2606 OID 16678)
--- Dependencies: 172 174 1943 1976
+-- TOC entry 1954 (class 2606 OID 16837)
+-- Dependencies: 174 1943 172 1976
 -- Name: tags_owner_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -846,8 +824,8 @@ ALTER TABLE ONLY tags
 
 
 --
--- TOC entry 1955 (class 2606 OID 16683)
--- Dependencies: 172 164 1927 1976
+-- TOC entry 1955 (class 2606 OID 16842)
+-- Dependencies: 163 1927 172 1976
 -- Name: tags_photo_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -856,8 +834,8 @@ ALTER TABLE ONLY tags
 
 
 --
--- TOC entry 1956 (class 2606 OID 16688)
--- Dependencies: 176 174 1943 1976
+-- TOC entry 1956 (class 2606 OID 16847)
+-- Dependencies: 174 1943 176 1976
 -- Name: views_owner_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -866,8 +844,8 @@ ALTER TABLE ONLY views
 
 
 --
--- TOC entry 1957 (class 2606 OID 16693)
--- Dependencies: 176 164 1927 1976
+-- TOC entry 1957 (class 2606 OID 16852)
+-- Dependencies: 1927 163 176 1976
 -- Name: views_photo_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -887,7 +865,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-04-21 13:42:57 CEST
+-- Completed on 2013-04-21 14:48:30 CEST
 
 --
 -- PostgreSQL database dump complete
