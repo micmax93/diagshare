@@ -13,19 +13,17 @@ class Model_Tags extends Model_Base
         return ORM::factory('tags')->where('photo_id', '=', $id)->find_all();
     }
 
-    public function setTag($id, $photoId, $ownerId, $title, $x, $y)
+    public function setTag($arr)
     {
-        if ($id != 0) {
-            if (ORM::factory('tags')->where('id', '=', $id)->count_all() == 0) return -1;
-            $tag = ORM::factory('tags')->where('id', '=', $id)->find();
+        if ($arr["id"] != 0) {
+            if (ORM::factory('tags')->where('id', '=', $arr["id"])->count_all() == 0) return -1;
+            $tag = ORM::factory('tags')->where('id', '=', $arr["id"])->find();
         } else
             $tag = ORM::factory('tags');
-
-        $tag->photo_id = $photoId;
-        $tag->owner_id = $ownerId;
-        $tag->title = $title;
-        $tag->x = $x;
-        $tag->y = $y;
+        foreach ($arr as $k => $v) {
+            if ($k != "id")
+                $tag->$k = $v;
+        }
         $tag->save();
         return $tag->id;
     }

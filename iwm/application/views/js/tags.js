@@ -88,14 +88,14 @@ function updateTagPosition(id) {
     var y = parseFloat(el.style.top) / zoom;
     var x = parseFloat(el.style.left) / zoom;
 
-    /*$.ajax({
+    $.ajax({
         type: "POST",
         dataType: "json",
         url: "index.php/tag/set/" + id.substr(4),
-        data: {x: x, y: y, photo_id: $(win).attr('photoid'), title: el.},
+        data: {x: parseInt(x), y: parseInt(y)},
         success: function (v) {
         }
-    });*/
+    });
 }
 
 /**

@@ -68,21 +68,15 @@ class Controller_Tag extends IwMController
         preg_replace('/[\s\W]+/', '-', $id);
 
         $post = $this->request->post();
-        if (!empty($post['title'])) $tag["title"] = $post['title'];
-        if (!empty($post['photo_id'])) $tag["photo_id"] = $post['photo_id'];
-        if (!empty($post['owner_id'])) $tag["owner_id"] = $post['owner_id'];
-        else
+        $post["id"] = $id;
+        if (empty($post['owner_id']))
             $tag["owner_id"] = Auth::instance()->get_user()->id;
-        if (!empty($post['x'])) $tag["x"] = $post['x'];
-        if (!empty($post['y'])) $tag["y"] = $post['y'];
 
+        foreach ($post as $k => $v) {
+            $tag[$k] = $v;
+        }
         $mtag = new Model_Tags();
-        if (($id = $mtag->setTag($id, $tag["photo_id"],
-            $tag["owner_id"],
-            $tag["title"],
-            $tag["x"],
-            $tag["y"])) > 0
-        )
+        if (($id = $mtag->setTag($tag)) > 0)
             $res = array("id" => $id, "status" => "ok");
         else
             $res = array("status" => "failed");
