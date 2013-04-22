@@ -102,24 +102,70 @@ function tagsReceived(v, gridId) {
 
 }
 
+var chatType='tag';
+var chatId=3;
+var chatLast=0;
 
-/**
- * sendChatMessage()
- * Wysyła dane z czatu
- * @param data
- */
 function sendChatMessage() {
-    var mesg = document.getElementById('chatInput');
-    webSocket.send(mesg.value);
-    mesg.value = "";
+    var msg = document.getElementById('chatInput').value;
+    //webSocket.send(msg);
+    var data={};
+    data["type"]="tag";
+    data["id"]=3;
+    data["content"]=msg;
+    //jQuery.post( url [, data ] [, success(data, textStatus, jqXHR) ] [, dataType ] )
+    jQuery.post("index.php/chat/newpost",data);
+}
+
+function sendMsg(cmd,type,id)
+{
+    if(webSocket.isOpen())
+    {
+        var str='{"cmd":"'+cmd+'","type":"'+type+'","id":'+id+'}';
+        webSocket.send(str);
+    }
+
+}
+
+function register()
+{sendMsg('register','user','0');}
+function request(type,id)
+{sendMsg('request',type,id);}
+function ignore(type,id)
+{sendMsg('ignore',type,id);}
+
+function downloadPosts()
+{
+    var args={};
+    args['id']=chatId;
+    args['last']=chatLast;
+    jQuery.post("index.php/chat/"+chatType,args,function(data){
+
+        for(i=0;i<data.length;i++)
+        {
+            $('#chatList').append("<tr><td>" + data[i]['owner'] + ": " + data[i]['content'] + "</td></tr>");
+            chatLast=data[i]['id'];
+        }
+    });
+
+}
+
+function setChat(type,id)
+{
+    ignore(chatType,chatId);
+    chatType=type;
+    chatId=id;
+    chatLast=0;
+    request(chatType,chatId);
+    downloadPosts();
 }
 
 
 function setupWebSocket() {
 
-    webSocket = new WebSocket(wsUri);
+    webSocket = new WebSocket("ws://" + window.location.host + ":12345/echo");
     webSocket.onopen = function (evt) {
-
+        register();
     };
     webSocket.onclose = function (evt) {
         onClose(evt)
@@ -129,16 +175,28 @@ function setupWebSocket() {
     };
     webSocket.onerror = function (evt) {
         onError(evt);
+
+        //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        downloadPosts();
     };
+
+    //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    setChat('tag',3);
 }
+
+
 
 function onClose(evt) {
     alert('Rozłączono!');
 }
 function onMessage(evt) {
-    //alert(evt.data);
-    $('#chatList').append("<tr><td>" + evt.data + "</td></tr>");
-    //webSocket.close();
+    //$('#chatList').append("<tr><td>" + evt.data + "</td></tr>");
+    data = jQuery.parseJSON(evt.data);
+    if((data['type']==chatType)&&(data['id']==chatId))
+    {
+        downloadPosts();
+    }
+    //TODO odczytanie rodzaju zasobu
 }
 function onError(evt) {
     alert('Błąd czatu: ' + evt.data);
