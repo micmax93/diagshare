@@ -11,13 +11,16 @@ echo '
 </div>
 <br>
     <script type="text/javascript">
-    var data;
+    function loadRooms()
+    {
+        var data;
         $.ajax({
             dataType: "json",
             url: "'.url::base(TRUE, 'http').'index.php/room/get",
             data: data,
             success: roomsReceived
         });
+    }
     </script>
 
 ';

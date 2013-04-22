@@ -17,6 +17,7 @@ function roomsReceived(data) {
 
     var list = '';
     var lid = 0;
+    document.getElementById('roomList').innerHTML = "<div id=\"rooms\"></div>";
     $.each(data, function (room, patients) {
         list += '<h3>' + room + '</h3>';
         list += '<div class="rooms"  style="height:100%;">';

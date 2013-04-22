@@ -10,7 +10,17 @@ echo '
 </head>
 <body>
 <h1>Upload image</h1>
-'.$patientId.'
+';
+if (isset($message)) echo $message;
+if (!isset($loading))
+    echo '
+<form enctype="multipart/form-data" method="post">
+                <input type="text" size="32" name="img_title" placeholder="title"><br>
+                <input type="file" size="32" name="img_upload" value=""><br>
+                <input type="text" name="patient_id" value="' . $patientId . '" style="display:none;visibility:hidden;">
+                <input type="submit" value="Upload">
+</form>';
+echo '
 </body>
 </html> ';
 

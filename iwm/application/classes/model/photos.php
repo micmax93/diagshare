@@ -77,7 +77,7 @@ class Model_Photos extends Model_Base
                 $item->$k = $v;
         }
         $item->save();
-        return $item->id;
+        return $item;
     }
 
     /**
@@ -85,7 +85,8 @@ class Model_Photos extends Model_Base
      * @param $dir
      * @return bool
      */
-    function deleteDirectory($dir) {
+    function deleteDirectory($dir)
+    {
         if (!file_exists($dir)) return true;
         if (!is_dir($dir) || is_link($dir)) return unlink($dir);
         foreach (scandir($dir) as $item) {
@@ -93,7 +94,8 @@ class Model_Photos extends Model_Base
             if (!deleteDirectory($dir . "/" . $item)) {
                 chmod($dir . "/" . $item, 0777);
                 if (!deleteDirectory($dir . "/" . $item)) return false;
-            };
+            }
+            ;
         }
         return rmdir($dir);
     }
