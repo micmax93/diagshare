@@ -61,5 +61,52 @@ class Controller_Tag extends IwMController
 
     }
 
+    public function action_set()
+    {
+
+        $id = $this->request->param("id");
+        preg_replace('/[\s\W]+/', '-', $id);
+
+        $post = $this->request->post();
+        $post["id"] = $id;
+        if (empty($post['owner_id']))
+            $tag["owner_id"] = Auth::instance()->get_user()->id;
+
+        foreach ($post as $k => $v) {
+            $tag[$k] = $v;
+        }
+        $mtag = new Model_Tags();
+        if (($id = $mtag->setTag($tag)) > 0)
+            $res = array("id" => $id, "status" => "ok");
+        else
+            $res = array("status" => "failed");
+
+
+        $this->response->headers('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($res));
+
+
+    }
+
+    public function action_delete()
+    {
+        $id = $this->request->param("id");
+        preg_replace('/[\s\W]+/', '-', $id);
+
+        $mtag = new Model_Tags();
+        if ($mtag->deleteItem($id)) {
+            $res = array("id" => $id, "status" => "ok");
+        } else {
+            $res = array("id" => $id, "status" => "failed");
+        }
+
+        $this->response->headers('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($res));
+
+
+    }
+
 
 }

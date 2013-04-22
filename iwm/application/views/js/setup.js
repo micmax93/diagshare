@@ -8,5 +8,5 @@
 
 function setup() {
     setupWebSocket();
-
+    loadRooms();
 }

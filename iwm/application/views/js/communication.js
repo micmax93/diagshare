@@ -17,22 +17,26 @@ function roomsReceived(data) {
 
     var list = '';
     var lid = 0;
+    document.getElementById('roomList').innerHTML = "<div id=\"rooms\"></div>";
     $.each(data, function (room, patients) {
         list += '<h3>' + room + '</h3>';
         list += '<div class="rooms"  style="height:100%;">';
         $.each(patients, function (patient, photos) {
-
+            var patient_id = patient.split("/");
+            patient_id = patient_id[patient_id.length - 1];
+            patient = patient.slice(0, patient.lastIndexOf("/"));
             list += '<div class="patient">';
             list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');">' + patient + '</a></h3>';
             list += '   <div id="patientLink' + lid + '" style="display:none;">';
             list += '       <ul>';
 
             for (var key in photos) {
-                list += '       <li>';
-                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');">' + key + '</a>';
+                list += '       <li class="photoListItem" id="photoListItem_' + photos[key] + '">';
+                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');">' + key + '</a><a href="javascript:removePhoto(\'' + photos[key] + '\',\'' + key + '\');"><img src="application/views/img/remove-small.png" class="photoRemove"></a>';
                 list += '       </li>';
 
             }
+            list += '<li class="photoListItemAdd"><a href="javascript:popupWindow(\'Image Upload\',\'index.php/image/load/' + patient_id + '\');">Add...</a></li>';
 
 
             list += '       </ul>';
@@ -49,8 +53,8 @@ function roomsReceived(data) {
 
     $(function () {
         $("#rooms").accordion({
-            collapsible:true,
-            autoHeight:true
+            collapsible: true,
+            autoHeight: true
         });
     });
 
@@ -77,10 +81,10 @@ function imageReceived(v) {
 function addTags(photoId, canvasId) {
     var data;
     $.ajax({
-        dataType:"json",
-        url:"index.php/tag/getAll/" + photoId,
-        data:data,
-        success:function (v) {
+        dataType: "json",
+        url: "index.php/tag/getAll/" + photoId,
+        data: data,
+        success: function (v) {
             tagsReceived(v, canvasId);
         }
     });
