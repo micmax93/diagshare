@@ -21,7 +21,9 @@ function roomsReceived(data) {
         list += '<h3>' + room + '</h3>';
         list += '<div class="rooms"  style="height:100%;">';
         $.each(patients, function (patient, photos) {
-
+            var patient_id = patient.split("/");
+            patient_id = patient_id[patient_id.length - 1];
+            patient = patient.slice(0, patient.lastIndexOf("/"));
             list += '<div class="patient">';
             list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');">' + patient + '</a></h3>';
             list += '   <div id="patientLink' + lid + '" style="display:none;">';
@@ -33,7 +35,7 @@ function roomsReceived(data) {
                 list += '       </li>';
 
             }
-            list += '<li class="photoListItemAdd"><a href="javascript:popupWindow(\'Image Upload\',\'index.php/image/load/' + patient + '\');">Add...</a></li>';
+            list += '<li class="photoListItemAdd"><a href="javascript:popupWindow(\'Image Upload\',\'index.php/image/load/' + patient_id + '\');">Add...</a></li>';
 
 
             list += '       </ul>';
