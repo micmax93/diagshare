@@ -123,7 +123,7 @@ function sendChatMessage() {
 
 function sendMsg(cmd,type,id)
 {
-    if(webSocket.isOpen())
+    if(webSocket.isOpen)
     {
         var str='{"cmd":"'+cmd+'","type":"'+type+'","id":'+id+'}';
         webSocket.send(str);
@@ -170,6 +170,9 @@ function setupWebSocket() {
     webSocket = new WebSocket("ws://" + window.location.host + ":12345/echo");
     webSocket.onopen = function (evt) {
         register();
+
+        //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        setChat('tag',3);
     };
     webSocket.onclose = function (evt) {
         onClose(evt)
@@ -183,9 +186,6 @@ function setupWebSocket() {
         //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         downloadPosts();
     };
-
-    //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    setChat('tag',3);
 }
 
 
