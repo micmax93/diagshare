@@ -17,13 +17,15 @@ class Controller_Chat extends IwMController
 
         $tag=(new Model_Tags())->getItem($id);
         $posts=$tag->getAllPostsAfter($last);
-        $result= array();
+        $result['type']='tag';
+        $result['id']=$id;
+        $result['posts']= array();
         foreach($posts as $key => $val)
         {
             $tab['id']=$val->id;
             $tab['owner']=(new Model_User())->getUser($val->owner_id)->username;
             $tab['content']=$val->content;
-            array_push($result,$tab);
+            array_push($result['posts'],$tab);
             unset($tab);
         }
 
