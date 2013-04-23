@@ -157,8 +157,9 @@ function setChat(type,id)
     chatType=type;
     chatId=id;
     chatLast=0;
-    request(chatType,chatId);
     downloadPosts();
+    $('#chatList tr').remove();
+    request(chatType,chatId);
 }
 
 
@@ -181,7 +182,7 @@ function setupWebSocket() {
         onError(evt);
 
         //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        downloadPosts();
+        setChat('tag',1);
     };
 }
 
