@@ -145,7 +145,7 @@ function downloadPosts() {
         if ((chatType != data['type']) || (chatId != data['id'])) {
             return;
         }
-        document.getElementById('chatRoomId').innerHTML = data['title'];
+        document.getElementById('chatRoomId').innerHTML = '#' + data['title'];
         for (i = 0; i < data['posts'].length; i++) {
             //if(data[i]['id']<=chatLast) {continue;}
             $('#chatList').prepend("<tr><td>" + data['posts'][i]['owner'] + ": " + data['posts'][i]['content'] + "</td></tr>");
