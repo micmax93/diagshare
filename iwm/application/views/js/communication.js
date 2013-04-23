@@ -141,6 +141,7 @@ function downloadPosts()
     args['id']=chatId;
     args['last']=chatLast;
     jQuery.post("index.php/chat/"+chatType,args,function(data){
+        if((chatType!=type)||(chatId!=id)) {return;}
         $('#chatList tr').remove();
         for(i=0;i<data.length;i++)
         {
