@@ -123,12 +123,8 @@ function sendChatMessage() {
 
 function sendMsg(cmd,type,id)
 {
-    if(webSocket.isOpen)
-    {
-        var str='{"cmd":"'+cmd+'","type":"'+type+'","id":'+id+'}';
-        webSocket.send(str);
-    }
-
+    var str='{"cmd":"'+cmd+'","type":"'+type+'","id":'+id+'}';
+    webSocket.send(str);
 }
 
 function register()
@@ -169,8 +165,8 @@ function setupWebSocket() {
 
     webSocket = new WebSocket("ws://" + window.location.host + ":12345/echo");
     webSocket.onopen = function (evt) {
-        register();
 
+        register();
         //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         setChat('tag',3);
     };
