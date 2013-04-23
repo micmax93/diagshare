@@ -115,8 +115,8 @@ function sendChatMessage() {
     document.getElementById('chatInput').value = '';
     //webSocket.send(msg);
     var data={};
-    data["type"]="tag";
-    data["id"]=3;
+    data["type"]=chatType;
+    data["id"]=chatId;
     data["content"]=msg;
     //jQuery.post( url [, data ] [, success(data, textStatus, jqXHR) ] [, dataType ] )
     jQuery.post("index.php/chat/newpost",data);
