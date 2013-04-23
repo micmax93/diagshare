@@ -206,6 +206,10 @@ html, body {
 .photoListItemAdd {
     list-style-image: url('../img/plus-small.png');
 }
+.photoListItemAdd p {
+    display: inline;
+    cursor: pointer;
+}
 
 .rooms {
     height: auto !important;

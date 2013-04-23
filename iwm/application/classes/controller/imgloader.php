@@ -5,6 +5,7 @@
  * Date: 30.03.13
  */
 require("IwMController.php");
+require("websocket.php");
 class Controller_ImgLoader extends IwMController
 {
     public $part_max_size = 300;
@@ -174,7 +175,7 @@ class Controller_ImgLoader extends IwMController
     public function action_index()
     {
         $this->action_test();
-        WebSocketBroadcastAdmin::single_update('room',0);
+
     }
 
 }

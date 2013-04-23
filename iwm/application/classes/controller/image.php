@@ -7,6 +7,7 @@
  */
 
 require("IwMController.php");
+require("websocket.php");
 
 class Controller_Image extends IwMController
 {
@@ -33,6 +34,7 @@ class Controller_Image extends IwMController
 
         if ($photos->deletePhoto($id)) {
             $res = array("status" => "ok");
+            WebSocketBroadcastAdmin::single_update('room', 0);
         } else {
             $res = array("status" => "failed");
         }
@@ -204,11 +206,12 @@ class Controller_Image extends IwMController
                 //echo "<br>Loading progres:";
                 $widok->set('message', '
                 <script type="text/javascript">
-                    window.opener.loadRooms();
+                //    window.opener.loadRooms();
                     window.close();
                 </script>
                 ');
                 $this->splitSaveImg($path, $img_data);
+                WebSocketBroadcastAdmin::single_update('room',0);
             } else {
                 $widok->set('message', "Load failed");
             }

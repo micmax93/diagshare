@@ -36,7 +36,7 @@ function roomsReceived(data) {
                 list += '       </li>';
 
             }
-            list += '<li class="photoListItemAdd"><a href="javascript:popupWindow(\'Image Upload\',\'index.php/image/load/' + patient_id + '\');">Add...</a></li>';
+            list += '<li class="photoListItemAdd"><p onclick="popupWindow(\'Image Upload\',\'index.php/image/load/' + patient_id + '\');">Add...</p></li>';
 
 
             list += '       </ul>';
@@ -200,7 +200,7 @@ function onMessage(evt) {
     }
     if((data['type']=='room')&&(data['id']==0))
     {
-        //updateRooms();
+        loadRooms();
     }
     //TODO odczytanie rodzaju zasobu
 }
