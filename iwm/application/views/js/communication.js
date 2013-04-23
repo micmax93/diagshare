@@ -169,8 +169,6 @@ function setupWebSocket() {
     webSocket.onopen = function (evt) {
 
         register();
-        //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        setChat('tag',3);
     };
     webSocket.onclose = function (evt) {
         onClose(evt)
@@ -181,8 +179,6 @@ function setupWebSocket() {
     webSocket.onerror = function (evt) {
         onError(evt);
 
-        //debug!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        setChat('tag',1);
     };
 }
 

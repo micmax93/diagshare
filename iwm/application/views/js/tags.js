@@ -26,7 +26,7 @@ function tag(tagId, Tagtop, Tagleft, Tagcontent) {
  */
 function addTag(parentId, id, top, left, content) {
     $('#' + parentId).append('<div class="imageTag" id="' + id + '"><p>' + content + '</p></div>');
-    $('#' + id).css('top', top).css('left', left).draggable({opacity: 0.6, stop: function () {
+    $('#' + id).css('top', top).css('left', left).draggable({opacity:0.6, stop:function () {
         updateTagPosition(id);
     }}).dblclick(function () {
             if ($(this).hasClass("in-edit")) {
@@ -40,7 +40,9 @@ function addTag(parentId, id, top, left, content) {
                     '<button onclick="deleteTag(\'' + id + '\');"><img src="application/views/img/remove.png"></button>';
 
             }
-        }).attr('basicTop', top).attr('basicLeft', left);
+        }).attr('basicTop', top).attr('basicLeft', left).click(function () {
+            setChat("tag", id.substr(4));
+        });
 }
 
 
@@ -66,11 +68,11 @@ function fixTagsPositions(gridId, scale) {
  */
 function updateTagText(id, value) {
     $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "index.php/tag/set/" + id.substr(4),
-        data: {title: value},
-        success: function (v) {
+        type:"POST",
+        dataType:"json",
+        url:"index.php/tag/set/" + id.substr(4),
+        data:{title:value},
+        success:function (v) {
         }
     });
 }
@@ -89,11 +91,11 @@ function updateTagPosition(id) {
     var x = parseFloat(el.style.left) / zoom;
 
     $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "index.php/tag/set/" + id.substr(4),
-        data: {x: parseInt(x), y: parseInt(y)},
-        success: function (v) {
+        type:"POST",
+        dataType:"json",
+        url:"index.php/tag/set/" + id.substr(4),
+        data:{x:parseInt(x), y:parseInt(y)},
+        success:function (v) {
         }
     });
 }
@@ -105,10 +107,10 @@ function updateTagPosition(id) {
 function deleteTag(id) {
     var tag = document.getElementById(id);
     $.ajax({
-        dataType: "json",
-        url: "index.php/tag/delete/" + tag.id.substr(4),
-        tag: tag,
-        success: function (v) {
+        dataType:"json",
+        url:"index.php/tag/delete/" + tag.id.substr(4),
+        tag:tag,
+        success:function (v) {
             if (v["status"] == "ok") {
                 var tag = document.getElementById("tag_" + v["id"]);
                 tag.parentNode.removeChild(tag);
@@ -147,14 +149,14 @@ function gridClicked(e, id) {
     y = parseInt(y / zoom);
 
     $.ajax({
-        type: "POST",
-        dataType: "json",
-        url: "index.php/tag/set/0",
-        y: y,
-        x: x,
-        data: {x: x, y: y, id: 0, photo_id: photoId, title: "Tag"},
-        grid: e.target.parentNode.id,
-        success: function (v) {
+        type:"POST",
+        dataType:"json",
+        url:"index.php/tag/set/0",
+        y:y,
+        x:x,
+        data:{x:x, y:y, id:0, photo_id:photoId, title:"Tag"},
+        grid:e.target.parentNode.id,
+        success:function (v) {
             if (v["status"] == "ok")
                 addTag(this.grid, "tag_" + v["id"], this.y * zoom, this.x * zoom, "Tag");
         }
