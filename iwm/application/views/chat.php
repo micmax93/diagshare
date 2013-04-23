@@ -19,7 +19,7 @@ $("#chatInput").keyup(function (e) {
 
 </script>
 
-<p id="chatRoomId">#pokój</p>
+<p id="chatRoomId">Czat</p>
 <hr>
 <table id="chatList">
 </table>
