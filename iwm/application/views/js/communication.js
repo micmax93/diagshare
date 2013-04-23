@@ -53,8 +53,8 @@ function roomsReceived(data) {
 
     $(function () {
         $("#rooms").accordion({
-            collapsible: true,
-            autoHeight: true
+            collapsible:true,
+            autoHeight:true
         });
     });
 
@@ -81,10 +81,10 @@ function imageReceived(v) {
 function addTags(photoId, canvasId) {
     var data;
     $.ajax({
-        dataType: "json",
-        url: "index.php/tag/getAll/" + photoId,
-        data: data,
-        success: function (v) {
+        dataType:"json",
+        url:"index.php/tag/getAll/" + photoId,
+        data:data,
+        success:function (v) {
             tagsReceived(v, canvasId);
         }
     });
@@ -106,62 +106,66 @@ function tagsReceived(v, gridId) {
 
 }
 
-var chatType='tag';
-var chatId=3;
-var chatLast=0;
+var chatType = 'tag';
+var chatId = 3;
+var chatLast = 0;
 
 function sendChatMessage() {
     var msg = document.getElementById('chatInput').value;
     document.getElementById('chatInput').value = '';
     //webSocket.send(msg);
-    var data={};
-    data["type"]=chatType;
-    data["id"]=chatId;
-    data["content"]=msg;
+    var data = {};
+    data["type"] = chatType;
+    data["id"] = chatId;
+    data["content"] = msg;
     //jQuery.post( url [, data ] [, success(data, textStatus, jqXHR) ] [, dataType ] )
-    jQuery.post("index.php/chat/newpost",data);
+    jQuery.post("index.php/chat/newpost", data);
 }
 
-function sendMsg(cmd,type,id)
-{
-    var str='{"cmd":"'+cmd+'","type":"'+type+'","id":'+id+'}';
+function sendMsg(cmd, type, id) {
+    var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + '}';
     webSocket.send(str);
 }
 
-function register()
-{sendMsg('register','user','0');}
-function request(type,id)
-{sendMsg('request',type,id);}
-function ignore(type,id)
-{sendMsg('ignore',type,id);}
+function register() {
+    sendMsg('register', 'user', '0');
+}
+function request(type, id) {
+    sendMsg('request', type, id);
+}
+function ignore(type, id) {
+    sendMsg('ignore', type, id);
+}
 
-function downloadPosts()
-{
-    var args={};
-    args['id']=chatId;
-    args['last']=chatLast;
-    jQuery.post("index.php/chat/"+chatType,args,function(data){
-        if((chatType!=data['type'])||(chatId!=data['id'])) {return;}
-        for(i=0;i<data['posts'].length;i++)
-        {
+function downloadPosts() {
+    var args = {};
+    args['id'] = chatId;
+    args['last'] = chatLast;
+    jQuery.post("index.php/chat/" + chatType, args, function (data) {
+        if ((chatType != data['type']) || (chatId != data['id'])) {
+            return;
+        }
+        document.getElementById('chatRoomId').innerHTML = data['title'];
+        for (i = 0; i < data['posts'].length; i++) {
             //if(data[i]['id']<=chatLast) {continue;}
             $('#chatList').prepend("<tr><td>" + data['posts'][i]['owner'] + ": " + data['posts'][i]['content'] + "</td></tr>");
-            chatLast=data['posts'][i]['id'];
+            chatLast = data['posts'][i]['id'];
         }
     });
 
 }
 
-function setChat(type,id)
-{
-    if((chatType==type)&&(chatId==id)) {return;}
-    ignore(chatType,chatId);
-    chatType=type;
-    chatId=id;
-    chatLast=0;
-    downloadPosts();
+function setChat(type, id) {
+    if ((chatType == type) && (chatId == id)) {
+        return;
+    }
+    ignore(chatType, chatId);
+    chatType = type;
+    chatId = id;
+    chatLast = 0;
     $('#chatList tr').remove();
-    request(chatType,chatId);
+    downloadPosts();
+    request(chatType, chatId);
 }
 
 
@@ -185,15 +189,13 @@ function setupWebSocket() {
 }
 
 
-
 function onClose(evt) {
     alert('Rozłączono!');
 }
 function onMessage(evt) {
     //$('#chatList').append("<tr><td>" + evt.data + "</td></tr>");
     data = jQuery.parseJSON(evt.data);
-    if((data['type']==chatType)&&(data['id']==chatId))
-    {
+    if ((data['type'] == chatType) && (data['id'] == chatId)) {
         downloadPosts();
     }
     //TODO odczytanie rodzaju zasobu
