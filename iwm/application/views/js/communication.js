@@ -141,13 +141,12 @@ function downloadPosts()
     args['id']=chatId;
     args['last']=chatLast;
     jQuery.post("index.php/chat/"+chatType,args,function(data){
-        //if((chatType!=type)||(chatId!=id)) {return;}
-        $('#chatList tr').remove();
-        for(i=0;i<data.length;i++)
+        if((chatType!=data['type'])||(chatId!=data['id'])) {return;}
+        for(i=0;i<data['posts'].length;i++)
         {
             //if(data[i]['id']<=chatLast) {continue;}
-            $('#chatList').prepend("<tr><td>" + data[i]['owner'] + ": " + data[i]['content'] + "</td></tr>");
-            chatLast=data[i]['id'];
+            $('#chatList').prepend("<tr><td>" + data['posts'][i]['owner'] + ": " + data['posts'][i]['content'] + "</td></tr>");
+            chatLast=data['posts'][i]['id'];
         }
     });
 
