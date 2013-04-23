@@ -112,6 +112,7 @@ var chatLast=0;
 
 function sendChatMessage() {
     var msg = document.getElementById('chatInput').value;
+    document.getElementById('chatInput').value = '';
     //webSocket.send(msg);
     var data={};
     data["type"]="tag";
