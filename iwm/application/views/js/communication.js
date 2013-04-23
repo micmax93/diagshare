@@ -144,7 +144,7 @@ function downloadPosts()
 
         for(i=0;i<data.length;i++)
         {
-            $('#chatList').append("<tr><td>" + data[i]['owner'] + ": " + data[i]['content'] + "</td></tr>");
+            $('#chatList').prepend("<tr><td>" + data[i]['owner'] + ": " + data[i]['content'] + "</td></tr>");
             chatLast=data[i]['id'];
         }
     });
