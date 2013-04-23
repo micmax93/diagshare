@@ -169,8 +169,8 @@ function setupWebSocket() {
 
     webSocket = new WebSocket("ws://" + window.location.host + ":12345/echo");
     webSocket.onopen = function (evt) {
-
         register();
+        request('room',0);
     };
     webSocket.onclose = function (evt) {
         onClose(evt)
@@ -195,6 +195,10 @@ function onMessage(evt) {
     if((data['type']==chatType)&&(data['id']==chatId))
     {
         downloadPosts();
+    }
+    if((data['type']=='room')&&(data['id']==0))
+    {
+        //updateRooms();
     }
     //TODO odczytanie rodzaju zasobu
 }

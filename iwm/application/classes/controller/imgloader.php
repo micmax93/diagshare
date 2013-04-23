@@ -174,6 +174,7 @@ class Controller_ImgLoader extends IwMController
     public function action_index()
     {
         $this->action_test();
+        WebSocketBroadcastAdmin::single_update('room',0);
     }
 
 }
