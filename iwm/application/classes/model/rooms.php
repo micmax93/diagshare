@@ -24,10 +24,13 @@ class Model_Rooms extends Model_Base
     {
         $rooms = (new Model_Rooms())->getAllItems();
         foreach ($rooms as $room) {
+            $result[$room->name] = "";
             $patients = $room->myPatients();
             foreach ($patients as $patient) {
+                $result[$room->name][$patient->name.'/'.$patient->id] = "";
                 $photos = $patient->myPhotos();
                 foreach ($photos as $photo) {
+                    Log::instance()->add(Log::NOTICE, 'Pacjent: '.$patient->name);
                     $result[$room->name][$patient->name.'/'.$patient->id][$photo->title] = $photo->id;
                 }
             }
