@@ -291,3 +291,10 @@ html, body {
     margin-right: 10%;
 }
 
+
+.patientRemove {
+    float: right;
+    margin-right: 10%;
+    margin-top: 3px;
+}
+

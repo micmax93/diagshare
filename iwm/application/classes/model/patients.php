@@ -62,8 +62,14 @@ class Model_Patients extends Model_Base
 
     public function deletePatient($id)
     {
-        if (ORM::factory('patients')->where('id', '=', $id)->count_all() > 0)
-            return ORM::factory('patients')->where('id', '=', $id)->find()->delete();
+        if (ORM::factory('patients')->where('id', '=', $id)->count_all() > 0) {
+            $patient = ORM::factory('patients')->where('id', '=', $id)->find();
+            foreach ($patient->myPosts() as $post) $post->delete();
+            foreach ($patient->myPhotos() as $photo) $photo->delete();
+            return $patient->delete();
+
+        }
+
         return false;
     }
 }

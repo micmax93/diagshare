@@ -29,8 +29,13 @@ function roomsReceived(data) {
             var patient_id = patient.split("/");
             patient_id = patient_id[patient_id.length - 1];
             patient = patient.slice(0, patient.lastIndexOf("/"));
-            list += '<div class="patient">';
-            list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');">' + patient + '</a></h3>';
+
+            var listOfWindows = Array();
+            for (var key in photos) {
+                listOfWindows.push(key + "_window");
+            }
+            list += '<div class="patient" id="patientListItem_' + patient_id + '" listOfWindows="' + listOfWindows.toString() + '">';
+            list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');">' + patient + '</a></h3><a href="javascript:removePatient(' + patient_id + ');"><img src="application/views/img/remove-small.png" class="patientRemove"></a>';
             list += '   <div id="patientLink' + lid + '" style="display:none;">';
             list += '       <ul>';
 

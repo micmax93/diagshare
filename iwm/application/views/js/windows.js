@@ -223,12 +223,13 @@ function removePhoto(id, name) {
     $.ajax({
         dataType: "json",
         url: "index.php/image/delete/" + id,
-        photoListItem: "photoListItem_"+id,
+        photoListItem: "photoListItem_" + id,
         windowName: name + "_window",
         success: function (v) {
-            if (v["status"] == "ok")
+            if (v["status"] == "ok") {
                 closeWindow(this.windowName);
-                $('#'+this.photoListItem).remove();
+                $('#' + this.photoListItem).remove();
+            }
         }
     });
 }

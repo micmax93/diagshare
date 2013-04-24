@@ -22,6 +22,22 @@ function authorizeUser() {
     });
 }
 
+function removePatient(id) {
+    $.ajax({
+        dataType: "json",
+        url: "index.php/patient/delete/" + id,
+        patientListItem: "patientListItem_" + id,
+        windowName: name + "_window",
+        success: function (v) {
+            if (v["status"] == "ok") {
+                var okna = $('#' + this.patientListItem).attr('listOfWindows');
+                okna = okna.split(",");
+                for (var i = 0; i < okna.length; i++) closeWindow(okna[i]);
+                $('#' + this.patientListItem).remove();
+            }
+        }
+    });
+}
 
 function popupWindow(title, url) {
     var newWindow = window.open(url, title, 'height=400,width=400,toolbar=no,scrollbars=no,location=no,resizable =yes');
