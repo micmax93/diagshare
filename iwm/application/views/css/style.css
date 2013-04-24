@@ -187,11 +187,13 @@ html, body {
     margin: 0;
     display: inline;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .patient h3 img {
     margin-left: 7px;
     margin-right: 3px;
+    cursor: default;
 }
 
 .patient div {

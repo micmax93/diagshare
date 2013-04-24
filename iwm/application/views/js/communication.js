@@ -19,6 +19,10 @@ function roomsReceived(data) {
     var lid = 0;
     document.getElementById('roomList').innerHTML = "<div id=\"rooms\"></div>";
     $.each(data, function (room, patients) {
+        var room_id = room.split("/");
+        room_id = room_id[room_id.length - 1];
+        room = room.slice(0, room.lastIndexOf("/"));
+
         list += '<h3>' + room + '</h3>';
         list += '<div class="rooms"  style="height:100%;">';
         $.each(patients, function (patient, photos) {
@@ -46,7 +50,7 @@ function roomsReceived(data) {
 
         });
         list += '<div class="patient">';
-        list += 'elo';
+        list += '<h3 onclick="popupWindow(\'Edit patient...\',\'index.php/patient/edit?room=' + room_id + '\');"><img src="application/views/img/plus.png">Add patient...</h3>';
         list += '</div>';
         list += '</div>';
 
@@ -56,8 +60,8 @@ function roomsReceived(data) {
 
     $(function () {
         $("#rooms").accordion({
-            collapsible:true,
-            autoHeight:true
+            collapsible: true,
+            autoHeight: true
         });
     });
 
@@ -84,10 +88,10 @@ function imageReceived(v) {
 function addTags(photoId, canvasId) {
     var data;
     $.ajax({
-        dataType:"json",
-        url:"index.php/tag/getAll/" + photoId,
-        data:data,
-        success:function (v) {
+        dataType: "json",
+        url: "index.php/tag/getAll/" + photoId,
+        data: data,
+        success: function (v) {
             tagsReceived(v, canvasId);
         }
     });
@@ -150,7 +154,9 @@ function downloadPosts() {
         }
         document.getElementById('chatRoomId').innerHTML = '#' + data['title'];
         for (i = 0; i < data['posts'].length; i++) {
-            if(data['posts'][i]['id']<=chatLast) {continue;}
+            if (data['posts'][i]['id'] <= chatLast) {
+                continue;
+            }
             $('#chatList').prepend("<tr><td>" + data['posts'][i]['owner'] + ": " + data['posts'][i]['content'] + "</td></tr>");
             chatLast = data['posts'][i]['id'];
         }
@@ -177,7 +183,7 @@ function setupWebSocket() {
     webSocket = new WebSocket("ws://" + window.location.host + ":12345/echo");
     webSocket.onopen = function (evt) {
         register();
-        request('room',0);
+        request('room', 0);
     };
     webSocket.onclose = function (evt) {
         onClose(evt)
@@ -201,8 +207,7 @@ function onMessage(evt) {
     if ((data['type'] == chatType) && (data['id'] == chatId)) {
         downloadPosts();
     }
-    if((data['type']=='room')&&(data['id']==0))
-    {
+    if ((data['type'] == 'room') && (data['id'] == 0)) {
         loadRooms();
     }
     //TODO odczytanie rodzaju zasobu

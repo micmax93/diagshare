@@ -24,13 +24,13 @@ class Model_Rooms extends Model_Base
     {
         $rooms = (new Model_Rooms())->getAllItems();
         foreach ($rooms as $room) {
-            $result[$room->name] = "";
+            $result[$room->name. '/' . $room->id] = "";
             $patients = $room->myPatients();
             foreach ($patients as $patient) {
-                $result[$room->name][$patient->name . '/' . $patient->id] = "";
+                $result[$room->name. '/' . $room->id][$patient->name . '/' . $patient->id] = "";
                 $photos = $patient->myPhotos();
                 foreach ($photos as $photo) {
-                    $result[$room->name][$patient->name . '/' . $patient->id][$photo->title] = $photo->id;
+                    $result[$room->name . '/' . $room->id][$patient->name . '/' . $patient->id][$photo->title] = $photo->id;
                 }
             }
         }
