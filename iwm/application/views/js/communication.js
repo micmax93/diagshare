@@ -45,6 +45,9 @@ function roomsReceived(data) {
             lid++;
 
         });
+        list += '<div class="patient">';
+        list += 'elo';
+        list += '</div>';
         list += '</div>';
 
 
