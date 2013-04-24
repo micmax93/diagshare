@@ -18,15 +18,13 @@ else
 echo '</h1>
 ';
 if (isset($message)) echo $message;
-if (!isset($saved))
+else
     echo '
-<form enctype="multipart/form-data" method="post">
-                <input type="text" size="32" name="name" placeholder="Name"'.(isset($name) ? 'value="'.$name.'"' : "").'><br>
-                <input type="text" name="room_id" value="' . $room_id . '" style="display:none;visibility:hidden;">
-                <input type="text" name="patient_id" value="' . (isset($patient_id) ? $patient_id : 0) . '" style="display:none;visibility:hidden;">
+<form enctype="multipart/form-data" action="'.URL::base().'index.php/patient/edit/'.stripslashes($id).'" method="post">
+                <input type="text" size="32" name="name" placeholder="Name"'.(isset($name) ? 'value="'.stripslashes($name).'"' : "").'><br>
+                <input type="text" name="room_id" value="' . stripslashes($room_id) . '" style="display:none;visibility:hidden;">
                 <input type="submit" value="Save">
-</form>';
-echo '
+</form>
 </body>
 </html> ';
 

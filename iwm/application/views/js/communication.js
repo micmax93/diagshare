@@ -50,7 +50,7 @@ function roomsReceived(data) {
 
         });
         list += '<div class="patient">';
-        list += '<h3 onclick="popupWindow(\'Edit patient...\',\'index.php/patient/edit?room=' + room_id + '\');"><img src="application/views/img/plus.png">Add patient...</h3>';
+        list += '<h3 onclick="popupWindow(\'Edit patient...\',\'index.php/patient/edit/0?room=' + room_id + '\');"><img src="application/views/img/plus.png">Add patient...</h3>';
         list += '</div>';
         list += '</div>';
 

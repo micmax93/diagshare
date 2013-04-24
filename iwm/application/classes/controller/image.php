@@ -30,7 +30,6 @@ class Controller_Image extends IwMController
         $id = $this->request->param("id");
         preg_replace('/[\s\W]+/', '-', $id);
         $photos = new Model_Photos();
-        $photos->deletePhoto($id);
 
         if ($photos->deletePhoto($id)) {
             $res = array("status" => "ok");
@@ -188,7 +187,6 @@ class Controller_Image extends IwMController
 
                  echo "<br>part count= " . $img_data['x']['num'] . " x " . $img_data['y']['num'];
                  echo "<br>part size= " . $img_data['x']['part'] . " x " . $img_data['y']['part'];*/
-
                 $photoData["id"] = 0;
                 $photoData["title"] = str_replace(" ", "_", $_POST['img_title']);
                 $photoData["patient_id"] = $_POST['patient_id'];
@@ -197,6 +195,7 @@ class Controller_Image extends IwMController
                 $photoData["width"] = $img_data['x']['out'];
                 $photoData["height"] = $img_data['y']['out'];
                 $photoData["filename"] = $_FILES['img_upload']['name'];
+                if(strlen($photoData["title"]) == 0) $photoData["title"] = "Empty_Title";
 
                 $mphoto = new Model_Photos();
                 $photo = $mphoto->setPhoto($photoData);
