@@ -298,3 +298,8 @@ html, body {
     margin-top: 3px;
 }
 
+.patientEdit {
+    float: right;
+    margin-right: 10px;
+    margin-top: 3px;
+}

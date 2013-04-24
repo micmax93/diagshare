@@ -35,7 +35,9 @@ function roomsReceived(data) {
                 listOfWindows.push(key + "_window");
             }
             list += '<div class="patient" id="patientListItem_' + patient_id + '" listOfWindows="' + listOfWindows.toString() + '">';
-            list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');">' + patient + '</a></h3><a href="javascript:removePatient(' + patient_id + ');"><img src="application/views/img/remove-small.png" class="patientRemove"></a>';
+            list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');">' + patient + '</a></h3>' +
+                '<a href="javascript:removePatient(' + patient_id + ');"><img src="application/views/img/remove-small.png" class="patientRemove"></a>' +
+                '<img src="application/views/img/edit.png" class="patientEdit" onclick="popupWindow(\'Edit patient...\',\'index.php/patient/edit/' + patient_id + '?room=' + room_id + '\');"></a>';
             list += '   <div id="patientLink' + lid + '" style="display:none;">';
             list += '       <ul>';
 
