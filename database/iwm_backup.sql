@@ -4,7 +4,25 @@
 
 -- Dumped from database version 9.1.9
 -- Dumped by pg_dump version 9.1.9
--- Started on 2013-04-21 14:48:30 CEST
+-- Started on 2013-04-25 01:44:41 CEST
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 1979 (class 1262 OID 16699)
+-- Name: iwm; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE iwm WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'pl_PL.UTF-8' LC_CTYPE = 'pl_PL.UTF-8';
+
+
+ALTER DATABASE iwm OWNER TO postgres;
+
+\connect iwm
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -469,7 +487,7 @@ ALTER TABLE ONLY views ALTER COLUMN id SET DEFAULT nextval('views_id_seq'::regcl
 -- Data for Name: patients; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO patients VALUES (1, 'Jan', '2013-03-24', 'CRITICAL', 'Ostry przypadek niewydolności mózgowej spowodowanej wystawieniem na szkodliwy wpływ pseudo-bazy danych.', 1, 2);
+INSERT INTO patients VALUES (1, 'Jasiu', '2013-03-24', 'CRITICAL', 'Ostry przypadek niewydolności mózgowej spowodowanej wystawieniem na szkodliwy wpływ pseudo-bazy danych.', 1, 2);
 
 
 --
@@ -478,7 +496,7 @@ INSERT INTO patients VALUES (1, 'Jan', '2013-03-24', 'CRITICAL', 'Ostry przypade
 -- Name: patients_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('patients_id_seq', 1, true);
+SELECT pg_catalog.setval('patients_id_seq', 23, true);
 
 
 --
@@ -488,7 +506,7 @@ SELECT pg_catalog.setval('patients_id_seq', 1, true);
 --
 
 INSERT INTO photos VALUES (1, 1, 'xray.jpg', 'Prześwietlenie', 1, 1, 200, 200);
-INSERT INTO photos VALUES (11, 1, 'Katie_Melua_9_1600x1200_Wallpaper.jpg', 'Katie', 8, 6, 1600, 1200);
+INSERT INTO photos VALUES (38, 1, 'Katie_Melua_by_Swezzels.jpg', 'Katie_Grafika', 6, 6, 1548, 1308);
 
 
 --
@@ -497,7 +515,7 @@ INSERT INTO photos VALUES (11, 1, 'Katie_Melua_9_1600x1200_Wallpaper.jpg', 'Kati
 -- Name: photos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('photos_id_seq', 14, true);
+SELECT pg_catalog.setval('photos_id_seq', 44, true);
 
 
 --
@@ -506,6 +524,12 @@ SELECT pg_catalog.setval('photos_id_seq', 14, true);
 -- Data for Name: posts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO posts VALUES (5, NULL, 117, 7, 'Tak to jest palec');
+INSERT INTO posts VALUES (6, NULL, 117, 7, '');
+INSERT INTO posts VALUES (7, NULL, 117, 7, ':>');
+INSERT INTO posts VALUES (8, NULL, 117, 7, 'lol');
+INSERT INTO posts VALUES (9, NULL, 117, 7, '');
+INSERT INTO posts VALUES (10, NULL, 117, 7, '');
 
 
 --
@@ -514,7 +538,7 @@ SELECT pg_catalog.setval('photos_id_seq', 14, true);
 -- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('posts_id_seq', 4, true);
+SELECT pg_catalog.setval('posts_id_seq', 10, true);
 
 
 --
@@ -551,6 +575,7 @@ INSERT INTO roles_users VALUES (7, 1);
 --
 
 INSERT INTO rooms VALUES (1, 'OIOM', 1);
+INSERT INTO rooms VALUES (2, 'Neurologia', 1);
 
 
 --
@@ -559,7 +584,7 @@ INSERT INTO rooms VALUES (1, 'OIOM', 1);
 -- Name: rooms_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('rooms_id_seq', 1, true);
+SELECT pg_catalog.setval('rooms_id_seq', 2, true);
 
 
 --
@@ -568,11 +593,10 @@ SELECT pg_catalog.setval('rooms_id_seq', 1, true);
 -- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO tags VALUES (117, 1, 7, 'Palec wskazujący prawej dłoni', 128, 22);
 INSERT INTO tags VALUES (115, 1, 7, 'Kciuk prawej ręki', 110, 87);
 INSERT INTO tags VALUES (116, 1, 7, 'Kciuk lewej dłoni', 92, 93);
-INSERT INTO tags VALUES (122, 11, 7, 'Nos', 939, 387);
-INSERT INTO tags VALUES (120, 11, 7, 'Oko', 751, 189);
+INSERT INTO tags VALUES (117, 1, 7, 'Palec wskazujący prawej dłoni', 129, 22);
+INSERT INTO tags VALUES (129, 1, 7, 'Lewy palec', 70, 21);
 
 
 --
@@ -581,7 +605,7 @@ INSERT INTO tags VALUES (120, 11, 7, 'Oko', 751, 189);
 -- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('tags_id_seq', 127, true);
+SELECT pg_catalog.setval('tags_id_seq', 129, true);
 
 
 --
@@ -592,7 +616,7 @@ SELECT pg_catalog.setval('tags_id_seq', 127, true);
 
 INSERT INTO users VALUES (1, 'test_user', 'user', NULL, NULL, NULL, NULL);
 INSERT INTO users VALUES (2, 'nxt_user', 'paswd', NULL, NULL, NULL, NULL);
-INSERT INTO users VALUES (7, 'admin@admin.pl', 'admin', '586d47435ff7be82b8f4b0847ac23e79492a10e77103768ae626d8ad22c664c6', NULL, 1366542779, 'Administrator');
+INSERT INTO users VALUES (7, 'admin@admin.pl', 'admin', '586d47435ff7be82b8f4b0847ac23e79492a10e77103768ae626d8ad22c664c6', NULL, 1366846382, 'Administrator');
 
 
 --
@@ -865,7 +889,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-04-21 14:48:30 CEST
+-- Completed on 2013-04-25 01:44:41 CEST
 
 --
 -- PostgreSQL database dump complete
