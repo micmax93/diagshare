@@ -17,10 +17,12 @@ echo '
 <h1>Sessions</h1>';
 if (isset($message)) echo $message;
 else {
-  echo 'ok';
+    echo '';
 }
 
 echo '
+<button onclick="window.opener.saveView();window.close();">Save board state</button>
+
 </body>
 </html> ';
 

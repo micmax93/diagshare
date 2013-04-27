@@ -18,4 +18,20 @@ class Controller_View extends IwMController
 
     }
 
+    public function action_set()
+    {
+        $id = $this->request->param('id');
+        preg_replace('/[\s\W]+/', '-', $id);
+        $arr["status"] = Arr::get($_POST, 'status');
+        $arr["state"] = Arr::get($_POST, 'state');
+        $arr["owner_id"] = Auth::instance()->get_user()->id;
+        $mview = new Model_Views();
+        if ($mview->setView($id, $arr)) {
+            $this->response->body(json_encode(array("status" => "ok")));
+
+        } else {
+            $this->response->body(json_encode(array("status" => "fail")));
+        }
+    }
+
 }
