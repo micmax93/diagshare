@@ -16,3 +16,16 @@ function saveView() {
         }
     });
 }
+
+
+function applyBoardState(id) {
+    $.ajax({
+        dataType: "json",
+        url: "index.php/view/get/" + id,
+        success: function (v) {
+            if (v["id"] != "null")
+                setBoardState(v["state"]);
+        }
+    });
+
+}

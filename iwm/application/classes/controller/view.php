@@ -27,6 +27,25 @@ class Controller_View extends IwMController
 
     }
 
+    public function action_get()
+    {
+        $id = $this->request->param("id");
+        preg_replace('/[\s\W]+/', '-', $id);
+
+        $views = new Model_Views();
+        $view = $views->getItem($id);
+        $ret["id"] = $view->id;
+        $ret["state"] = $view->state;
+        $ret["status"] = $view->status;
+        $ret["owner_id"] = $view->owner_id;
+        $ret["start"] = $view->start;
+        $ret["end"] = $view->end;
+
+        $this->response->headers('Access-Control-Allow-Origin', '*');
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($ret));
+    }
+
     public function action_set()
     {
         $id = $this->request->param('id');

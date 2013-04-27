@@ -307,9 +307,6 @@ function getBoardState() {
  */
 var currentView = Array();
 function setBoardState(state) {
-    // nadpisanie predefiniowanym stanem
-    state = '[{"title":"Prześwietlenie","photoId":"1","top":"20px","left":"","zoom":"","contrast":60,"gridTop":"-732.22px","gridLeft":"-675.4px","gridHeight":"1489.2px","gridWidth":"1489.2px","display":"","firstPlan":"0"},{"title":"Katie","photoId":"11","top":"155px","left":"895px","zoom":"895px","brightness":40,"gridTop":"-599px","gridLeft":"-4957px","gridHeight":"6193.2px","gridWidth":"8257.2px","display":"","firstPlan":"0"},{"title":"Monica","photoId":"13","top":"176px","left":"600px","zoom":"600px","brightness":40,"contrast":140,"gridTop":"","gridLeft":"","gridHeight":"533px","gridWidth":"800px","display":"","firstPlan":"1"}]';
-
 
     // zamknij okna i usuń
     for (var i = 0; i < listaOkien.length; i++) {

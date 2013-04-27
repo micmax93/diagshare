@@ -40,7 +40,7 @@ end time
 ';
 
 foreach ($views as $view) {
-    echo '<tr><td>' . $users[$view->owner_id] . '</td><td> ' . $view->start . ' </td><td>' . $view->end . '</td> </tr>';
+    echo '<tr onclick="window.opener.applyBoardState('.$view->id.');"><td>' . $users[$view->owner_id] . '</td><td> ' . $view->start . ' </td><td>' . $view->end . '</td> </tr>';
 }
 
 echo '
