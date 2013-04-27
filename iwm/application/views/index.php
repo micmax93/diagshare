@@ -13,6 +13,7 @@ echo '
   var baseUrl = "' . URL::base() . '";
   var wsUri = "ws://echo.websocket.org/";
   var webSocket;
+  var startTime = new Date();
  </script>
  <script src="' . URL::base() . 'application/views/js/jquery-1.9.1.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>

@@ -40,7 +40,7 @@ function removePatient(id) {
 }
 
 function popupWindow(title, url) {
-    var newWindow = window.open(url, title, 'height=400,width=400,toolbar=no,scrollbars=no,location=no,resizable=no');
+    var newWindow = window.open(url, title, 'height=400,width=400,toolbar=no,scrollbars=yes,location=no,resizable=yes');
     if (window.focus) {
         newWindow.focus()
     }

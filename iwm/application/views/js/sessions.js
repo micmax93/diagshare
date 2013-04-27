@@ -11,7 +11,7 @@ function saveView() {
     $.ajax({
         type: "POST",
         url: baseUrl + "index.php/view/set/0",
-        data: {status: "PUBLIC", state: JSON.stringify(getBoardState())},
+        data: {status: "PUBLIC", state: JSON.stringify(getBoardState()), start: startTime, end: new Date()},
         success: function () {
         }
     });
