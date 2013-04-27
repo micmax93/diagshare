@@ -10,6 +10,7 @@ echo '
  <link rel="stylesheet" type="text/css" href="' . URL::base() . 'application/views/css/jquery-ui.css">
  <script type="text/javascript">
   var base_url = "' . URL::base() . '";
+  var baseUrl = "' . URL::base() . '";
   var wsUri = "ws://echo.websocket.org/";
   var webSocket;
  </script>

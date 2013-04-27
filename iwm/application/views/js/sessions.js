@@ -6,10 +6,13 @@
  * To change this template use File | Settings | File Templates.
  */
 
-function saveView()
-{
-    var data = Array();
-    data["status"] = "PUBLIC";
-    data["state"] = JSON.stringify(getBoardState());
-    jQuery.post(baseUrl + "index.php/view/set/0", data,function(v) { });
+function saveView() {
+
+    $.ajax({
+        type: "POST",
+        url: baseUrl + "index.php/view/set/0",
+        data: {status: "PUBLIC", state: JSON.stringify(getBoardState())},
+        success: function () {
+        }
+    });
 }

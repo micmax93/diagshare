@@ -26,6 +26,7 @@ class Controller_View extends IwMController
         $arr["state"] = Arr::get($_POST, 'state');
         $arr["owner_id"] = Auth::instance()->get_user()->id;
         $mview = new Model_Views();
+
         if ($mview->setView($id, $arr)) {
             $this->response->body(json_encode(array("status" => "ok")));
 
