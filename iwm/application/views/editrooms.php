@@ -20,11 +20,15 @@ if (isset($message)) echo $message;
 else {
     echo '<ul class="roomManageList">';
     foreach ($rooms as $room) {
-        echo '<li>' . $room->id . '<input value="' . stripcslashes($room->name) . '" id="roomEdit_' . $room->id . '">
+        echo '<li id="roomList_'.$room->id.'">' . $room->id . '<input value="' . stripcslashes($room->name) . '" id="roomEdit_' . $room->id . '">
         <button onclick="saveRoom(' . $room->id . ');"><img src="' . URL::base() . 'application/views/img/tick.png" /></button>
         <button onclick="deleteRoom(' . $room->id . ');"><img src="' . URL::base() . 'application/views/img/remove-small.png" /></button>
         </li>';
     }
+    echo '<li id="roomList_New">Add New: <input id="roomEdit_New">
+    <button onclick="newRoom(\'roomEdit_New\');"><img src="' . URL::base() . 'application/views/img/plus-small.png" /></button>
+    </li>
+    ';
     echo '</ul>';
 
 }

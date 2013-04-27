@@ -24,7 +24,7 @@ class Controller_Room extends IwMController
         $widok = View::factory('editrooms');
         $mroom = new Model_Rooms();
         $rooms = $mroom->getAllItems();
-        $widok->set('rooms',$rooms);
+        $widok->set('rooms', $rooms);
         $this->response->body($widok->render());
 
     }
@@ -34,7 +34,28 @@ class Controller_Room extends IwMController
         $id = $this->request->param('id');
         preg_replace('/[\s\W]+/', '-', $id);
         $mroom = new Model_Rooms();
-        $mroom->deleteRoom($id);
+        if ($mroom->deleteRoom($id)) {
+            $this->response->body(json_encode(array("status" => "ok")));
+
+        } else {
+            $this->response->body(json_encode(array("status" => "fail")));
+        }
+        WebSocketBroadcastAdmin::single_update('room', 0);
+    }
+
+    public function action_set()
+    {
+        $id = $this->request->param('id');
+        preg_replace('/[\s\W]+/', '-', $id);
+        $arr["name"] = Arr::get($_POST, 'name');
+        $arr["owner_id"] = Auth::instance()->get_user()->id;
+        $mroom = new Model_Rooms();
+        if ($mroom->setRoom($id, $arr)) {
+            $this->response->body(json_encode(array("status" => "ok")));
+
+        } else {
+            $this->response->body(json_encode(array("status" => "fail")));
+        }
         WebSocketBroadcastAdmin::single_update('room', 0);
     }
 
