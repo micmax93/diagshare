@@ -11,6 +11,15 @@ h1 {
     list-style: none;
     margin: 0;
 }
+.roomManageList li {
+    margin-bottom: 3px;
+    background: #3C9DD0;
+    padding: 3px;
+}
+
+.roomManageList li input {
+    margin-left: 10px;
+}
 
 button {
     margin: 0px;
