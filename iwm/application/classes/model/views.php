@@ -10,38 +10,44 @@ class Model_Views extends Model_Base
 
     public function getPhoto()
     {
-        $p=new Model_Photos();
+        $p = new Model_Photos();
         return $p->getItem($this->photo_id);
     }
 
     public function getOwner()
     {
-        $u=new Model_User();
+        $u = new Model_User();
         return $u->getItem($this->owner_id);
     }
 
     public function endY()
     {
-        $photo=$this->getPhoto();
-        $myEnd=($this->y)+(($photo->height)/($this->scale));
+        $photo = $this->getPhoto();
+        $myEnd = ($this->y) + (($photo->height) / ($this->scale));
 
-        if($myEnd>($photo->height)) {return $photo->height;}
-        else {return $myEnd;}
+        if ($myEnd > ($photo->height)) {
+            return $photo->height;
+        } else {
+            return $myEnd;
+        }
     }
 
     public function endX()
     {
-        $photo=$this->getPhoto();
-        $myEnd=($this->x)+(($photo->width)/($this->scale));
+        $photo = $this->getPhoto();
+        $myEnd = ($this->x) + (($photo->width) / ($this->scale));
 
-        if($myEnd>($photo->width)) {return $photo->width;}
-        else {return $myEnd;}
+        if ($myEnd > ($photo->width)) {
+            return $photo->width;
+        } else {
+            return $myEnd;
+        }
     }
 
     public function getVisibleTags()
     {
-        $photo=$this->getPhoto();
-        $tags=$photo->getTags($this->x,$this->y,$this->endX(),$this->endY());
+        $photo = $this->getPhoto();
+        $tags = $photo->getTags($this->x, $this->y, $this->endX(), $this->endY());
         return $tags;
     }
 }
