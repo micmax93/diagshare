@@ -17,6 +17,7 @@ function roomsReceived(data) {
 
     var list = '';
     var lid = 0;
+    var addRoom;
     document.getElementById('roomList').innerHTML = "<div id=\"rooms\"></div>";
     $.each(data, function (room, patients) {
         var room_id = room.split("/");
@@ -61,15 +62,17 @@ function roomsReceived(data) {
         list += '</div>';
         list += '</div>';
 
-
     });
+
+    addRoom ='<div class="manageRooms"><p onclick="popupWindow(\'Manage Rooms\',\'index.php/room/load/0\');"><img src="application/views/img/manage.png">Edit Rooms</p></div>';
+
     document.getElementById('rooms').innerHTML = list;
 
     $(function () {
         $("#rooms").accordion({
             collapsible: true,
             autoHeight: true
-        });
+        }).append(addRoom);
     });
 
 
