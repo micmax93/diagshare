@@ -13,6 +13,8 @@ class Controller_View extends IwMController
 {
     public function action_load()
     {
+        $widok = View::factory('editsessions');
+        $this->response->body($widok->render());
 
     }
 
