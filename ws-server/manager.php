@@ -5,6 +5,7 @@ class Manager
 {
     protected $user_list;
     protected $resource_list;
+    protected $live_channels;
 
     function new_user($uid,$uws)
     {
@@ -18,7 +19,7 @@ class Manager
         $this->resource_list[$type][$id][$user]=true;
         $this->say("User id=$user request resource $type($id)");
     }
-    public function drop_resource($user,$type,$id)
+    public function leave_resource($user,$type,$id)
     {
         unset($this->user_list[$user][$type][$id]);
         unset($this->resource_list[$type][$id][$user]);
@@ -34,22 +35,20 @@ class Manager
             }
         }
         unset($this->user_list[$uid]);
+        $this->close_live($uid);
         $this->say("Removing user id=$uid");
     }
     public function user_exists($user)
     {
         return isset($this->user_list[$user]);
     }
-    public function send_update($type,$id,$admin=null,$hash=null)
+    public function send_update($type,$id,$data,$admin=null,$hash=null)
     {
         $n=0;
         if(isset($this->resource_list[$type][$id]))
         {
             $msg=new WebSocketMessage();
-            $data['cmd']='update';
-            $data['type']=$type;
-            $data['id']=$id;
-            $msg->setData(json_encode($data));
+            $msg->setData($data);
 
             foreach($this->resource_list[$type][$id] as $uid => $val)
             {
@@ -58,6 +57,53 @@ class Manager
             }
         }
         $this->say("Resource $type($id) update notify send to $n users");
+    }
+
+    public function open_live($id,$chanel)
+    {
+        $this->live_channels[$id]=$chanel;
+    }
+    public function close_live($id)
+    {
+        if(!isset($this->live_channels[$id])) {return;}
+
+        $chanel=$this->live_channels[$id];
+        $msg['cmd']='update';
+        $msg['type']='live';
+        $msg['id']=$chanel;
+        $msg['error']='Chanel disconnected.';
+        $this->update_live($id,json_encode($msg));
+
+        unset($this->live_channels[$id]);
+        unset($this->resource_list['live'][$chanel]);
+    }
+    public function request_live($uid,$chanel)
+    {
+        if(isset($this->resource_list['live'][$chanel]))
+        {
+            $this->request_resource($uid,'live',$chanel);
+        }
+        else
+        {
+            $data['cmd']='update';
+            $data['type']='live';
+            $data['id']=$chanel;
+            $data['error']='Chanel offline.';
+            $msg=new WebSocketMessage();
+            $msg->setData(json_encode($data));
+            $this->user_list[$uid]['ws']->sendMessage($msg);
+        }
+    }
+    public function leave_live($uid,$chanel)
+    {
+        $this->leave_resource($uid,'live',$chanel);
+    }
+    public function update_live($id,$data)
+    {
+        if(!isset($this->live_channels[$id])) {return;}
+
+        $chanel=$this->live_channels[$id];
+        $this->send_update('live',$chanel,$data);
     }
 
     protected function say($msg) {
@@ -133,11 +179,11 @@ class SecureManager extends Manager
             parent::remove_user($uid);
         }
     }
-    public function send_update($type,$id,$admin=null,$hash=null)
+    public function send_update($type,$id,$data,$admin=null,$hash=null)
     {
         if($this->admin_list[$admin]['hash']==$hash)
         {
-            parent::send_update($type,$id);
+            parent::send_update($type,$id,$data);
         }
     }
 }
@@ -181,13 +227,36 @@ class CommunicationInterpreter
         }
         else
         {
-            if($this->manager->is_admin($sender))
+            if($data->type=='live')
+            {
+                if($data->cmd=='open')
+                {
+                    $this->manager->open_live($sender,$data->id);
+                }
+                else if($data->cmd=='close')
+                {
+                    $this->manager->close_live($sender);
+                }
+                else if($data->cmd=='request')
+                {
+                    $this->manager->request_live($sender,$data->id);
+                }
+                else if($data->cmd=='ignore')
+                {
+                    $this->manager->leave_live($sender,$data->id);
+                }
+                else if($data->cmd=='update')
+                {
+                    $this->manager->update_live($sender,$msg);
+                }
+            }
+            else if($this->manager->is_admin($sender))
             {
                 if($data->cmd=='update')
                 {
                     if(isset($data->hash))
                     {
-                        $this->manager->send_update($data->type,$data->id,$sender,$data->hash);
+                        $this->manager->send_update($data->type,$data->id,$msg,$sender,$data->hash);
                     }
                 }
             }
@@ -199,7 +268,7 @@ class CommunicationInterpreter
                 }
                 else if($data->cmd=='ignore')
                 {
-                    $this->manager->drop_resource($sender,$data->type,$data->id);
+                    $this->manager->leave_resource($sender,$data->type,$data->id);
                 }
             }
         }
