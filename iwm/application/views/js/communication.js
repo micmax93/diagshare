@@ -143,6 +143,14 @@ function sendMsg(cmd, type, id) {
     var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + '}';
     webSocket.send(str);
 }
+function sendHashMsg(cmd, type, id, hash) {
+    var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + '","hash":' + hash + '}';
+    webSocket.send(str);
+}
+function sendDataMsg(cmd, type, id, data) {
+    var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + '","data":' + data + '}';
+    webSocket.send(str);
+}
 
 function register() {
     sendMsg('register', 'user', '0');
@@ -220,8 +228,31 @@ function onMessage(evt) {
     if ((data['type'] == 'room') && (data['id'] == 0)) {
         loadRooms();
     }
+    if (data['type'] == 'live') {
+        //TODO: Odczyt sesji live
+    }
     //TODO odczytanie rodzaju zasobu
 }
 function onError(evt) {
     alert('Błąd czatu: ' + evt.data);
+}
+
+
+var liveChanel=null;
+
+function startLiveSession() {
+    jQuery.get("index.php/chat/live", function(data) {
+        liveChanel=data['chanel'];
+        sendHashMsg('open','live',data['chanel'],data['hash']);
+        alert("Uruchomiono współdzielenie sesji.");
+    });
+}
+
+function sendSessionUpdate(data) {
+    sendDataMsg('stop','live',liveChanel,data);
+}
+
+function stopLiveSession() {
+    sendMsg('stop','live',liveChanel);
+    liveChanel=null;
 }

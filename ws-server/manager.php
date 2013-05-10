@@ -59,8 +59,13 @@ class Manager
         $this->say("Resource $type($id) update notify send to $n users");
     }
 
-    public function open_live($id,$chanel)
+    public function open_live($id,$chanel,$hash)
     {
+        if($hash!=crypt("user=" . $chanel,"live_view")) {return;}
+        foreach($this->live_channels as $chl)
+        {
+            if($chl==$chanel) {return;}
+        }
         $this->live_channels[$id]=$chanel;
     }
     public function close_live($id)
@@ -81,6 +86,13 @@ class Manager
     {
         if(isset($this->resource_list['live'][$chanel]))
         {
+            if(isset($this->user_list[$uid]['live']))
+            {
+                foreach($this->user_list[$uid]['live'] as $rid => $val)
+                {
+                    $this->leave_resource($uid,'live',$rid);
+                }
+            }
             $this->request_resource($uid,'live',$chanel);
         }
         else
@@ -231,7 +243,7 @@ class CommunicationInterpreter
             {
                 if($data->cmd=='open')
                 {
-                    $this->manager->open_live($sender,$data->id);
+                    $this->manager->open_live($sender,$data->id,$data->hash);
                 }
                 else if($data->cmd=='close')
                 {

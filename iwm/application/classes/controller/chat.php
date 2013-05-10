@@ -59,6 +59,17 @@ class Controller_Chat extends IwMController
         WebSocketBroadcastAdmin::single_update($type, $id);
     }
 
+    public function action_live()
+    {
+        $chanel = Auth::instance()->get_user()->id;
+
+        $result['chanel'] = $chanel;
+        $result['hash'] = crypt("user=" . $chanel,"live_view");
+
+        $this->response->headers('Content-Type', 'application/json');
+        $this->response->body(json_encode($result));
+    }
+
     public function action_index()
     {
         $type = "tag";
