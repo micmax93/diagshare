@@ -47,6 +47,12 @@ echo '
 </tbody>
 </table>
 
+<hr>
+<button onclick="window.opener.startLiveSession();">Start live</button>
+<button onclick="window.opener.sendSessionRequest();">Request</button>
+<button onclick="window.opener.sendSessionUpdate();">Update state</button>
+<button onclick="window.opener.stopLiveSession();">Stop live</button>
+
 </body>
 </html> ';
 

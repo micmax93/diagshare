@@ -3,9 +3,9 @@
 
 class Manager
 {
-    protected $user_list;
-    protected $resource_list;
-    protected $live_channels;
+    protected $user_list=array();
+    protected $resource_list=array();
+    protected $live_channels=array();
 
     function new_user($uid,$uws)
     {
@@ -61,12 +61,18 @@ class Manager
 
     public function open_live($id,$chanel,$hash)
     {
-        if($hash!=crypt("user=" . $chanel,"live_view")) {return;}
+        if($hash!=crypt("user=" . $chanel,"live_view"))
+        {
+            $this->say("User id=$id - incorrect hash");
+            return;
+        }
         foreach($this->live_channels as $chl)
         {
             if($chl==$chanel) {return;}
         }
         $this->live_channels[$id]=$chanel;
+        $this->resource_list['live'][$chanel]=array();
+        $this->say("User id=$id opened chanel=$chanel");
     }
     public function close_live($id)
     {
@@ -81,6 +87,8 @@ class Manager
 
         unset($this->live_channels[$id]);
         unset($this->resource_list['live'][$chanel]);
+
+        $this->say("Chanel=$chanel closed");
     }
     public function request_live($uid,$chanel)
     {

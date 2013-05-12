@@ -144,11 +144,11 @@ function sendMsg(cmd, type, id) {
     webSocket.send(str);
 }
 function sendHashMsg(cmd, type, id, hash) {
-    var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + '","hash":' + hash + '}';
+    var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + ',"hash":"' + hash + '"}';
     webSocket.send(str);
 }
 function sendDataMsg(cmd, type, id, data) {
-    var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + '","data":' + data + '}';
+    var str = '{"cmd":"' + cmd + '","type":"' + type + '","id":' + id + ',"data":' + data + '}';
     webSocket.send(str);
 }
 
@@ -229,7 +229,15 @@ function onMessage(evt) {
         loadRooms();
     }
     if (data['type'] == 'live') {
-        //TODO: Odczyt sesji live
+        if (typeof data['error'] != 'undefined')
+        {
+            alert("Rozłączono z sesją live: "+ data['error']);
+        }
+        else
+        {
+            var board=JSON.stringify(data['data']);
+            setBoardState(board);
+        }
     }
     //TODO odczytanie rodzaju zasobu
 }
@@ -248,11 +256,16 @@ function startLiveSession() {
     });
 }
 
-function sendSessionUpdate(data) {
-    sendDataMsg('stop','live',liveChanel,data);
+function sendSessionUpdate() {
+    var board=JSON.stringify(getBoardState());
+    sendDataMsg('update','live',liveChanel,board);
+}
+
+function sendSessionRequest() {
+    request('live',7);
 }
 
 function stopLiveSession() {
-    sendMsg('stop','live',liveChanel);
+    sendMsg('close','live',liveChanel);
     liveChanel=null;
 }
