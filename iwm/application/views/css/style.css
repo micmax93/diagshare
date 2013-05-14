@@ -323,9 +323,9 @@ html, body {
 }
 
 #rooms > h3 {
-    background: white;
+    background: #F8F8F8;
     padding: 10px;
-    margin-top: 0px;
+    margin-top: 2px;
     margin-bottom: 2px;
     border-radius: 3px;
     color: slategrey;
@@ -334,10 +334,11 @@ html, body {
 .patient {
     background: white;
     padding: 5px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
 }
+
 .patient a {
     color: slategrey;
 }
