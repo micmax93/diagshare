@@ -322,3 +322,22 @@ html, body {
     margin-left: 35px;
 }
 
+#rooms > h3 {
+    background: white;
+    padding: 10px;
+    margin-top: 0px;
+    margin-bottom: 2px;
+    border-radius: 3px;
+    color: slategrey;
+}
+
+.patient {
+    background: white;
+    padding: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+}
+.patient a {
+    color: slategrey;
+}

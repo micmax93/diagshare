@@ -64,15 +64,19 @@ function roomsReceived(data) {
 
     });
 
-    addRoom ='<div class="manageRooms"><p onclick="popupWindow(\'Manage Rooms\',\'index.php/room/load/0\');"><img src="application/views/img/manage.png">Edit Rooms</p></div>';
+    addRoom = '<div class="manageRooms"><p onclick="popupWindow(\'Manage Rooms\',\'index.php/room/load/0\');"><img src="application/views/img/manage.png">Edit Rooms</p></div>';
 
+    // Rozwijanie listy oddziałów
     document.getElementById('rooms').innerHTML = list;
-
     $(function () {
-        $("#rooms").accordion({
-            collapsible: true,
-            autoHeight: true
-        }).append(addRoom);
+        $("#rooms").append(addRoom);
+        $('#rooms > h3').each(function () {
+            $(this).next().toggle();
+            $(this).click(function () {
+                $(this).next().toggle();
+            });
+        }).css('cursor', 'pointer');
+
     });
 
 
@@ -229,13 +233,11 @@ function onMessage(evt) {
         loadRooms();
     }
     if (data['type'] == 'live') {
-        if (typeof data['error'] != 'undefined')
-        {
-            alert("Rozłączono z sesją live: "+ data['error']);
+        if (typeof data['error'] != 'undefined') {
+            alert("Rozłączono z sesją live: " + data['error']);
         }
-        else
-        {
-            var board=JSON.stringify(data['data']);
+        else {
+            var board = JSON.stringify(data['data']);
             setBoardState(board);
         }
     }
@@ -246,26 +248,26 @@ function onError(evt) {
 }
 
 
-var liveChanel=null;
+var liveChanel = null;
 
 function startLiveSession() {
-    jQuery.get("index.php/chat/live", function(data) {
-        liveChanel=data['chanel'];
-        sendHashMsg('open','live',data['chanel'],data['hash']);
+    jQuery.get("index.php/chat/live", function (data) {
+        liveChanel = data['chanel'];
+        sendHashMsg('open', 'live', data['chanel'], data['hash']);
         alert("Uruchomiono współdzielenie sesji.");
     });
 }
 
 function sendSessionUpdate() {
-    var board=JSON.stringify(getBoardState());
-    sendDataMsg('update','live',liveChanel,board);
+    var board = JSON.stringify(getBoardState());
+    sendDataMsg('update', 'live', liveChanel, board);
 }
 
 function sendSessionRequest() {
-    request('live',7);
+    request('live', 7);
 }
 
 function stopLiveSession() {
-    sendMsg('close','live',liveChanel);
-    liveChanel=null;
+    sendMsg('close', 'live', liveChanel);
+    liveChanel = null;
 }
