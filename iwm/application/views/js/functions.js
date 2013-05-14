@@ -40,9 +40,19 @@ function removePatient(id) {
 }
 
 function popupWindow(title, url) {
-    var newWindow = window.open(url, title, 'height=400,width=400,toolbar=no,scrollbars=yes,location=no,resizable=yes');
+    var options = "'height=400,width=400,toolbar=no,scrollbars=yes,location=no,resizable=yes'";
+    var newWindow = window.open(url, title, options);
     if (window.focus) {
         newWindow.focus()
     }
     return false;
 }
+
+function popupWindowOpt(title, url, opt) {
+    var newWindow = window.open(url, title, opt);
+    if (window.focus) {
+        newWindow.focus()
+    }
+    return false;
+}
+
