@@ -55,6 +55,11 @@ class Model_User extends Model_Auth_User
             return false;
     }
 
+    public function getAll()
+    {
+        return ORM::factory('user')->find_all();
+    }
+
     public function getUserByUsername($username)
     {
         return ORM::factory('user')->where('username', '=', $username)->find();
@@ -140,7 +145,7 @@ class Model_User extends Model_Auth_User
         return $user->has('roles', ORM::factory('role')->where('id', '=', $idr)->find());
     }
 
-    public function setUserProfile($id, $username, $email, $fullname, $password="")
+    public function setUserProfile($id, $username, $email, $fullname, $password = "")
     {
         if ($id != 0) $user = ORM::factory('user')->where('id', '=', $id)->find();
         else $user = ORM::factory('user');
@@ -148,7 +153,7 @@ class Model_User extends Model_Auth_User
         $user->username = $username;
         $user->email = $email;
         $user->full_name = $fullname;
-        if($password != "") $user->password = $password;
+        if ($password != "") $user->password = $password;
 
         return $user->save();
     }

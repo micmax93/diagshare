@@ -17,10 +17,8 @@ class Controller_User extends IwMController
 
     public function action_login()
     {
-
         $widok = View::factory('login');
         $widok->set('title', 'DiagShare');
-
         $this->response->body($widok->render());
     }
 
@@ -53,6 +51,16 @@ class Controller_User extends IwMController
     public function action_authorized()
     {
         echo "<body onload=\"javascript:window.location ='" . url::base() . "';\"> ";
+    }
+
+    public function action_manage()
+    {
+        $muser = new Model_User();
+        $users = $muser->getAll();
+        $view = View::factory('manageuser');
+        $view->set('users', $users);
+        $this->response->body($view->render());
+
     }
 
 
