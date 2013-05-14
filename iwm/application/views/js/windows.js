@@ -106,10 +106,14 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     addTags(photoId, id + '_grid');
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
-    $('#' + id + '_grid').draggable({cursor: "move"});
+    $('#' + id + '_grid').draggable({cursor: "move"}).bind('dragend', function () {
+        sendSessionUpdate();
+    });
     $('#' + id + '_viewport').css('z-index', 0);
-    $('#' + id + '_window').css('z-index', 1);
-
+    $('#' + id + '_window').css('z-index', 1).bind('dragend', function () {
+        sendSessionUpdate();
+    });
+    sendSessionUpdate();
 }
 
 /**
@@ -136,6 +140,7 @@ function closeWindow(id) {
 
 
     }
+    sendSessionUpdate();
 }
 
 /**
@@ -156,6 +161,7 @@ function firstPlanWindow(name) {
         window.style.zIndex = 1;
         window.getElementsByTagName("div")[0].className = "titleBarActive";
     }
+    sendSessionUpdate();
 }
 
 /**
@@ -175,7 +181,7 @@ function showHide(thing) {
         //el.parentNode.style.height = (parseInt(el.parentNode.style.height) - parseInt(el.height)) + "px";
 
     }
-
+    sendSessionUpdate();
 }
 
 /**
@@ -210,7 +216,7 @@ function showHideOrLoad(id, name) {
         }
 
     }
-
+    sendSessionUpdate();
 }
 
 /**
@@ -232,6 +238,7 @@ function removePhoto(id, name) {
             }
         }
     });
+    sendSessionUpdate();
 }
 
 /**

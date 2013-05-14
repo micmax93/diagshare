@@ -15,7 +15,7 @@
  * @return {HTMLElement}
  */
 function addCanvas(parentId, id, width, height) {
-    var newCanvas = $('<canvas/>', {'id':id});
+    var newCanvas = $('<canvas/>', {'id': id});
     newCanvas.className = "imageCanvas";
     $('#' + parentId).append(newCanvas);
     var retCanvas = document.getElementById(id);
@@ -117,6 +117,7 @@ function zoom(id, scale) {
 
 
     var tags = document.getElementsByClassName('imageTag');
+    sendSessionUpdate();
 }
 
 
@@ -144,7 +145,7 @@ function contrastCanvas(id, value) {
         this.contrast(contrast[id]);
         this.render();
     });
-
+    sendSessionUpdate();
 }
 
 
@@ -174,6 +175,7 @@ function brightnessCanvas(id, value) {
         this.brightness(brightness[id]);
         this.render();
     });
+    sendSessionUpdate();
 }
 
 
@@ -199,5 +201,5 @@ function canvasRevert(id) {
         });
     }
 
-
+    sendSessionUpdate();
 }

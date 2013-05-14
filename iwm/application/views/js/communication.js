@@ -259,8 +259,10 @@ function startLiveSession() {
 }
 
 function sendSessionUpdate() {
-    var board = JSON.stringify(getBoardState());
-    sendDataMsg('update', 'live', liveChanel, board);
+    if (liveChanel != null) {
+        var board = JSON.stringify(getBoardState());
+        sendDataMsg('update', 'live', liveChanel, board);
+    }
 }
 
 function sendSessionRequest() {
