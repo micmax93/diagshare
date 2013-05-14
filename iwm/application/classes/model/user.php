@@ -145,7 +145,7 @@ class Model_User extends Model_Auth_User
         return $user->has('roles', ORM::factory('role')->where('id', '=', $idr)->find());
     }
 
-    public function setUserProfile($id, $username, $email, $password = "")
+    public function setUserProfile($id, $username, $email, $full_name, $password = "")
     {
         if ($id != 0) $user = ORM::factory('user')->where('id', '=', $id)->find();
         else {
@@ -155,6 +155,7 @@ class Model_User extends Model_Auth_User
 
         $user->username = $username;
         $user->email = $email;
+        $user->full_name = $full_name;
         if ($password != "") $user->password = $password;
 
 

@@ -25,6 +25,7 @@ else {
         <tr>
         <th>username</th>
         <th>email</th>
+        <th>full name</th>
         <th>password</th>
         <th colspan="2">options</th>
         </tr>
@@ -35,6 +36,7 @@ else {
         echo '<tr>
         <td><input value="' . stripcslashes($user->username) . '" id="userEditName_' . $user->id . '"></td>
         <td><input value="' . stripcslashes($user->email) . '" id="userEditEmail_' . $user->id . '"></td>
+        <td><input value="' . stripcslashes($user->full_name) . '" id="userEditFullName_' . $user->id . '"></td>
         <td><input value="" id="userEditPassword_' . $user->id . '" type="password"></td>
         <td><button onclick="saveUser(' . $user->id . ');"><img src="' . URL::base() . 'application/views/img/tick.png" /></button></td>
         <td><button onclick="deleteUser(' . $user->id . ');"><img src="' . URL::base() . 'application/views/img/remove-small.png" /></button></td>

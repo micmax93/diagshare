@@ -90,10 +90,11 @@ class Controller_User extends IwMController
         preg_replace('/[\s\W]+/', '-', $id);
         $arr["username"] = Arr::get($_POST, 'username');
         $arr["email"] = Arr::get($_POST, 'email');
+        $arr["full_name"] = Arr::get($_POST, 'full_name');
         $arr["password"] = Arr::get($_POST, 'password');
 
         $muser = new Model_User();
-        if ($muser->setUserProfile((int)$id, $arr["username"], $arr["email"], $arr["password"])
+        if ($muser->setUserProfile((int)$id, $arr["username"], $arr["email"],$arr["full_name"], $arr["password"])
         ) {
             $this->response->body(json_encode(array("status" => "ok")));
 
