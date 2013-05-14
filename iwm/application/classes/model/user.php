@@ -145,17 +145,29 @@ class Model_User extends Model_Auth_User
         return $user->has('roles', ORM::factory('role')->where('id', '=', $idr)->find());
     }
 
-    public function setUserProfile($id, $username, $email, $fullname, $password = "")
+    public function setUserProfile($id, $username, $email, $password = "")
     {
         if ($id != 0) $user = ORM::factory('user')->where('id', '=', $id)->find();
-        else $user = ORM::factory('user');
+        else {
+            $user = ORM::factory('user');
+
+        }
 
         $user->username = $username;
         $user->email = $email;
-        $user->full_name = $fullname;
         if ($password != "") $user->password = $password;
 
-        return $user->save();
+
+        $user->save();
+
+
+        if ($id == 0) {
+            $uz = ORM::factory('user')->where('username', '=', $username)->find();
+            $uz->addRole('login');
+        }
+
+
+        return true;
     }
 
     public function setUserPassword($id, $pass)
@@ -170,13 +182,18 @@ class Model_User extends Model_Auth_User
     public function deleteUser($id)
     {
         if ($id != 0) {
-            $user = ORM::factory('user')->where('id', '=', $id)->find();
+            if (ORM::factory('user')->where('id', '=', $id)->count_all() > 0) {
+                $user = ORM::factory('user')->where('id', '=', $id)->find();
 
-            // delete information about roles
-            foreach ($user->roles->find_all() as $role)
-                $user->remove('roles', $role);
+                // delete information about roles
+                foreach ($user->roles->find_all() as $role)
+                    $user->remove('roles', $role);
 
-            $user->delete();
+                $user->delete();
+                return true;
+
+            } else
+                return false;
         }
     }
 

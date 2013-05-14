@@ -69,4 +69,36 @@ class Controller_User extends IwMController
         Auth::instance()->logout();
         $this->request->redirect('user/login');
     }
+
+
+    public function action_delete()
+    {
+        $id = $this->request->param('id');
+        preg_replace('/[\s\W]+/', '-', $id);
+        $muser = new Model_User();
+        if ($muser->deleteUser($id)) {
+            $this->response->body(json_encode(array("status" => "ok")));
+
+        } else {
+            $this->response->body(json_encode(array("status" => "fail")));
+        }
+    }
+
+    public function action_set()
+    {
+        $id = $this->request->param('id');
+        preg_replace('/[\s\W]+/', '-', $id);
+        $arr["username"] = Arr::get($_POST, 'username');
+        $arr["email"] = Arr::get($_POST, 'email');
+        $arr["password"] = Arr::get($_POST, 'password');
+
+        $muser = new Model_User();
+        if ($muser->setUserProfile((int)$id, $arr["username"], $arr["email"], $arr["password"])
+        ) {
+            $this->response->body(json_encode(array("status" => "ok")));
+
+        } else {
+            $this->response->body(json_encode(array("status" => "fail")));
+        }
+    }
 }

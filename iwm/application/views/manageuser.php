@@ -12,7 +12,7 @@ echo '
  <script>
  var baseUrl = "' . URL::base() . '";
  </script>
- <script src="' . URL::base() . 'application/views/js/user.js"></script>
+ <script src="' . URL::base() . 'application/views/js/users.js"></script>
 </head>
 <body>
 <h1>Manage Users</h1>

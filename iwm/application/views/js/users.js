@@ -24,6 +24,8 @@ function newUser(field) {
     var text = document.getElementById(field).value;
     var data = {};
     data["username"] = text;
+    data["email"] = text + "@" + "ChangeMe.com";
+    data["password"] = text;
     jQuery.post(baseUrl + "index.php/user/set/0", data, function (v) {
         location.reload();
     });
@@ -35,11 +37,11 @@ function saveUser(id) {
     var email = document.getElementById('userEditEmail_' + id).value;
     var password = document.getElementById('userEditPassword_' + id).value;
     var data = {};
-    data["name"] = username;
+    data["username"] = username;
     data["email"] = email;
     if (password.length > 0)
         data["password"] = password;
     jQuery.post(baseUrl + "index.php/user/set/" + id, data, function () {
-        location.reload();
+        alert('Saved.');
     });
 }
