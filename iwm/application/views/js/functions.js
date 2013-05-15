@@ -57,7 +57,7 @@ function popupWindowOpt(title, url, opt) {
 }
 
 function blockBoard() {
-    $('#main').block({ message: null });
+    $('#main').block({ message: null, overlayCSS: { opacity: 0}});
 
 }
 
