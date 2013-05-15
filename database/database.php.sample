@@ -17,6 +17,7 @@ return array
          *
          * string   identifier  set the escaping identifier
          */   // Column to return from INSERT queries, see #2188 and #2273
+        'primary_key' => '',
         'table_prefix' => '',
         'charset'      => 'utf8',
         'caching'      => FALSE,
