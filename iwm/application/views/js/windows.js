@@ -364,8 +364,9 @@ function applyView(x) {
         el.style.top = currentView[x].top;
         el.style.left = currentView[x].left;
         el.style.zIndex = currentView[x].firstPlan;
-        if (currentView[x].display == "none")
-            el.display = "none";
+        if (currentView[x].display == "none") {
+            el.style.display = "none";
+        }
         $(grid).attr('zoom', currentView[x].zoom);
         grid.style.top = currentView[x].gridTop;
         grid.style.left = currentView[x].gridLeft;
