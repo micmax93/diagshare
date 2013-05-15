@@ -73,6 +73,7 @@ function updateTagText(id, value) {
         url: "index.php/tag/set/" + id.substr(4),
         data: {title: value},
         success: function (v) {
+            sendSessionUpdate();
         }
     });
 
@@ -162,6 +163,7 @@ function gridClicked(e, id) {
         success: function (v) {
             if (v["status"] == "ok")
                 addTag(this.grid, "tag_" + v["id"], this.y * zoom, this.x * zoom, "Tag");
+                sendSessionUpdate();
         }
     });
 

@@ -76,7 +76,10 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title' }).css('top', (listaOkien.length * 20)).width(width * rowSize * scale).height(height * scale * rows + 20);
+    $('#' + id + '_window').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title', stop: function () {
+        sendSessionUpdate();
+    }
+    }).css('top', (listaOkien.length * 20)).width(width * rowSize * scale).height(height * scale * rows + 20);
     $('#' + id + '_grid').width(width * rowSize).height(height * rows).attr('basicHeight', height * rows).attr('basicWidth', width * rowSize).attr('zoom', 1);
 
 
@@ -116,9 +119,12 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         addTags(photoId, id + '_grid');
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
-    $('#' + id + '_grid').draggable({cursor: "move"}).bind('dragend', function () {
-        sendSessionUpdate();
-    });
+    $('#' + id + '_grid').draggable({cursor: "move",
+        stop: function () {
+            sendSessionUpdate();
+        }}).bind('dragend', function () {
+            sendSessionUpdate();
+        });
     $('#' + id + '_viewport').css('z-index', 0);
     $('#' + id + '_window').css('z-index', max + 1).bind('dragend', function () {
         sendSessionUpdate();
