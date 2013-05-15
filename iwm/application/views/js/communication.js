@@ -255,6 +255,7 @@ function onError(evt) {
 
 
 var liveChanel = null;
+var liveListener = null;
 
 function startLiveSession() {
     jQuery.get("index.php/chat/live", function (data) {
@@ -273,7 +274,12 @@ function sendSessionUpdate() {
 
 function sendSessionRequest() {
     request('live', 7);
+    liveListener=7;
     blockBoard();
+}
+
+function sendSesionAck() {
+    sendMsg('ack','live',liveListener);
 }
 
 function requestSessionList() {

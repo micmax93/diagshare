@@ -334,9 +334,12 @@ function getBoardState() {
  * Odtwarza zwrócony przez getBoardState stan.
  *
  */
-
+var nofWindows = -1;
+var createdWindows = 0;
 function setBoardState(state) {
-
+    if(createdWindows > 0) return;
+    nofWindows = -1;
+    createdWindows = 0;
     // zamknij okna i usuń
     for (var i = 0; i < listaOkien.length; i++) {
         $('#' + listaOkien[i]).css('display', 'none').remove();
@@ -345,10 +348,10 @@ function setBoardState(state) {
 
     var windows = JSON.parse(state);
     currentView = Array();
+    nofWindows = windows.length;
     for (var i = 0; i < windows.length; i++) {
         currentView[windows[i].title] = windows[i];
         showHideOrLoad(windows[i].photoId, windows[i].title);
-
     }
 }
 
@@ -385,6 +388,7 @@ function applyView(x) {
             brightness[x + '_img'] = currentView[x].brightness;
         addTags(currentView[x].photoId, currentView[x].title + '_grid');
 
+
         //alert('w');
 
     }
@@ -406,5 +410,10 @@ function applyViewFilers(canvas) {
         this.render();
 
     });
+    createdWindows++;
+    if(createdWindows >= nofWindows) {
+        sendSesionAck();
+        createdWindows = 0;
+    }
 }
 

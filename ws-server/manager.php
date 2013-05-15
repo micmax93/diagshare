@@ -59,6 +59,13 @@ class Manager
         $this->say("Resource $type($id) update notify send to $n users");
     }
 
+    protected function say($msg) {
+        echo '<CMD>' . "$msg \r\n";
+    }
+}
+
+class LiveManager extends Manager
+{
     public function open_live($id,$chanel,$hash)
     {
         if($hash!=crypt("user=" . $chanel,"live_view"))
@@ -123,12 +130,35 @@ class Manager
         if(!isset($this->live_channels[$id])) {return;}
 
         $chanel=$this->live_channels[$id];
-        $this->send_update('live',$chanel,$data);
+        $n=0;
+        if(isset($this->resource_list['live'][$chanel]))
+        {
+            $msg=new WebSocketMessage();
+            $msg->setData($data);
+
+            $n=0;
+            $q=0;
+            foreach($this->resource_list['live'][$chanel] as $uid => $val)
+            {
+                if($val==true)
+                {
+                    $this->resource_list['live'][$chanel][$uid]=false;
+                    $this->user_list[$uid]['ws']->sendMessage($msg);
+                    $n++;
+                }
+                else
+                {
+                    $this->resource_list['live'][$chanel][$uid]=$msg;
+                    $q++;
+                }
+            }
+        }
+        $this->say("Resource live($chanel) update notify send to $n users, $q messages added to queue");
     }
     public function list_live($uid)
     {
-		$ls=array();
-		foreach($this->live_channels as $chl)
+        $ls=array();
+        foreach($this->live_channels as $chl)
         {
             array_push($ls,$chl);
         }
@@ -140,16 +170,30 @@ class Manager
         $msg=new WebSocketMessage();
         $msg->setData(json_encode($data));
         $this->user_list[$uid]['ws']->sendMessage($msg);
+        $this->say("Live chanel list send to user=$uid");
     }
+    public function update_ack_live($uid,$chanel)
+    {
+        if(!isset($this->resource_list['live'][$chanel][$uid])) {return;}
+        $str="Recieved ack from user $uid";
 
-    protected function say($msg) {
-        echo '<CMD>' . "$msg \r\n";
+        $val=$this->resource_list['live'][$chanel][$uid];
+        if($val==false)
+        {
+            $this->resource_list['live'][$chanel][$uid]=true;
+        }
+        else if($val!=true)
+        {
+            $this->resource_list['live'][$chanel][$uid]=false;
+            $this->user_list[$uid]['ws']->sendMessage($val);
+            $str+=", sending waiting messages";
+        }
+        $this->say($str);
     }
 }
 
 
-
-class SecureManager extends Manager
+class SecureManager extends LiveManager
 {
     protected function rand_string($len)
     {
@@ -288,6 +332,10 @@ class CommunicationInterpreter
                 else if($data->cmd=='ls')
                 {
                     $this->manager->list_live($sender);
+                }
+                else if($data->cmd=='ack')
+                {
+                    $this->manager->update_ack_live($sender,$data->id);
                 }
             }
             else if($this->manager->is_admin($sender))
