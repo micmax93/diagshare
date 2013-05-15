@@ -62,6 +62,6 @@ function blockBoard() {
 }
 
 function unlockBoard() {
-    $('#main').unblockUI();
+    $('#main').unblock();
 }
 
