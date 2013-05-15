@@ -22,11 +22,18 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
 
     // Oznacz wszystkie pozostałe okna jako nieaktywne
     var window;
-    for (var i = 0; i < listaOkien.length; i++) {
-        window = document.getElementById(listaOkien[i]);
-        window.style.zIndex = 0;
-        window.getElementsByTagName("div")[0].className = "titleBar";
+    var max = 0;
+
+    // Oblicz max zIndex okien
+    if (listaOkien.length > 0) {
+        for (var i = 0; i < listaOkien.length; i++) {
+            window = document.getElementById(listaOkien[i]);
+            if (parseInt(window.style.zIndex) > max) max = parseInt(window.style.zIndex);
+            window.getElementsByTagName("div")[0].className = "titleBar";
+        }
     }
+
+
     // Dodaj diva ze strukturą okna
     $('#' + parentId).append('' +
         '<div class="imageWindow" id="' + id + '_window"  onmousedown="firstPlanWindow(\'' + id + '_window\');" photoId="' + photoId + '">' +
@@ -110,7 +117,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         sendSessionUpdate();
     });
     $('#' + id + '_viewport').css('z-index', 0);
-    $('#' + id + '_window').css('z-index', 1).bind('dragend', function () {
+    $('#' + id + '_window').css('z-index', max + 1).bind('dragend', function () {
         sendSessionUpdate();
     });
     sendSessionUpdate();
@@ -125,7 +132,6 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
 function closeWindow(id) {
     $('#' + id).css('display', 'none').remove();
     for (var i = 0; i < listaOkien.length; i++) {
-
 
         if (listaOkien[i] == id) {
             var name = listaOkien[i].substr(0, listaOkien[i].length - 7) + "_img";
@@ -150,15 +156,16 @@ function closeWindow(id) {
  */
 function firstPlanWindow(name) {
     var window;
+    var maxzIndex = 0;
     for (var i in listaOkien) {
         window = document.getElementById(listaOkien[i]);
-        window.style.zIndex = 0;
+        if (parseInt(window.style.zIndex) > maxzIndex) maxzIndex = parseInt(window.style.zIndex);
         window.getElementsByTagName("div")[0].className = "titleBar";
-
     }
+
     window = document.getElementById(name);
     if (window) {
-        window.style.zIndex = 1;
+        window.style.zIndex = maxzIndex + 1;
         window.getElementsByTagName("div")[0].className = "titleBarActive";
     }
     sendSessionUpdate();
@@ -300,7 +307,13 @@ function getBoardState() {
         windows.push(win);
     }
     windows.sort(function (a, b) {
-        return (a.firstPlan - b.firstPlan);
+        if (a.firstPlan > b.firstPlan)
+            return 1;
+        if (a.firstPlan == b.firstPlan)
+            return 0;
+        if (a.firstPlan < b.firstPlan)
+            return -1;
+
     });
     return windows;
 }
