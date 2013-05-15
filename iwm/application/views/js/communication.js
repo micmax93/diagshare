@@ -64,7 +64,7 @@ function roomsReceived(data) {
 
     });
 
-    addRoom = '<div class="manageRooms"><p onclick="popupWindow(\'Manage Rooms\',\'index.php/room/load/0\');"><img src="application/views/img/manage.png">Edit Rooms</p></div>';
+    addRoom = '<div class="manageRooms"><p onclick="popupWindow(\'Manage Rooms\',\'index.php/room/load/0\');"><img src="application/views/img/edit.png"> Edit Rooms</p></div>';
 
     // Rozwijanie listy oddziałów
     document.getElementById('rooms').innerHTML = list;
