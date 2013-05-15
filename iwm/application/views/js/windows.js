@@ -4,6 +4,7 @@
  * Time: 14:50
  */
 var listaOkien = Array();
+var currentView = Array();
 
 /**
  * createWindow()
@@ -110,7 +111,9 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     });
 
     // Wyświetl tagi przynależne do zdjęcia.
-    addTags(photoId, id + '_grid');
+    // Przy odtwarzaniu stanu zostaną one naniesione później - po zaaplikowaniu zoomu
+    if (!currentView[id])
+        addTags(photoId, id + '_grid');
 
     // Ustaw przesuwalność zdjęć wewnątrz viewportu i pierwszoplanowość okna
     $('#' + id + '_grid').draggable({cursor: "move"}).bind('dragend', function () {
@@ -295,7 +298,7 @@ function getBoardState() {
         win.photoId = $(el).attr('photoId');
         win.top = el.style.top;
         win.left = el.style.left;
-        win.zoom = el.style.left;
+        win.zoom = $(grid).attr('zoom');
         win.brightness = brightness[win.title + "_img"];
         win.contrast = contrast[win.title + "_img"];
         win.gridTop = grid.style.top;
@@ -325,7 +328,7 @@ function getBoardState() {
  * Odtwarza zwrócony przez getBoardState stan.
  *
  */
-var currentView = Array();
+
 function setBoardState(state) {
 
     // zamknij okna i usuń
@@ -339,6 +342,7 @@ function setBoardState(state) {
     for (var i = 0; i < windows.length; i++) {
         currentView[windows[i].title] = windows[i];
         showHideOrLoad(windows[i].photoId, windows[i].title);
+
     }
 }
 
@@ -360,7 +364,9 @@ function applyView(x) {
         el.style.top = currentView[x].top;
         el.style.left = currentView[x].left;
         el.style.zIndex = currentView[x].firstPlan;
-        el.display = currentView[x].display;
+        if (currentView[x].display == "none")
+            el.display = "none";
+        $(grid).attr('zoom', currentView[x].zoom);
         grid.style.top = currentView[x].gridTop;
         grid.style.left = currentView[x].gridLeft;
         grid.style.height = currentView[x].gridHeight;
@@ -370,7 +376,7 @@ function applyView(x) {
             contrast[x + '_img'] = currentView[x].contrast;
         if (isNumber(currentView[x].brightness))
             brightness[x + '_img'] = currentView[x].brightness;
-
+        addTags(currentView[x].photoId, currentView[x].title + '_grid');
 
         //alert('w');
 
