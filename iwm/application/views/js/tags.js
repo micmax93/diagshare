@@ -97,9 +97,9 @@ function updateTagPosition(id) {
         url: "index.php/tag/set/" + id.substr(4),
         data: {x: parseInt(x), y: parseInt(y)},
         success: function (v) {
+            sendSessionUpdate();
         }
     });
-    sendSessionUpdate();
 }
 
 /**
