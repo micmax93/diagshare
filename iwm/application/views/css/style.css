@@ -306,6 +306,7 @@ html, body {
 
 
 .manageRooms {
+    margin-top:2px;
     padding: 5px;
     display:block;
     background: white;
