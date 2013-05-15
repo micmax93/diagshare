@@ -75,6 +75,7 @@ function updateTagText(id, value) {
         success: function (v) {
         }
     });
+
 }
 
 /**
@@ -98,6 +99,7 @@ function updateTagPosition(id) {
         success: function (v) {
         }
     });
+    sendSessionUpdate();
 }
 
 /**
@@ -118,6 +120,7 @@ function deleteTag(id) {
 
         }
     });
+    sendSessionUpdate();
 
 }
 
