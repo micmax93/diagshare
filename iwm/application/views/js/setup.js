@@ -15,7 +15,7 @@ function setup() {
     function keydown(evt) {
         if (!evt) evt = event;
         if (evt.shiftKey && evt.altKey && evt.keyCode == 76) { // ctrl+alt+l
-            popupWindow("Manage users","index.php/user/manage");
+            popupWindow("Manage users", "index.php/user/manage");
         }
     }
 

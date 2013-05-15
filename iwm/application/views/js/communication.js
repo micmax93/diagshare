@@ -236,6 +236,7 @@ function onMessage(evt) {
     if (data['type'] == 'live') {
         if (typeof data['error'] != 'undefined') {
             alert("Rozłączono z sesją live: " + data['error']);
+            unlockBoard();
         }
         else {
             var board = JSON.stringify(data['data']);
@@ -268,6 +269,7 @@ function sendSessionUpdate() {
 
 function sendSessionRequest() {
     request('live', 7);
+    blockBoard();
 }
 
 function stopLiveSession() {

@@ -55,4 +55,37 @@ function popupWindowOpt(title, url, opt) {
     }
     return false;
 }
+Zoom
+
+
+function blockBoard() {
+    var main = document.getElementById('main');
+    main.onclick = function () {
+        return false;
+    }
+
+    main.ondblclick = function () {
+        return false;
+    }
+
+    main.ondrag = function () {
+        return false;
+    }
+
+}
+
+function unlockBoard() {
+    var main = document.getElementById('main');
+    main.onclick = function () {
+        return true;
+    }
+
+    main.ondblclick = function () {
+        return true;
+    }
+
+    main.ondrag = function () {
+        return true;
+    }
+}
 
