@@ -125,6 +125,22 @@ class Manager
         $chanel=$this->live_channels[$id];
         $this->send_update('live',$chanel,$data);
     }
+    public function list_live($uid)
+    {
+		$ls=array();
+		foreach($this->live_channels as $chl)
+        {
+            array_push($ls,$chl);
+        }
+        $data['cmd']='list';
+        $data['type']='live';
+        $data['id']=count($ls);
+        $data['data']=$ls;
+
+        $msg=new WebSocketMessage();
+        $msg->setData(json_encode($data));
+        $this->user_list[$uid]['ws']->sendMessage($msg);
+    }
 
     protected function say($msg) {
         echo '<CMD>' . "$msg \r\n";
@@ -268,6 +284,10 @@ class CommunicationInterpreter
                 else if($data->cmd=='update')
                 {
                     $this->manager->update_live($sender,$msg);
+                }
+                else if($data->cmd=='ls')
+                {
+                    $this->manager->list_live($sender);
                 }
             }
             else if($this->manager->is_admin($sender))

@@ -235,12 +235,16 @@ function onMessage(evt) {
     }
     if (data['type'] == 'live') {
         if (typeof data['error'] != 'undefined') {
-            alert("Rozłączono z sesją live: " + data['error']);
+            alert("Błąd: " + data['error']);
             unlockBoard();
         }
-        else {
+        else if(data['cmd'] == 'update'){
             var board = JSON.stringify(data['data']);
             setBoardState(board);
+        }
+        else if(data['cmd'] == 'list'){
+            var list = JSON.stringify(data['data']);
+            alert("Dostępnych " + data['id'] + " stanów: " + data['data']);
         }
     }
     //TODO odczytanie rodzaju zasobu
@@ -270,6 +274,10 @@ function sendSessionUpdate() {
 function sendSessionRequest() {
     request('live', 7);
     blockBoard();
+}
+
+function requestSessionList() {
+    sendMsg('ls','live',0);
 }
 
 function stopLiveSession() {

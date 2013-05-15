@@ -49,9 +49,11 @@ echo '
 
 <hr>
 <button onclick="window.opener.startLiveSession();">Start live</button>
-<button onclick="window.opener.sendSessionRequest();">Request</button>
 <button onclick="window.opener.sendSessionUpdate();">Update state</button>
 <button onclick="window.opener.stopLiveSession();">Stop live</button>
+<br>
+<button onclick="window.opener.requestSessionList();">List</button>
+<button onclick="window.opener.sendSessionRequest();">Request</button>
 
 </body>
 </html> ';
