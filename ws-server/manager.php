@@ -80,6 +80,7 @@ class LiveManager extends Manager
         $this->live_channels[$id]=$chanel;
         $this->resource_list['live'][$chanel]=array();
         $this->say("User id=$id opened chanel=$chanel");
+        $this->send_update('list',0,json_encode(['cmd'=>'update','type'=>'list','id'=>0]));
     }
     public function close_live($id)
     {
@@ -96,6 +97,7 @@ class LiveManager extends Manager
         unset($this->resource_list['live'][$chanel]);
 
         $this->say("Chanel=$chanel closed");
+        $this->send_update('list',0,json_encode(['cmd'=>'update','type'=>'list','id'=>0]));
     }
     public function request_live($uid,$chanel)
     {
