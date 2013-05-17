@@ -45,7 +45,7 @@ function popupWindow(title, url) {
     if (window.focus) {
         newWindow.focus()
     }
-    return false;
+    return newWindow;
 }
 
 function popupWindowOpt(title, url, opt) {
@@ -53,7 +53,7 @@ function popupWindowOpt(title, url, opt) {
     if (window.focus) {
         newWindow.focus()
     }
-    return false;
+    return newWindow;
 }
 
 function blockBoard() {

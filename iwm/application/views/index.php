@@ -13,6 +13,7 @@ echo '
   var baseUrl = "' . URL::base() . '";
   var wsUri = "ws://echo.websocket.org/";
   var webSocket;
+  var sessionWindow;
   var startTime = new Date();
  </script>
  <script src="' . URL::base() . 'application/views/js/jquery-1.9.1.js"></script>
@@ -34,7 +35,7 @@ echo '
         <h1>diagShare </h1>
         <!--<button onclick="alert(JSON.stringify(getBoardState()));">get</button>
         <button onclick="setBoardState();">set</button>-->
-            <a href="#" class="sidebarButton" onclick="popupWindow(\'Sessions\',\'index.php/view/load\');">Sessions</a>
+            <a href="#" class="sidebarButton" onclick="sessionWindow=popupWindow(\'Sessions\',\'index.php/view/load\');">Sessions</a>
             <a href="index.php/user/logout" class="sidebarButton">Logout</a>
         <div id="roomList">
         ' . $room . '

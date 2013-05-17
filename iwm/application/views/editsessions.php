@@ -11,6 +11,14 @@ echo '
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
  <script>
     var baseUrl = "' . URL::base() . '";
+    var sessionWindow = window.opener.sessionWindow;
+    var userList = Array();
+    ';
+foreach ($userData as $user) {
+    echo "userList[" . $user->id . "] = '" . $user->username . "';
+    ";
+}
+echo '
  </script>
 </head>
 <body>
@@ -40,7 +48,7 @@ end time
 ';
 
 foreach ($views as $view) {
-    echo '<tr onclick="window.opener.applyBoardState('.$view->id.');"><td>' . $users[$view->owner_id] . '</td><td> ' . $view->start . ' </td><td>' . $view->end . '</td> </tr>';
+    echo '<tr onclick="window.opener.applyBoardState(' . $view->id . ');"><td>' . $users[$view->owner_id] . '</td><td> ' . $view->start . ' </td><td>' . $view->end . '</td> </tr>';
 }
 
 echo '
@@ -51,10 +59,16 @@ echo '
 <button onclick="window.opener.startLiveSession();">Start live</button>
 <button onclick="window.opener.sendSessionUpdate();">Update state</button>
 <button onclick="window.opener.stopLiveSession();">Stop live</button>
-<br>
-<button onclick="window.opener.requestSessionList();">List</button>
-<button onclick="window.opener.sendSessionRequest();">Request</button>
-
+<script>
+    window.opener.request("list",0);
+    window.opener.requestSessionList();
+</script>
+<h4>Sesje live</h4>
+<table class="viewList" id="sessionList">
+<thead><tr><th>username</th></tr></thead>
+<tbody>
+</tbody>
+</table>
 </body>
 </html> ';
 

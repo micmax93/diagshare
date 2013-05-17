@@ -111,6 +111,15 @@ function addTags(photoId, canvasId) {
     });
 
 }
+/**
+ * sessionsListReceived()
+ * Aktualizuje tabelę aktywnych sesji.
+ * @param data
+ * @param users
+ */
+function sessionsListReceived(data, users) {
+    requestSessionList();
+}
 
 /**
  * tagsReceived()
@@ -233,18 +242,26 @@ function onMessage(evt) {
     if ((data['type'] == 'room') && (data['id'] == 0)) {
         loadRooms();
     }
+    if ((data['type'] == 'list') && (data['id'] == 0)) {
+        sessionsListReceived(data['data'], 0);
+    }
     if (data['type'] == 'live') {
         if (typeof data['error'] != 'undefined') {
             alert("Błąd: " + data['error']);
             unlockBoard();
         }
-        else if(data['cmd'] == 'update'){
+        else if (data['cmd'] == 'update') {
             var board = JSON.stringify(data['data']);
             setBoardState(board);
         }
-        else if(data['cmd'] == 'list'){
-            var list = JSON.stringify(data['data']);
-            alert("Dostępnych " + data['id'] + " stanów: " + data['data']);
+        else if (data['cmd'] == 'list') {
+            //alert(sessionWindow);
+            var lst = sessionWindow.document.getElementById('sessionList');
+            $(lst).empty();
+            $(lst).append('<thead><tr><th>username</th></tr></thead>');
+            for (var i = 0; i < data['data'].length; i++)
+                $(lst).append('<tr><td onclick="window.opener.sendSessionRequest(' + parseInt(data['data'][i]) + ');">' + sessionWindow.userList[parseInt(data['data'][i])] + " </td></tr > ");
+
         }
     }
     //TODO odczytanie rodzaju zasobu
@@ -272,18 +289,18 @@ function sendSessionUpdate() {
     }
 }
 
-function sendSessionRequest() {
-    request('live', 7);
-    liveListener=7;
+function sendSessionRequest(id) {
+    request('live', id);
+    liveListener = id;
     blockBoard();
 }
 
 function sendSesionAck() {
-    sendMsg('ack','live',liveListener);
+    sendMsg('ack', 'live', liveListener);
 }
 
 function requestSessionList() {
-    sendMsg('ls','live',0);
+    sendMsg('ls', 'live', 0);
 }
 
 function stopLiveSession() {

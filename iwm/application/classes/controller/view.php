@@ -16,12 +16,15 @@ class Controller_View extends IwMController
         $widok = View::factory('editsessions');
         $mview = new Model_Views();
         $muser = new Model_User();
+        $userData = $muser->getAll();
+
         $views = $mview->getAllItems();
         $users = Array();
         foreach ($views as $view) {
             $users[$view->owner_id] = $muser->getUser($view->owner_id)->username;
         }
         $widok->set('users', $users);
+        $widok->set('userData', $userData);
         $widok->set('views', $views);
         $this->response->body($widok->render());
 
