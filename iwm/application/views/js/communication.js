@@ -278,6 +278,7 @@ function startLiveSession() {
     jQuery.get("index.php/chat/live", function (data) {
         liveChanel = data['chanel'];
         sendHashMsg('open', 'live', data['chanel'], data['hash']);
+        sendSessionUpdate();
         alert("Uruchomiono współdzielenie sesji.");
     });
 }
@@ -292,7 +293,17 @@ function sendSessionUpdate() {
 function sendSessionRequest(id) {
     request('live', id);
     liveListener = id;
+    alert("Uruchomiono obserwowanie sesji.");
     blockBoard();
+}
+
+
+function sendSessionIgnore() {
+    if(liveListener==null) {return;}
+    ignore('live', liveListener);
+    liveListener = null;
+    unlockBoard();
+    alert("Zakończono obserwowanie sesji.");
 }
 
 function sendSesionAck() {

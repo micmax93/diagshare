@@ -5,7 +5,6 @@ class Manager
 {
     protected $user_list=array();
     protected $resource_list=array();
-    protected $live_channels=array();
 
     function new_user($uid,$uws)
     {
@@ -66,6 +65,9 @@ class Manager
 
 class LiveManager extends Manager
 {
+    protected $live_channels=array();
+    protected $live_current=array();
+
     public function open_live($id,$chanel,$hash)
     {
         if($hash!=crypt("user=" . $chanel,"live_view"))
@@ -95,6 +97,7 @@ class LiveManager extends Manager
 
         unset($this->live_channels[$id]);
         unset($this->resource_list['live'][$chanel]);
+        unset($this->live_current[$chanel]);
 
         $this->say("Chanel=$chanel closed");
         $this->send_update('list',0,json_encode(['cmd'=>'update','type'=>'list','id'=>0]));
@@ -111,6 +114,10 @@ class LiveManager extends Manager
                 }
             }
             $this->request_resource($uid,'live',$chanel);
+            if(isset($this->live_current[$chanel]))
+            {
+                $this->user_list[$uid]['ws']->sendMessage($this->live_current[$chanel]);
+            }
         }
         else
         {
@@ -140,6 +147,7 @@ class LiveManager extends Manager
 
             $n=0;
             $q=0;
+            $this->live_current[$chanel]=$msg;
             foreach($this->resource_list['live'][$chanel] as $uid => $val)
             {
                 if($val==true)

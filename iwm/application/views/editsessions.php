@@ -57,13 +57,13 @@ echo '
 
 <hr>
 <button onclick="window.opener.startLiveSession();">Start live</button>
-<button onclick="window.opener.sendSessionUpdate();">Update state</button>
 <button onclick="window.opener.stopLiveSession();">Stop live</button>
 <script>
     window.opener.request("list",0);
     window.opener.requestSessionList();
 </script>
 <h4>Sesje live</h4>
+<button onclick="window.opener.sendSessionIgnore();">Stop live sync</button>
 <table class="viewList" id="sessionList">
 <thead><tr><th>username</th></tr></thead>
 <tbody>
