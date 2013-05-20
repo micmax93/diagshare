@@ -67,8 +67,8 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     var maxWidth = 0.7 * screen.width;
     var maxHeight = 0.7 * screen.height;
 
-    if (height * rows <= 500) scale = 500 / (height * rows);
-    if (width * rowSize <= 500) scale = 500 / (width * rowSize);
+    if (height * rows <= 700) scale = 700 / (height * rows);
+    if (width * rowSize <= 700) scale = 700 / (width * rowSize);
     if (height * rows >= maxHeight) scale = 1000 / (height * rows);
     if (width * rowSize >= maxWidth) scale = 1000 / (width * rowSize);
 
