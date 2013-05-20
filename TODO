@@ -1,3 +1,11 @@
-1. Poprawić zwracanie widoku [uwzględnić zmiany w ID zdjecia] -> Marcin
-4. Okno logowania [osobna podstrona, ochrona before()]-> Marcin
-5. Dodawanie Pacjentów, Pokoi, Zdjęć [każdy user ma prawo] -> Marcin
+1. Może: Czat dla sesji live
+2. Wyjście z nasłuchiwania live - wysłać komunikat ignore
+3. Po zmianie/usunięciu tagu zmienić info w oknie czatu
+4. Zablokować możliwość przywracania offlineowego stanu w trakcie sesji live - jako klient
+5. Wyjebać przycisk update state
+6. Popup przy dołączeniu do sesji live
+7. Popup przy wyjściu z sesji live (nadający i odbierający)
+8. Poprawić wygląd listingów sesji
+9. Samo kliknięcie na obrazek - niech nie powoduje update
+ELF:
+1. Update przy połaczeniu

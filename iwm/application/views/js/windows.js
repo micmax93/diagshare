@@ -67,8 +67,8 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     var maxWidth = 0.7 * screen.width;
     var maxHeight = 0.7 * screen.height;
 
-    if (height * rows <= 700) scale = 700 / (height * rows);
-    if (width * rowSize <= 700) scale = 700 / (width * rowSize);
+    if (height * rows <= 500) scale = 500 / (height * rows);
+    if (width * rowSize <= 500) scale = 500 / (width * rowSize);
     if (height * rows >= maxHeight) scale = 1000 / (height * rows);
     if (width * rowSize >= maxWidth) scale = 1000 / (width * rowSize);
 
@@ -173,11 +173,14 @@ function firstPlanWindow(name) {
     }
 
     window = document.getElementById(name);
+
     if (window) {
-        window.style.zIndex = maxzIndex + 1;
+        if (maxzIndex != parseInt(window.style.zIndex)) {
+            window.style.zIndex = maxzIndex + 1;
+            sendSessionUpdate();
+        }
         window.getElementsByTagName("div")[0].className = "titleBarActive";
     }
-    sendSessionUpdate();
 }
 
 /**
@@ -337,7 +340,7 @@ function getBoardState() {
 var nofWindows = -1;
 var createdWindows = 0;
 function setBoardState(state) {
-    if(createdWindows > 0) return;
+    if (createdWindows > 0) return;
     nofWindows = -1;
     createdWindows = 0;
     // zamknij okna i usuń
@@ -411,7 +414,7 @@ function applyViewFilers(canvas) {
 
     });
     createdWindows++;
-    if(createdWindows >= nofWindows) {
+    if (createdWindows >= nofWindows) {
         sendSesionAck();
         createdWindows = 0;
     }
