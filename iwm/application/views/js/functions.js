@@ -59,11 +59,17 @@ function popupWindowOpt(title, url, opt) {
 function blockBoard() {
 //    $('#main').block({ message: null, overlayCSS: { opacity: 0, position: 'absolute'}});
     $('#main').css('pointer-events', 'none');
+    $('#roomList').css('background', 'black').css('opacity', 0.2).css('pointer-events', 'none');
+    $('#messageBox').css('background', 'black').css('opacity', 0.2).css('pointer-events', 'none');
+    $('#chatControl').css('background', 'black').css('opacity', 0.2).css('pointer-events', 'none');
 
 }
 
 function unlockBoard() {
     //   $('#main').unblock();
     $('#main').css('pointer-events', 'auto');
+    $('#roomList').css('background', '#3C9DD0').css('opacity', 1).css('pointer-events', 'auto');
+    $('#messageBox').css('background', '#3C9DD0').css('opacity', 1).css('pointer-events', 'auto');
+    $('#chatControl').css('background', '#3C9DD0').css('opacity', 1).css('pointer-events', 'auto');
 }
 
