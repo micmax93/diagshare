@@ -42,6 +42,7 @@ function addTag(parentId, id, top, left, content) {
             }
         }).attr('basicTop', top).attr('basicLeft', left).click(function () {
             setChat("tag", id.substr(4));
+
         });
 }
 
@@ -71,9 +72,13 @@ function updateTagText(id, value) {
         type: "POST",
         dataType: "json",
         url: "index.php/tag/set/" + id.substr(4),
+        idd: id.substr(4),
+        idTitle: value,
         data: {title: value},
         success: function (v) {
             sendSessionUpdate();
+            if (activeChatTag == this.idd)
+                document.getElementById('chatRoomId').innerHTML = '#' + this.idTitle;
         }
     });
 
@@ -163,7 +168,7 @@ function gridClicked(e, id) {
         success: function (v) {
             if (v["status"] == "ok")
                 addTag(this.grid, "tag_" + v["id"], this.y * zoom, this.x * zoom, "Tag");
-                sendSessionUpdate();
+            sendSessionUpdate();
         }
     });
 

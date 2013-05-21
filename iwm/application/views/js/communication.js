@@ -195,8 +195,9 @@ function downloadPosts() {
     });
 
 }
-
+var activeChatTag = "";
 function setChat(type, id) {
+    activeChatTag = id;
     if ((chatType == type) && (chatId == id)) {
         return;
     }
@@ -298,7 +299,9 @@ function sendSessionRequest(id) {
 
 
 function sendSessionIgnore() {
-    if(liveListener==null) {return;}
+    if (liveListener == null) {
+        return;
+    }
     ignore('live', liveListener);
     liveListener = null;
     unlockBoard();
