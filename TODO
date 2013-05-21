@@ -2,3 +2,6 @@
 15. Sprawdzić prace czatu na nieistniejacym tagu
 16. Usuwanie postów czatu po usunieciu tagu
 17. Brak możliwości dodania pokoju po usunięciu wszystkich
+18. Przemyśleć synchronizacje i to gdzie wołać ACK
+19. Zmienić w posts (patient_id,tag_id) -> (resource_type,resource_id)
+
