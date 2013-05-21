@@ -303,7 +303,7 @@ function getBoardState() {
         win.title = el.id.substr(0, el.id.length - 7);
         win.photoId = $(el).attr('photoId');
         win.top = el.style.top;
-        win.left = el.style.left;
+        win.left = parseInt(el.style.left) - (0.15 * parseInt(screen.width)) + "px";
         win.zoom = $(grid).attr('zoom');
         win.brightness = brightness[win.title + "_img"];
         win.contrast = contrast[win.title + "_img"];
@@ -372,7 +372,7 @@ function applyView(x) {
     if (el && currentView[x]) {
 
         el.style.top = currentView[x].top;
-        el.style.left = currentView[x].left;
+        el.style.left = parseInt(currentView[x].left) + (0.15 * parseInt(screen.width)) + "px";
         el.style.zIndex = currentView[x].firstPlan;
         if (currentView[x].display == "none") {
             el.style.display = "none";
