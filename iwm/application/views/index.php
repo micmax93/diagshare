@@ -20,7 +20,6 @@ echo '
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery.mousewheel.js"></script>
  <script src="' . URL::base() . 'application/views/js/caman.full.min.js"></script>
- <script src="' . URL::base() . 'application/views/js/jquery.blockUI.js"></script>
  <script src="' . URL::base() . 'application/views/js/communication.js"></script>
  <script src="' . URL::base() . 'application/views/js/functions.js"></script>
  <script src="' . URL::base() . 'application/views/js/tags.js"></script>

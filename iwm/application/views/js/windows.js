@@ -76,7 +76,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
     listaOkien.push(id + '_window');
 
-    $('#' + id + '_window').css('position','absolute').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title', stop: function () {
+    $('#' + id + '_window').css('position', 'absolute').draggable({opacity: 0.8, containment: "parent", handle: '#' + id + '_title', stop: function () {
         sendSessionUpdate();
     }
     }).css('top', (listaOkien.length * 20)).width(width * rowSize * scale).height(height * scale * rows + 20);
@@ -373,6 +373,7 @@ function applyView(x) {
     var el = document.getElementById(x + '_window');
     var grid = document.getElementById(x + '_grid');
     if (el && currentView[x]) {
+
         el.style.top = currentView[x].top;
         el.style.left = currentView[x].left;
         el.style.zIndex = currentView[x].firstPlan;

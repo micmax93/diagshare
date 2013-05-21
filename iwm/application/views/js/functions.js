@@ -57,11 +57,13 @@ function popupWindowOpt(title, url, opt) {
 }
 
 function blockBoard() {
-    $('#main').block({ message: null, overlayCSS: { opacity: 0}});
+//    $('#main').block({ message: null, overlayCSS: { opacity: 0, position: 'absolute'}});
+    $('#main').css('pointer-events', 'none');
 
 }
 
 function unlockBoard() {
-    $('#main').unblock();
+    //   $('#main').unblock();
+    $('#main').css('pointer-events', 'auto');
 }
 
