@@ -30,7 +30,17 @@ else {
 echo '
 <button onclick="window.opener.saveView();window.close();">Save board state</button><br>
 <br>
-<table class="viewList">
+<h4>Saved sessions</h4>
+<table class="viewList" id="vList" style="display: block;">
+<script>
+
+if(window.opener.liveListener != null) {
+      document.getElementById(\'vList\').style.display = "none";
+}
+else
+      document.getElementById(\'vList\').style.display = "block";
+</script>
+
 <thead>
 <tr>
 <th>
@@ -48,27 +58,39 @@ end time
 ';
 
 foreach ($views as $view) {
-    echo '<tr onclick="window.opener.applyBoardState(' . $view->id . ');"><td>' . $users[$view->owner_id] . '</td><td> ' . $view->start . ' </td><td>' . $view->end . '</td> </tr>';
+    echo '<tr onclick="window.opener.applyBoardState(' . $view->id . ');window.close();"><td>' . $users[$view->owner_id] . '</td><td> ' . $view->start . ' </td><td>' . $view->end . '</td> </tr>';
 }
 
 echo '
 </tbody>
 </table>
 
-<hr>
-<button onclick="window.opener.startLiveSession();">Start live</button>
-<button onclick="window.opener.stopLiveSession();">Stop live</button>
 <script>
     window.opener.request("list",0);
     window.opener.requestSessionList();
 </script>
-<h4>Sesje live</h4>
-<button onclick="window.opener.sendSessionIgnore();">Stop live sync</button>
+<h4>Online sessions</h4>
+
 <table class="viewList" id="sessionList">
 <thead><tr><th>username</th></tr></thead>
 <tbody>
 </tbody>
 </table>
+<hr>
+<script>
+if(window.opener.liveListener != null) {
+    document.write(\'<button onclick="window.opener.sendSessionIgnore();window.close();">Stop live sync</button>\');
+} else
+{
+    if(window.opener.liveChanel != null)
+        document.write(\'<button onclick="window.opener.stopLiveSession();window.close();">Stop live</button>\');
+    else
+        document.write(\'<button onclick="window.opener.startLiveSession();window.close();">Start live</button> \');
+
+}
+</script>
+
+
 </body>
 </html> ';
 

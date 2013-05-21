@@ -264,7 +264,6 @@ function onMessage(evt) {
 
         }
     }
-    //TODO odczytanie rodzaju zasobu
 }
 function onError(evt) {
     alert('Błąd czatu: ' + evt.data);

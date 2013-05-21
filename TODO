@@ -1,11 +1,5 @@
 1. Może: Czat dla sesji live
 3. Po zmianie/usunięciu tagu zmienić info w oknie czatu
-4. Zablokować możliwość przywracania offlineowego stanu w trakcie sesji live - jako klient
-8. Poprawić wygląd listingów sesji
 9. Samo kliknięcie na obrazek - niech nie powoduje update
 10. Poprawienie skalowania okien.
-11. Zamykanie okna wyboru sesji po wyborze sesji
-12. WAŻNE! Poprawić transmisje lokacji okien, kodbierający widzi okno przesunięte w stosunku do nadającego (mniej więcej o szerokość panelu bocznego)
-13. szyba mleczna na czat i rooms w sesji live
 14. Zapobiegaj tworzeniu istniejacych okien
-15. po start live i stop zamykać okno
