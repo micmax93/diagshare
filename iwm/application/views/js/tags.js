@@ -120,8 +120,12 @@ function deleteTag(id) {
         tag: tag,
         success: function (v) {
             if (v["status"] == "ok") {
+                if (activeChatTag == v["id"])
+                    document.getElementById('chatRoomId').innerHTML = 'Czat';
+
                 var tag = document.getElementById("tag_" + v["id"]);
                 tag.parentNode.removeChild(tag);
+
             }
 
         }
