@@ -44,7 +44,7 @@ function roomsReceived(data) {
 
             for (var key in photos) {
                 list += '       <li class="photoListItem" id="photoListItem_' + photos[key] + '">';
-                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');">' + key + '</a><a href="javascript:removePhoto(\'' + photos[key] + '\',\'' + key + '\');"><img src="application/views/img/remove-small.png" class="photoRemove"></a>';
+                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');sendSessionUpdate();">' + key + '</a><a href="javascript:removePhoto(\'' + photos[key] + '\',\'' + key + '\');"><img src="application/views/img/remove-small.png" class="photoRemove"></a>';
                 list += '       </li>';
 
             }
