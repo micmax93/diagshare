@@ -4,4 +4,6 @@
 17. Brak możliwości dodania pokoju po usunięciu wszystkich
 18. Przemyśleć synchronizacje i to gdzie wołać ACK
 19. Zmienić w posts (patient_id,tag_id) -> (resource_type,resource_id)
+20. Revert sie chyba nie zapisuje w stanie
+21. Literówka w disconnected
 
