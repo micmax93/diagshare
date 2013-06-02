@@ -40,25 +40,6 @@ class Model_Tags extends Model_Base
         return $p->getItem($this->photoId);
     }
 
-
-    public function myPosts()
-    {
-        $p = new Model_Posts();
-        return $p->newQuery()->where('tag_id', '=', $this->id)->find_all();
-    }
-
-    public function getAllPostsAfter($lastPost)
-    {
-        $p = new Model_Posts();
-
-        $p = $p->newQuery();
-        $p = $p->where('tag_id', '=', $this->id);
-        $p = $p->where('id', '>', $lastPost);
-        $p = $p->order_by('id', 'ASC');
-
-        return $p->find_all();
-    }
-
     public function deleteItem($id)
     {
         if (ORM::factory('tags')->where('id', '=', $id)->count_all() == 0) return false;

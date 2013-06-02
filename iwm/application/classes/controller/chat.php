@@ -10,16 +10,18 @@ require("websocket.php");
 
 class Controller_Chat extends IwMController
 {
-    public function action_tag()
+    public function action_get()
     {
         $id = $_POST['id'];
         $last = $_POST['last'];
+        $type = $_POST['type'];
 
-        $tag = (new Model_Tags())->getItem($id);
-        $posts = $tag->getAllPostsAfter($last);
-        $result['type'] = 'tag';
+        $chat = new Model_Chat($type,$id);
+        $posts = $chat->getAllPostsAfter($last);
+
+        $result['type'] = $type;
         $result['id'] = $id;
-        $result['title'] = $tag->title;
+        $result['title'] = $chat->getTitle();
         $result['posts'] = array();
         foreach ($posts as $key => $val) {
             $tab['id'] = $val->id;
@@ -72,7 +74,7 @@ class Controller_Chat extends IwMController
 
     public function action_index()
     {
-        $type = "tag";
+        $type = "tags";
         $id = 3;
         if (isset($_POST['update'])) {
             WebSocketBroadcastAdmin::single_update($_POST['type'], $_POST['id']);
@@ -83,7 +85,7 @@ class Controller_Chat extends IwMController
             $this->action_newpost();
         }
         if (isset($_POST['download'])) {
-            $this->action_tag();
+            $this->action_get();
             return;
         }
         echo '<h3>Admin site</h3>';
@@ -105,8 +107,9 @@ class Controller_Chat extends IwMController
         echo '<hr>';
         echo '<h3>Post downloader</h3>';
         echo '<form enctype="multipart/form-data" method="post">
-                <input type="number" size="32" name="id" value="3"><br>
+                <input type="number" size="32" name="id" value="115"><br>
                 <input type="number" size="32" name="last" value="0"><br>
+                <input type="text" size="32" name="type" value="tags"><br>
                 <input type="submit" name="download" value="download">
                 </form>';
 

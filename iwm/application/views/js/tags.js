@@ -41,7 +41,7 @@ function addTag(parentId, id, top, left, content) {
 
             }
         }).attr('basicTop', top).attr('basicLeft', left).click(function () {
-            setChat("tag", id.substr(4));
+            setChat("tags", id.substr(4));
         });
 }
 

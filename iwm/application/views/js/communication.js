@@ -137,7 +137,7 @@ function tagsReceived(v, gridId) {
 
 }
 
-var chatType = 'tag';
+var chatType = 'tags';
 var chatId = 3;
 var chatLast = 0;
 
@@ -180,7 +180,8 @@ function downloadPosts() {
     var args = {};
     args['id'] = chatId;
     args['last'] = chatLast;
-    jQuery.post("index.php/chat/" + chatType, args, function (data) {
+    args['type'] = chatType;
+    jQuery.post("index.php/chat/get", args, function (data) {
         if ((chatType != data['type']) || (chatId != data['id'])) {
             return;
         }
