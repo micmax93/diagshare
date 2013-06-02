@@ -5,7 +5,7 @@ echo '
 <html>
 <head>
  <title>' . $title . '</title>
- <link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css">
+ <!--<link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css">-->
  <link rel="stylesheet" type="text/css" href="' . URL::base() . 'application/views/css/style.css">
  <link rel="stylesheet" type="text/css" href="' . URL::base() . 'application/views/css/jquery-ui.css">
  <script type="text/javascript">
@@ -20,7 +20,6 @@ echo '
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery.mousewheel.js"></script>
  <script src="' . URL::base() . 'application/views/js/caman.full.min.js"></script>
- <script src="' . URL::base() . 'application/views/js/jquery.blockUI.js"></script>
  <script src="' . URL::base() . 'application/views/js/communication.js"></script>
  <script src="' . URL::base() . 'application/views/js/functions.js"></script>
  <script src="' . URL::base() . 'application/views/js/tags.js"></script>

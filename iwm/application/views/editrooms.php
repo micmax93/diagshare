@@ -5,7 +5,7 @@ echo '
 <html>
 <head>
  <title>Manage Rooms...</title>
- <link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css">
+ <!--<link href="http://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet" type="text/css">-->
  <link rel="stylesheet" type="text/css" href="' . URL::base() . 'application/views/css/editrooms.css">
  <script src="' . URL::base() . 'application/views/js/jquery-1.9.1.js"></script>
  <script src="' . URL::base() . 'application/views/js/jquery-ui.js"></script>

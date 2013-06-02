@@ -11,7 +11,6 @@ function tag(tagId, Tagtop, Tagleft, Tagcontent) {
     var top = Tagtop;
     var left = Tagleft;
     var content = Tagcontent;
-
 }
 
 
@@ -71,9 +70,13 @@ function updateTagText(id, value) {
         type: "POST",
         dataType: "json",
         url: "index.php/tag/set/" + id.substr(4),
+        idd: id.substr(4),
+        idTitle: value,
         data: {title: value},
         success: function (v) {
             sendSessionUpdate();
+            if (activeChatTag == this.idd)
+                document.getElementById('chatRoomId').innerHTML = '#' + this.idTitle;
         }
     });
 
@@ -115,8 +118,12 @@ function deleteTag(id) {
         tag: tag,
         success: function (v) {
             if (v["status"] == "ok") {
+                if (activeChatTag == v["id"])
+                    document.getElementById('chatRoomId').innerHTML = 'Czat';
+
                 var tag = document.getElementById("tag_" + v["id"]);
                 tag.parentNode.removeChild(tag);
+
             }
 
         }
@@ -163,7 +170,7 @@ function gridClicked(e, id) {
         success: function (v) {
             if (v["status"] == "ok")
                 addTag(this.grid, "tag_" + v["id"], this.y * zoom, this.x * zoom, "Tag");
-                sendSessionUpdate();
+            sendSessionUpdate();
         }
     });
 

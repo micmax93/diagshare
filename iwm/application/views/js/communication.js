@@ -44,7 +44,7 @@ function roomsReceived(data) {
 
             for (var key in photos) {
                 list += '       <li class="photoListItem" id="photoListItem_' + photos[key] + '">';
-                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');">' + key + '</a><a href="javascript:removePhoto(\'' + photos[key] + '\',\'' + key + '\');"><img src="application/views/img/remove-small.png" class="photoRemove"></a>';
+                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');sendSessionUpdate();">' + key + '</a><a href="javascript:removePhoto(\'' + photos[key] + '\',\'' + key + '\');"><img src="application/views/img/remove-small.png" class="photoRemove"></a>';
                 list += '       </li>';
 
             }
@@ -196,8 +196,9 @@ function downloadPosts() {
     });
 
 }
-
+var activeChatTag = "";
 function setChat(type, id) {
+    activeChatTag = id;
     if ((chatType == type) && (chatId == id)) {
         return;
     }
@@ -265,7 +266,6 @@ function onMessage(evt) {
 
         }
     }
-    //TODO odczytanie rodzaju zasobu
 }
 function onError(evt) {
     alert('Błąd czatu: ' + evt.data);
@@ -300,7 +300,9 @@ function sendSessionRequest(id) {
 
 
 function sendSessionIgnore() {
-    if(liveListener==null) {return;}
+    if (liveListener == null) {
+        return;
+    }
     ignore('live', liveListener);
     liveListener = null;
     unlockBoard();

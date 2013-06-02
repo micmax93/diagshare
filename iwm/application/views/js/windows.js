@@ -64,13 +64,10 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         '');
     // Obliczenie skali okna
     var scale = 1;
-    var maxWidth = 0.7 * screen.width;
-    var maxHeight = 0.7 * screen.height;
+    var maxWidth = 0.8 * screen.width;
+    var maxHeight = screen.height - 100;
 
-    if (height * rows <= 700) scale = 700 / (height * rows);
-    if (width * rowSize <= 700) scale = 700 / (width * rowSize);
-    if (height * rows >= maxHeight) scale = 1000 / (height * rows);
-    if (width * rowSize >= maxWidth) scale = 1000 / (width * rowSize);
+    scale = 700 / (height * rows);
 
 
     // Dodaj okno do listy i umożliw jego przesuwanie a także zwiększ o wysokość paska tytułowego
@@ -306,7 +303,7 @@ function getBoardState() {
         win.title = el.id.substr(0, el.id.length - 7);
         win.photoId = $(el).attr('photoId');
         win.top = el.style.top;
-        win.left = el.style.left;
+        win.left = parseInt(el.style.left) - (0.15 * parseInt(screen.width)) + "px";
         win.zoom = $(grid).attr('zoom');
         win.brightness = brightness[win.title + "_img"];
         win.contrast = contrast[win.title + "_img"];
@@ -373,8 +370,9 @@ function applyView(x) {
     var el = document.getElementById(x + '_window');
     var grid = document.getElementById(x + '_grid');
     if (el && currentView[x]) {
+
         el.style.top = currentView[x].top;
-        el.style.left = currentView[x].left;
+        el.style.left = parseInt(currentView[x].left) + (0.15 * parseInt(screen.width)) + "px";
         el.style.zIndex = currentView[x].firstPlan;
         if (currentView[x].display == "none") {
             el.style.display = "none";
