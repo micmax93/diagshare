@@ -49,15 +49,14 @@ class Controller_Chat extends IwMController
         $type = $_POST['type'];
         $id = $_POST['id'];
         $content = $_POST['content'];
+
         $new_post = new Model_Posts();
-        if ($type == 'patient') {
-            $new_post->patient_id = $id;
-        } elseif ($type == 'tag') {
-            $new_post->tag_id = $id;
-        }
+        $new_post->chat_id = $id;
+        $new_post->chat_type = $type;
         $new_post->content = $content;
         $new_post->owner_id = Auth::instance()->get_user()->id;
         $new_post->save();
+
         WebSocketBroadcastAdmin::single_update($type, $id);
     }
 

@@ -187,11 +187,12 @@ function downloadPosts() {
         }
         document.getElementById('chatRoomId').innerHTML = '#' + data['title'];
         for (i = 0; i < data['posts'].length; i++) {
-            if (data['posts'][i]['id'] <= chatLast) {
+            var id = parseInt(data['posts'][i]['id']);
+            if (id <= chatLast) {
                 continue;
             }
             $('#chatList').prepend("<tr><td>" + data['posts'][i]['owner'] + ": " + data['posts'][i]['content'] + "</td></tr>");
-            chatLast = data['posts'][i]['id'];
+            chatLast = id;
         }
     });
 

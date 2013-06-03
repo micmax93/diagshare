@@ -4,51 +4,13 @@
 
 -- Dumped from database version 9.2.4
 -- Dumped by pg_dump version 9.2.4
--- Started on 2013-06-02 17:01:45
+-- Started on 2013-06-03 23:29:34
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-
-DROP DATABASE iwm;
---
--- TOC entry 2036 (class 1262 OID 16395)
--- Name: iwm; Type: DATABASE; Schema: -; Owner: iwm
---
-
-CREATE DATABASE iwm WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Polish_Poland.1250' LC_CTYPE = 'Polish_Poland.1250';
-
-
-ALTER DATABASE iwm OWNER TO iwm;
-
-\connect iwm
-
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
---
--- TOC entry 6 (class 2615 OID 2200)
--- Name: public; Type: SCHEMA; Schema: -; Owner: iwm
---
-
-CREATE SCHEMA public;
-
-
-ALTER SCHEMA public OWNER TO iwm;
-
---
--- TOC entry 2037 (class 0 OID 0)
--- Dependencies: 6
--- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: iwm
---
-
-COMMENT ON SCHEMA public IS 'standard public schema';
-
 
 --
 -- TOC entry 185 (class 3079 OID 11727)
@@ -515,6 +477,12 @@ INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (12, 130, 7
 INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (10, 117, 7, '', 'tags');
 INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (8, 117, 7, 'lol', 'tags');
 INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (6, 117, 7, '', 'tags');
+INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (14, 117, 7, 'dobry', 'tags');
+INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (15, 117, 7, 'tak', 'tags');
+INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (16, 117, 7, 'x', 'tags');
+INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (17, 117, 7, '<><>', 'tags');
+INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (18, 117, 7, '', 'tags');
+INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (19, 117, 7, 'teraz działa', 'tags');
 
 
 --
@@ -523,7 +491,7 @@ INSERT INTO posts (id, chat_id, owner_id, content, chat_type) VALUES (6, 117, 7,
 -- Name: posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('posts_id_seq', 13, true);
+SELECT pg_catalog.setval('posts_id_seq', 19, true);
 
 
 --
@@ -605,7 +573,7 @@ SELECT pg_catalog.setval('tags_id_seq', 131, true);
 
 INSERT INTO users (id, email, username, password, logins, last_login, full_name) VALUES (8, 'user@user.pl', 'user', '890d1ca8fcd713f2ebbcdaa090a7820cc0a00bbaf1e2ab4cebec935934207afa', NULL, 1369070450, 'Jan Kowalski');
 INSERT INTO users (id, email, username, password, logins, last_login, full_name) VALUES (9, 'test@user.pl', 'test', '6db5e888bf97568ce6ae62b08d47d6a6411363b39265270c6c701eb3a7e25217', NULL, 1369078715, 'Janusz Jan');
-INSERT INTO users (id, email, username, password, logins, last_login, full_name) VALUES (7, 'admin@admin.pl', 'admin', '586d47435ff7be82b8f4b0847ac23e79492a10e77103768ae626d8ad22c664c6', NULL, 1370169682, 'Administrator');
+INSERT INTO users (id, email, username, password, logins, last_login, full_name) VALUES (7, 'admin@admin.pl', 'admin', '586d47435ff7be82b8f4b0847ac23e79492a10e77103768ae626d8ad22c664c6', NULL, 1370293505, 'Administrator');
 
 
 --
@@ -829,7 +797,7 @@ GRANT ALL ON SCHEMA public TO iwm;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2013-06-02 17:01:45
+-- Completed on 2013-06-03 23:29:34
 
 --
 -- PostgreSQL database dump complete
