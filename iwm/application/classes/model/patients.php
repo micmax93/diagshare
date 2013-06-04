@@ -25,7 +25,7 @@ class Model_Patients extends Model_Base
         $p = new Model_Photos();
         return $p->newQuery()->where('patient_id', '=', $this->id)->find_all();
     }
-
+    // Deprecated
     public function myPosts()
     {
         $p = new Model_Posts();
@@ -64,7 +64,7 @@ class Model_Patients extends Model_Base
     {
         if (ORM::factory('patients')->where('id', '=', $id)->count_all() > 0) {
             $patient = ORM::factory('patients')->where('id', '=', $id)->find();
-            foreach ($patient->myPosts() as $post) $post->delete();
+            //foreach ($patient->myPosts() as $post) $post->delete();
             foreach ($patient->myPhotos() as $photo) $photo->delete();
             return $patient->delete();
 

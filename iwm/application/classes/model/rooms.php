@@ -23,6 +23,7 @@ class Model_Rooms extends Model_Base
     static public function getStructTree()
     {
         $rooms = (new Model_Rooms())->getAllItems();
+        $result = array();
         foreach ($rooms as $room) {
             $result[$room->name . '/' . $room->id] = "";
             $patients = $room->myPatients();
