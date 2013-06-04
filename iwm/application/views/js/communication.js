@@ -199,6 +199,9 @@ function downloadPosts() {
 }
 var activeChatTag = "";
 function setChat(type, id) {
+    if (chatType == 'liveChat')
+        return;
+
     activeChatTag = id;
     if ((chatType == type) && (chatId == id)) {
         return;
@@ -217,6 +220,7 @@ function closeChat() {
     chatId = 0;
     chatLast = 0;
     $('#chatList tr').remove();
+    document.getElementById('chatRoomId').innerHTML = 'Czat';
 }
 
 function setupWebSocket() {
@@ -302,7 +306,6 @@ function sendSessionUpdate() {
 function sendSessionRequest(id) {
     request('live', id);
     liveListener = id;
-    alert(id);
     setChat('liveChat', id);
     alert("Uruchomiono obserwowanie sesji.");
     blockBoard();
