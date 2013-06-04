@@ -24,7 +24,7 @@ function roomsReceived(data) {
         room_id = room_id[room_id.length - 1];
         room = room.slice(0, room.lastIndexOf("/"));
 
-        list += '<h3>' + room + '</h3>';
+        list += '<h3 onclick="setChat(\'rooms\',' + room_id + ')">' + room + '</h3>';
         list += '<div class="rooms"  style="height:100%;">';
         $.each(patients, function (patient, photos) {
             var patient_id = patient.split("/");
@@ -36,7 +36,7 @@ function roomsReceived(data) {
                 listOfWindows.push(key + "_window");
             }
             list += '<div class="patient" id="patientListItem_' + patient_id + '" listOfWindows="' + listOfWindows.toString() + '">';
-            list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');">' + patient + '</a></h3>' +
+            list += '   <h3><img src="application/views/img/folder-horizontal.png"><a href="javascript:menuRoll(\'patientLink' + lid + '\');" onclick="setChat(\'patients\',' + patient_id + ');">' + patient + '</a></h3>' +
                 '<a href="javascript:removePatient(' + patient_id + ');"><img src="application/views/img/remove-small.png" class="patientRemove"></a>' +
                 '<img src="application/views/img/edit.png" class="patientEdit" onclick="popupWindow(\'Edit patient...\',\'index.php/patient/edit/' + patient_id + '?room=' + room_id + '\');"></a>';
             list += '   <div id="patientLink' + lid + '" style="display:none;">';
@@ -44,7 +44,7 @@ function roomsReceived(data) {
 
             for (var key in photos) {
                 list += '       <li class="photoListItem" id="photoListItem_' + photos[key] + '">';
-                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');sendSessionUpdate();">' + key + '</a><a href="javascript:removePhoto(\'' + photos[key] + '\',\'' + key + '\');"><img src="application/views/img/remove-small.png" class="photoRemove"></a>';
+                list += '           <a href="javascript:showHideOrLoad(\'' + photos[key] + '\',\'' + key + '\');sendSessionUpdate();setChat(\'photos\',' + photos[key] + ');">' + key + '</a><a href="javascript:removePhoto(\'' + photos[key] + '\',\'' + key + '\');"><img src="application/views/img/remove-small.png" class="photoRemove"></a>';
                 list += '       </li>';
 
             }
