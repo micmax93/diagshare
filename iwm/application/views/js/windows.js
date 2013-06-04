@@ -49,7 +49,7 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         '       <a href="javascript:brightnessCanvas(\'' + id + '_img\',20);" class="smallButton">+</a>' +
         '       <a href="javascript:brightnessCanvas(\'' + id + '_img\',-20);" class="smallButton">-</a>' +
         ' Revert:' +
-        '       <a href="javascript:canvasRevert(\'' + id + '_grid\',-20);" class="smallButton">O</a>' +
+        '       <a href="javascript:canvasRevert(\'' + id + '\');" class="smallButton">O</a>' +
         '       <a href="javascript:closeWindow(\'' + id + '_window\');" class="close">X</a>' +
         '   </div>' +
         '   <div class="viewport" id="' + id + '_viewport">' +

@@ -185,13 +185,13 @@ function brightnessCanvas(id, value) {
  * @param id
  */
 function canvasRevert(id) {
-    var grid = document.getElementById(id);
+    var grid = document.getElementById(id + '_grid');
     $(grid).height($(grid).attr('basicHeight'));
     $(grid).width($(grid).attr('basicWidth'));
     grid.style.top = 0;
     grid.style.left = 0;
-    contrast[grid.id] = 0;
-    brightness[grid.id] = 0;
+    contrast[id + '_img'] = 0;
+    brightness[id + '_img'] = 0;
     var canvases = grid.getElementsByTagName("canvas");
     fixTagsPositions(grid.id, 1 / ($(grid).attr('zoom')));
     $(grid).attr('zoom', 1);
