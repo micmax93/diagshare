@@ -127,6 +127,15 @@ function createWindow(parentId, id, width, height, rowSize, rows, photoId, image
         sendSessionUpdate();
     });
     sendSessionUpdate();
+
+    setTimeout(function() {
+        createdWindows++;
+        if (createdWindows >= nofWindows) {
+            sendSesionAck();
+            createdWindows = 0;
+        }
+    },50);
+
 }
 
 /**
@@ -411,10 +420,6 @@ function applyViewFilers(canvas) {
         this.render();
 
     });
-    createdWindows++;
-    if (createdWindows >= nofWindows) {
-        sendSesionAck();
-        createdWindows = 0;
-    }
+
 }
 
