@@ -203,15 +203,21 @@ function setChat(type, id) {
     if ((chatType == type) && (chatId == id)) {
         return;
     }
-    ignore(chatType, chatId);
+    closeChat();
     chatType = type;
     chatId = id;
-    chatLast = 0;
-    $('#chatList tr').remove();
     downloadPosts();
     request(chatType, chatId);
 }
 
+
+function closeChat() {
+    ignore(chatType, chatId);
+    chatType = '';
+    chatId = 0;
+    chatLast = 0;
+    $('#chatList tr').remove();
+}
 
 function setupWebSocket() {
 
@@ -281,7 +287,7 @@ function startLiveSession() {
         liveChanel = data['chanel'];
         sendHashMsg('open', 'live', data['chanel'], data['hash']);
         sendSessionUpdate();
-        setChat('liveChat',liveChanel);
+        setChat('liveChat', liveChanel);
         alert("Uruchomiono współdzielenie sesji.");
     });
 }
@@ -297,7 +303,7 @@ function sendSessionRequest(id) {
     request('live', id);
     liveListener = id;
     alert(id);
-    setChat('liveChat',id);
+    setChat('liveChat', id);
     alert("Uruchomiono obserwowanie sesji.");
     blockBoard();
 }
@@ -307,6 +313,7 @@ function sendSessionIgnore() {
     if (liveListener == null) {
         return;
     }
+    closeChat();
     ignore('live', liveListener);
     liveListener = null;
     unlockBoard();
@@ -323,5 +330,6 @@ function requestSessionList() {
 
 function stopLiveSession() {
     sendMsg('close', 'live', liveChanel);
+    closeChat();
     liveChanel = null;
 }
