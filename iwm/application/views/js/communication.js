@@ -281,6 +281,7 @@ function startLiveSession() {
         liveChanel = data['chanel'];
         sendHashMsg('open', 'live', data['chanel'], data['hash']);
         sendSessionUpdate();
+        setChat('liveChat',liveChanel);
         alert("Uruchomiono współdzielenie sesji.");
     });
 }
@@ -295,6 +296,8 @@ function sendSessionUpdate() {
 function sendSessionRequest(id) {
     request('live', id);
     liveListener = id;
+    alert(id);
+    setChat('liveChat',id);
     alert("Uruchomiono obserwowanie sesji.");
     blockBoard();
 }
